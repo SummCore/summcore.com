@@ -7,7 +7,7 @@
   <meta http-equiv="X-Frame-Options" content="DENY">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revenue Forecasting Tool | Multi-Sector Sales & Profit Projections</title>
-    <meta name="description" content="Forecast revenue, costs, profit and break-even across multiple business models. Free Revenue Forecasting Tool by SummCore.">
+    <meta name="description" content="Forecast revenue, costs, profit, and break-even across multiple business models and sectors. Free revenue forecasting tool by SummCore with export to PDF and scenario comparison.">
     <link rel="canonical" href="https://summcore.com/Revenue%20Calculator/index.html">
     <meta name="robots" content="index,follow,max-image-preview:large">
     <meta property="og:type" content="website">
@@ -30,7 +30,39 @@
       "publisher": {"@type": "Organization", "name": "SummCore"}
     }
     </script>
-    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What business models does the Revenue Forecasting Tool support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It supports multiple sectors and business models including subscription, one-time sales, recurring revenue, and blended models with scenario comparison."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I compare different revenue scenarios?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You can create and compare multiple scenarios side by side to evaluate different growth assumptions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I export my forecasts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Forecasts can be exported to PDF for sharing with stakeholders or including in business plans."
+          }
+        }
+      ]
+    }
+    </script>
+
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -393,6 +425,27 @@
         </div>
 
 
+    </div>
+
+    <!-- FAQ Section -->
+    <div style="max-width:1200px;margin:2.5rem auto;padding:0 1rem;">
+      <div style="background:#0f172a;border-radius:0.75rem;padding:2rem;box-shadow:0 4px 24px rgba(0,0,0,0.2);">
+        <h2 style="color:#ffffff;font-size:1.5rem;font-weight:700;margin-bottom:1.5rem;text-align:center;">Frequently Asked Questions</h2>
+        <div style="display:flex;flex-direction:column;gap:1rem;">
+          <details style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:0.5rem;padding:1rem;cursor:pointer;">
+            <summary style="color:#ffffff;font-weight:600;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">What business models does the Revenue Forecasting Tool support?<span style="color:#fe2700;font-size:1.25rem;margin-left:0.5rem;">+</span></summary>
+            <p style="color:rgba(255,255,255,0.8);margin-top:0.75rem;line-height:1.6;font-size:0.95rem;">It supports multiple sectors and business models including subscription, one-time sales, recurring revenue, and blended models with scenario comparison.</p>
+          </details>
+          <details style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:0.5rem;padding:1rem;cursor:pointer;">
+            <summary style="color:#ffffff;font-weight:600;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">Can I compare different revenue scenarios?<span style="color:#fe2700;font-size:1.25rem;margin-left:0.5rem;">+</span></summary>
+            <p style="color:rgba(255,255,255,0.8);margin-top:0.75rem;line-height:1.6;font-size:0.95rem;">Yes. You can create and compare multiple scenarios side by side to evaluate different growth assumptions.</p>
+          </details>
+          <details style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:0.5rem;padding:1rem;cursor:pointer;">
+            <summary style="color:#ffffff;font-weight:600;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">Can I export my forecasts?<span style="color:#fe2700;font-size:1.25rem;margin-left:0.5rem;">+</span></summary>
+            <p style="color:rgba(255,255,255,0.8);margin-top:0.75rem;line-height:1.6;font-size:0.95rem;">Yes. Forecasts can be exported to PDF for sharing with stakeholders or including in business plans.</p>
+          </details>
+        </div>
+      </div>
     </div>
 
     <script>

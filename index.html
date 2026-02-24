@@ -7,7 +7,7 @@
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Innovation Consulting for SMEs and Startups | SummCore</title>
-  <meta name="description" content="SummCore provides innovation consulting and growth strategies for SMEs and startups. Explore free business tools, revenue forecasting, strategy generators, and expert consultation.">
+  <meta name="description" content="SummCore helps SMEs and startups grow with innovation consulting, free business tools, revenue forecasting, strategy generators, and one-to-one expert consultation. Start for free today.">
   <link rel="canonical" href="https://summcore.com/">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <meta property="og:type" content="website">
@@ -32,6 +32,54 @@
       "https://www.tiktok.com/@summcore"
     ],
     "description": "Innovation consulting and growth strategy for SMEs and startups"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is SummCore?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SummCore is an innovation consulting firm that helps SMEs and startups grow through strategy frameworks, free business tools, and one-to-one expert consultation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are the business tools free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. All SummCore tools are completely free with no sign-up required. This includes the Business Health Check, Strategy Generator, Financial Health Checker, Revenue Forecasting Tool, Invoicing & Quotation App, and Business Plan Templates."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who is SummCore for?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SummCore is designed for small and medium-sized enterprises (SMEs) and startups looking for practical growth strategies, business planning tools, and expert innovation consulting."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I book a free consultation?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Scroll to the consultation section on our homepage and fill in your business name, contact details, and a brief description of your needs. A SummCore consultant will get back to you promptly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What services does SummCore offer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SummCore offers innovation consulting, growth strategy development, process improvement, product development guidance, and a suite of free business tools covering health checks, strategy generation, financial analysis, revenue forecasting, and invoicing."
+        }
+      }
+    ]
   }
   </script>
   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
@@ -665,6 +713,40 @@
       </section>
     );
 
+    const FAQ = () => {
+      const faqs = [
+        { q: "What is SummCore?", a: "SummCore is an innovation consulting firm that helps SMEs and startups grow through strategy frameworks, free business tools, and one-to-one expert consultation." },
+        { q: "Are the business tools free to use?", a: "Yes. All SummCore tools are completely free with no sign-up required. This includes the Business Health Check, Strategy Generator, Financial Health Checker, Revenue Forecasting Tool, Invoicing & Quotation App, and Business Plan Templates." },
+        { q: "Who is SummCore for?", a: "SummCore is designed for small and medium-sized enterprises (SMEs) and startups looking for practical growth strategies, business planning tools, and expert innovation consulting." },
+        { q: "How do I book a free consultation?", a: "Scroll to the consultation section on our homepage and fill in your business name, contact details, and a brief description of your needs. A SummCore consultant will get back to you promptly." },
+        { q: "What services does SummCore offer?", a: "SummCore offers innovation consulting, growth strategy development, process improvement, product development guidance, and a suite of free business tools covering health checks, strategy generation, financial analysis, revenue forecasting, and invoicing." }
+      ];
+      const [open, setOpen] = React.useState(null);
+      return (
+        <section id="faq" className="py-16 bg-slate-800">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold text-center text-white mb-10">Frequently Asked Questions</h2>
+            <div className="space-y-3">
+              {faqs.map((item, i) => (
+                <div key={i} className="bg-slate-700 rounded-lg border border-slate-600">
+                  <button
+                    onClick={() => setOpen(open === i ? null : i)}
+                    className="w-full text-left px-6 py-4 flex justify-between items-center text-white font-semibold hover:text-amber-400 transition-colors"
+                  >
+                    <span>{item.q}</span>
+                    <span className="text-xl ml-4">{open === i ? '\u2212' : '+'}</span>
+                  </button>
+                  {open === i && (
+                    <div className="px-6 pb-4 text-gray-300">{item.a}</div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
     const App = () => (
       <div>
         <NavBar />
@@ -672,6 +754,7 @@
         <Services />
         <Pitch />
         <Tools />
+        <FAQ />
         <Consultation />
         <Footer />
       </div>

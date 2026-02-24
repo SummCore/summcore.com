@@ -1,9 +1,27 @@
+# AI Crawlers — allow indexing for AEO visibility
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# All other crawlers
 User-agent: *
 Allow: /
 
 Sitemap: https://summcore.com/sitemap.xml
-
-
-
-
-
