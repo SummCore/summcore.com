@@ -1,0 +1,475 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Layout */
+.app-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+/* Form Section */
+.form-section {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group h2 {
+    color: #4a5568;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 5px;
+}
+
+/* Input Styles */
+input, textarea, select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+    margin-bottom: 10px;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+/* Items Section */
+.items-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 0.5fr;
+    gap: 10px;
+    padding: 10px;
+    background: #f7fafc;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.item-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 0.5fr;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.item-row input {
+    margin-bottom: 0;
+    padding: 8px;
+    font-size: 13px;
+}
+
+.item-row .subtotal {
+    font-weight: bold;
+    color: #2d3748;
+    text-align: center;
+    padding: 8px;
+    background: white;
+    border-radius: 4px;
+}
+
+.remove-item {
+    background: #e53e3e;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.3s ease;
+}
+
+.remove-item:hover {
+    background: #c53030;
+}
+
+.add-item-btn {
+    background: #48bb78;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.add-item-btn:hover {
+    background: #38a169;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 15px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+}
+
+.btn-pdf {
+    background: #e53e3e;
+    color: white;
+}
+
+.btn-pdf:hover {
+    background: #c53030;
+    transform: translateY(-2px);
+}
+
+.btn-word {
+    background: #2b6cb0;
+    color: white;
+}
+
+.btn-word:hover {
+    background: #2c5282;
+    transform: translateY(-2px);
+}
+
+.btn-excel {
+    background: #38a169;
+    color: white;
+}
+
+.btn-excel:hover {
+    background: #2f855a;
+    transform: translateY(-2px);
+}
+
+.btn-email {
+    background: #805ad5;
+    color: white;
+}
+
+.btn-email:hover {
+    background: #6b46c1;
+    transform: translateY(-2px);
+}
+
+.btn-print {
+    background: #4a5568;
+    color: white;
+}
+
+.btn-print:hover {
+    background: #2d3748;
+    transform: translateY(-2px);
+}
+
+/* Preview Section */
+.preview-section {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.preview-section h2 {
+    color: #4a5568;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 5px;
+}
+
+/* Document Preview */
+.document-preview {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 30px;
+    background: white;
+    min-height: 400px;
+    font-family: 'Times New Roman', serif;
+    line-height: 1.6;
+    position: relative;
+}
+
+.document-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 16px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.company-info {
+    flex: 1;
+}
+
+.company-logo {
+    max-width: 150px;
+    max-height: 100px;
+    object-fit: contain;
+    justify-self: end;
+}
+
+.document-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2d3748;
+    margin: 20px 0;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/* Watermark */
+.doc-content { position: relative; z-index: 1; }
+.content-area { position: relative; }
+
+.document-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.client-info, .invoice-info {
+    padding: 15px;
+    background: #f7fafc;
+    border-radius: 8px;
+}
+
+.info-title {
+    font-weight: bold;
+    color: #4a5568;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0;
+}
+
+.items-table th,
+.items-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.items-table th {
+    background: #f7fafc;
+    font-weight: bold;
+    color: #4a5568;
+}
+
+.items-table .number-cell {
+    text-align: right;
+}
+
+.total-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #e2e8f0;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.total-row.final {
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: #2d3748;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 10px;
+}
+
+.document-footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+    color: #718096;
+    font-size: 0.9rem;
+}
+
+.timestamp {
+    text-align: center;
+    color: #a0aec0;
+    font-size: 0.8rem;
+    margin-top: 20px;
+    font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .app-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .items-header,
+    .item-row {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+    
+    .items-header span {
+        display: none;
+    }
+    
+    .item-row input,
+    .item-row .subtotal {
+        margin-bottom: 5px;
+    }
+    
+    .action-buttons {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .form-section,
+    .preview-section {
+        padding: 20px;
+    }
+    
+    .document-details {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .document-header {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .action-buttons {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Print Styles */
+@media print {
+    /* Hide everything except the document preview card */
+    body * {
+        visibility: hidden;
+    }
+    
+    /* Show only the document preview and its contents */
+    .document-preview,
+    .document-preview * {
+        visibility: visible;
+    }
+    
+    /* Position the document at the top */
+    .document-preview {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        border: none;
+        padding: 20px;
+        box-shadow: none;
+        background: white;
+    }
+    
+    /* Ensure text colors are readable */
+    * {
+        color: black !important;
+        background: white !important;
+    }
+    /* Hide the "Live Preview" heading in print */
+    .preview-section h2 { display: none !important; }
+    
+    @page { margin: 12mm; }
+}

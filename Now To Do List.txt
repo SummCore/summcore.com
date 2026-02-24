@@ -1,0 +1,66 @@
+1.Business Health Check:
+Export options needed:
+PDF
+Google sheets
+Word
+Excel
+csv
+
+Currently when select download all the writing is moved down the page instead 
+of starting from the top and push off the writing.
+
+Email Results-results need to be automatically emailed to info@summcore.com with the users email that was entered
+Book Free Consultation - Form needed with whats needed
+
+2.Revenue Checker:
+Export options needed:
+PDF
+Google sheets
+Word
+Excel
+csv
+
+Print option needed
+
+3.Business Strategy Generator:
+Export options needed:
+PDF
+Google sheets
+Word
+Excel
+csv
+
+Needs Print option.
+
+4.Customer Journey Mapper:
+I don`t see the point it seems like it offers no purpose.
+Export options needed:
+PDF
+Google sheets
+Word
+Excel
+csv
+
+Needs Print option.
+
+5.Free Financial Health Checker:
+Free Financial Health Checker- must only populate once "Calculate Financial Metrics " button has been pushed.
+Export options needed:
+PDF
+Google sheets
+Word
+Excel
+csv
+
+Needs Print option.
+
+6. Invoicing & Quotation App:
+Export options needed:
+PDF
+Google sheets
+Word
+Excel
+csv
+
+Print option must only show the informaion on the Cards only.
+Logo needs to be on the right hand side next to company details, like you see in the preview

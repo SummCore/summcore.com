@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Invoices and Quotes Online | Free Invoicing Tool</title>
+    <meta name="description" content="Generate professional invoices and quotations in your browser. Export to PDF, Word, Excel and email directly. Free Invoicing & Quotation tool by SummCore.">
+    <link rel="canonical" href="https://summcore.com/Invoicing%20%26%20Quotation/index.html">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Create Invoices and Quotes Online | Free Invoicing Tool">
+    <meta property="og:description" content="Generate professional invoices and quotations. Export and email with one click. Free tool by SummCore.">
+    <meta property="og:url" content="https://summcore.com/Invoicing%20%26%20Quotation/index.html">
+    <meta property="og:image" content="https://summcore.com/Logo/SC25.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Create Invoices and Quotes Online | Free Invoicing Tool">
+    <meta name="twitter:description" content="Generate invoices and quotations in minutes. Export to PDF/Word/Excel.">
+    <meta name="twitter:image" content="https://summcore.com/Logo/SC25.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Invoicing & Quotation App",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "url": "https://summcore.com/Invoicing%20%26%20Quotation/index.html",
+      "publisher": {"@type": "Organization", "name": "SummCore"}
+    }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.1.0/docx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+</head>
+<body style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);">
+    <a href="../index.html#tools" aria-label="Free Tools" style="position:fixed;top:16px;left:16px;z-index:1000;display:flex;flex-direction:column;align-items:center;text-decoration:none;line-height:1;gap:0;">
+      <img src="../Logo/SC25.png" alt="SummCore Free Tools home" loading="lazy" style="width:80px;height:80px;object-fit:contain;margin:0;filter:drop-shadow(0 0 6px rgba(255,255,255,0.9)) drop-shadow(0 0 12px rgba(255,255,255,0.6));" />
+      <div style="font-size:16px;margin-top:-12px;color:white;font-weight:700;line-height:1;">Free Tools</div>
+    </a>
+    <div class="container">
+        <header>
+            <h1>📄 Invoicing & Quotation App</h1>
+            <p>Generate professional invoices and quotations with ease</p>
+        </header>
+
+        <div class="app-layout">
+            <!-- Form Section -->
+            <div class="form-section">
+                <div class="form-group">
+                    <h2>📋 Document Type</h2>
+                    <select id="documentType" onchange="updateDocumentType()" title="Choose whether to create an invoice or quotation">
+                        <option value="invoice">Invoice</option>
+                        <option value="quote">Quotation</option>
+                    </select>
+                </div>
+
+                <!-- Company Information -->
+                <div class="form-group">
+                    <h2>🏢 Company Information</h2>
+                    <div class="input-row">
+                        <input type="text" id="companyName" placeholder="Company Name" oninput="updatePreview()">
+                        <input type="file" id="companyLogo" accept="image/*" onchange="handleLogoUpload()">
+                    </div>
+                    <div class="input-row">
+                        <div>
+                          <label for="logoSize">Logo Size (width in px)</label>
+                          <input type="range" id="logoSize" min="60" max="220" value="120" oninput="handleLogoSizeChange(this.value)">
+                          <div style="font-size:12px;color:#4a5568;">Current: <span id="logoSizeLabel">120</span>px</div>
+                        </div>
+                        <div>
+                          <label for="logoPosition">Logo Position</label>
+                          <select id="logoPosition" onchange="handleLogoPositionChange(this.value)">
+                            <option value="right" selected>Right of company info</option>
+                            <option value="left">Left of company info</option>
+                            <option value="above">Above company info</option>
+                            <option value="below">Below company info</option>
+                          </select>
+                        </div>
+                    </div>
+                    <textarea id="companyAddress" placeholder="Company Address&#10;Street, City, Postcode" oninput="updatePreview()"></textarea>
+                    <div class="input-row">
+                        <input type="email" id="companyEmail" placeholder="Email" oninput="updatePreview()">
+                        <input type="tel" id="companyPhone" placeholder="Phone" oninput="updatePreview()">
+                    </div>
+                </div>
+
+                <!-- Client Information -->
+                <div class="form-group">
+                    <h2>👤 Client Information</h2>
+                    <input type="text" id="clientName" placeholder="Client Name" oninput="updatePreview()">
+                    <textarea id="clientAddress" placeholder="Client Address&#10;Street, City, Postcode" oninput="updatePreview()"></textarea>
+                </div>
+
+                <!-- Document Details -->
+                <div class="form-group">
+                    <h2>📝 Document Details</h2>
+                    <div class="input-row">
+                        <input type="text" id="documentNumber" placeholder="Invoice/Quote Number" oninput="updatePreview()">
+                        <select id="currency" onchange="updatePreview()" title="Select the currency for your invoice or quotation">
+                            <option value="£">£ GBP</option>
+                            <option value="$">$ USD</option>
+                            <option value="€">€ EUR</option>
+                            <option value="¥">¥ JPY</option>
+                        </select>
+                    </div>
+                    <input type="text" id="paymentTerms" placeholder="Payment Terms (e.g., Net 30)" oninput="updatePreview()">
+                </div>
+
+                <!-- Items Section -->
+                <div class="form-group">
+                    <h2>📦 Items</h2>
+                    <div class="items-header">
+                        <span>Description</span>
+                        <span>Qty</span>
+                        <span>Unit Price</span>
+                        <span>Tax %</span>
+                        <span>Subtotal</span>
+                        <span>Action</span>
+                    </div>
+                    <div id="itemsList">
+                        <!-- Dynamic items will be added here -->
+                    </div>
+                    <button type="button" onclick="addItem()" class="add-item-btn" title="Add a new line item to your invoice or quote">+ Add Item</button>
+                </div>
+
+                <!-- Notes -->
+                <div class="form-group">
+                    <h2>📝 Notes</h2>
+                    <textarea id="notes" placeholder="Additional notes or terms..." oninput="updatePreview()"></textarea>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button onclick="window.print()" class="btn" style="background:#fe2700;color:#fff;" title="Open Save or Print to choose your format">Save or Print</button>
+                    <button onclick="sendEmail()" class="btn" style="background:#fe2700;color:#fff;" title="Send invoice/quote directly via email">Send Email</button>
+                </div>
+            </div>
+
+            <!-- Preview Section -->
+            <div class="preview-section">
+                <h2>👁️ Live Preview</h2>
+                <div id="documentPreview" class="document-preview">
+                    <!-- Live preview will be generated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+# Backups and duplicates
+index - Copy.html
+index - Copy (2).html
+SummCore.zip
+*.zip
+
+# Temp files
+*.tmp
+*.bak
+
+# OS files
+.DS_Store
+Thumbs.db

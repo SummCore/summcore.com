@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Health Check & Audit Tool | Free Assessment</title>
+  <meta name="description" content="Evaluate your business across foundations, finance, marketing, operations, customer and innovation. Free Business Health Check by SummCore.">
+  <link rel="canonical" href="https://summcore.com/Business%20Health%20Check%20&%20Audit%20Tool/businesshealthcheck.html">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Business Health Check & Audit Tool | Free Assessment">
+  <meta property="og:description" content="Quickly assess your business health and get actionable recommendations.">
+  <meta property="og:url" content="https://summcore.com/Business%20Health%20Check%20&%20Audit%20Tool/businesshealthcheck.html">
+  <meta property="og:image" content="https://summcore.com/Logo/SC25.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Business Health Check & Audit Tool | Free Assessment">
+  <meta name="twitter:description" content="Evaluate key areas and get tailored recommendations. Free tool by SummCore.">
+  <meta name="twitter:image" content="https://summcore.com/Logo/SC25.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Business Health Check & Audit Tool",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "url": "https://summcore.com/Business%20Health%20Check%20&%20Audit%20Tool/businesshealthcheck.html",
+    "publisher": {"@type": "Organization", "name": "SummCore"}
+  }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.19.3/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <style>
+    /* Watermark removed */
+
+    /* Mobile Optimizations */
+    @media (max-width: 768px) {
+      /* Prevent horizontal scroll */
+      body {
+        overflow-x: hidden;
+      }
+      
+      /* Mobile header */
+      .container {
+        padding: 0.75rem !important;
+      }
+      
+      /* Mobile title section */
+      div[style*="text-align: center"] {
+        padding: 15px !important;
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
+      }
+      
+      div[style*="text-align: center"] h1 {
+        font-size: 1.75rem !important;
+        line-height: 1.2 !important;
+      }
+      
+      div[style*="text-align: center"] p {
+        font-size: 1rem !important;
+        line-height: 1.5 !important;
+      }
+      
+      /* Mobile forms */
+      .bg-white {
+        padding: 1rem !important;
+        margin-bottom: 1rem !important;
+      }
+      
+      .text-xl {
+        font-size: 1.25rem !important;
+      }
+      
+      .text-lg {
+        font-size: 1.125rem !important;
+      }
+      
+      /* Mobile inputs */
+      input, select, textarea, button {
+        font-size: 16px !important; /* Prevents zoom on iOS */
+        min-height: 44px !important; /* iOS recommended touch target */
+        padding: 0.75rem !important;
+      }
+      
+      /* Mobile buttons */
+      button {
+        width: 100% !important;
+        margin-bottom: 0.5rem !important;
+      }
+      
+      /* Mobile grid adjustments */
+      .grid-cols-1.md\\:grid-cols-2 {
+        gap: 0.75rem !important;
+      }
+      
+      /* Mobile spacing */
+      .space-y-4 > * + * {
+        margin-top: 1rem !important;
+      }
+      
+      .mb-6 {
+        margin-bottom: 1rem !important;
+      }
+      
+      .mb-4 {
+        margin-bottom: 0.75rem !important;
+      }
+      
+      /* Mobile consultation form */
+      .grid.grid-cols-1.gap-3 {
+        gap: 0.75rem !important;
+      }
+      
+      /* Mobile navigation link */
+      a[aria-label="Free Tools"] {
+        top: 10px !important;
+        left: 10px !important;
+      }
+      
+      a[aria-label="Free Tools"] img {
+        width: 60px !important;
+        height: 60px !important;
+      }
+      
+      a[aria-label="Free Tools"] div {
+        font-size: 14px !important;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      /* Extra small mobile adjustments */
+      .container {
+        padding: 0.5rem !important;
+      }
+      
+      div[style*="text-align: center"] h1 {
+        font-size: 1.5rem !important;
+      }
+      
+      div[style*="text-align: center"] p {
+        font-size: 0.9rem !important;
+      }
+      
+      .bg-white {
+        padding: 0.75rem !important;
+      }
+      
+      .text-xl {
+        font-size: 1.125rem !important;
+      }
+      
+      .text-lg {
+        font-size: 1rem !important;
+      }
+      
+      input, select, textarea {
+        padding: 0.5rem !important;
+      }
+      
+      button {
+        padding: 0.75rem !important;
+      }
+    }
+
+    /* Print/export: only result cards */
+    @media print {
+      /* Hide everything except result cards */
+      body * {
+        visibility: hidden;
+      }
+      /* Show only the results section and its contents */
+      #resultsSection,
+      #resultsSection *,
+      #overallScore,
+      #overallScore *,
+      #categoryScores,
+      #categoryScores *,
+      #recommendations,
+      #recommendations * {
+        visibility: visible;
+      }
+      /* Position the results at the top */
+      #resultsSection {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        box-shadow: none;
+        padding: 20px;
+        background: white;
+      }
+      /* Hide buttons and consultation form */
+      button,
+      .mt-6.bg-gray-50 {
+        visibility: hidden !important;
+      }
+      /* Ensure text colors are readable */
+      * {
+        color: black !important;
+        background: white !important;
+      }
+      @page { margin: 12mm; }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);">
+  <a href="../index.html#tools" aria-label="Free Tools" style="position:fixed;top:16px;left:16px;z-index:1000;display:flex;flex-direction:column;align-items:center;text-decoration:none;line-height:1;gap:0;">
+    <img src="Logo/SC25.png" alt="SummCore Free Tools home" loading="lazy" style="width:80px;height:80px;object-fit:contain;margin:0;filter:drop-shadow(0 0 6px rgba(255,255,255,0.9)) drop-shadow(0 0 12px rgba(255,255,255,0.6));" />
+    <div style="font-size:16px;margin-top:-12px;color:white;font-weight:700;line-height:1;">Free Tools</div>
+  </a>
+  <!-- App Title Section -->
+  <div style="text-align: center; margin-top: 40px; margin-bottom: 40px; padding: 20px;">
+    <h1 style="color: white; font-size: 2.5rem; margin-bottom: 10px; font-weight: 700;">🏥 Business Health Check</h1>
+    <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; margin: 0;">A comprehensive assessment tool to evaluate your business performance and identify growth opportunities</p>
+  </div>
+
+  <div class="container mx-auto p-4 max-w-3xl">
+
+
+
+    <!-- User Info Form -->
+    <div id="userInfoSection" class="bg-white p-6 rounded-lg shadow-md mb-6">
+      <h2 class="text-xl font-semibold mb-4">Tell Us About Your Business</h2>
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Business Name</label>
+          <input type="text" id="userName" name="name_field" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" id="userEmail" name="email_field" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" required>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Business Type</label>
+          <select id="businessType" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" title="Select your business type for customized assessment questions">
+            <option value="general">Select Business Type</option>
+            <option value="agriculture">Agriculture</option>
+            <option value="automotive">Automotive Services</option>
+            <option value="bakery">Bakery</option>
+            <option value="barpub">Bar / Pub</option>
+            <option value="beauty-salon">Beauty / Salon / Barber</option>
+            <option value="cafe">Café / Coffee Shop</option>
+            <option value="childcare">Childcare / Nursery</option>
+            <option value="cleaning">Cleaning Services</option>
+            <option value="clinic">Healthcare Clinic / Practice</option>
+            <option value="construction">Construction / Trades</option>
+            <option value="consulting">Consulting / Advisory</option>
+            <option value="creative-design">Creative / Design Studio</option>
+            <option value="dental">Dental Practice</option>
+            <option value="ecommerce">E-commerce</option>
+            <option value="education-training">Education / Training</option>
+            <option value="events">Events / Entertainment</option>
+            <option value="finance">Finance / Accounting</option>
+            <option value="foodtruck">Food Truck</option>
+            <option value="freelancer">Freelancer / Sole Trader</option>
+            <option value="health-fitness">Health & Fitness (Gym, PT, Yoga)</option>
+            <option value="home-services">Home Services (Repairs, Gardening)</option>
+            <option value="hospitality">Hospitality / Hotel / BnB</option>
+            <option value="it-services">IT Services / MSP</option>
+            <option value="legal">Legal Services</option>
+            <option value="logistics">Logistics / Delivery</option>
+            <option value="manufacturing">Manufacturing</option>
+            <option value="marketing-agency">Marketing / Advertising Agency</option>
+            <option value="media">Photography / Media / Content</option>
+            <option value="nonprofit">Nonprofit / Charity</option>
+            <option value="coaching">Online Course / Coaching</option>
+            <option value="other">Other</option>
+            <option value="pets">Pets / Pet Services</option>
+            <option value="property-mgmt">Property Management</option>
+            <option value="real-estate">Real Estate / Property</option>
+            <option value="restaurant">Restaurant</option>
+            <option value="retail-electronics">Retail - Electronics</option>
+            <option value="retail-fashion">Retail - Fashion/Apparel</option>
+            <option value="retail">Retail - General</option>
+            <option value="retail-grocery">Retail - Grocery/Convenience</option>
+            <option value="saas">SaaS / Software</option>
+            <option value="spa-wellness">Spa / Wellness</option>
+            <option value="travel">Travel / Tourism</option>
+          </select>
+        </div>
+        <button onclick="startAssessment()" class="w-full text-white p-2 rounded-md" style="background-color:#fe2700;" title="Begin your comprehensive business health evaluation">Start Assessment</button>
+      </div>
+    </div>
+
+    <!-- Question Sections -->
+    <div id="questionSections" class="hidden space-y-6"></div>
+
+    <!-- Results Section -->
+    <div id="resultsSection" class="hidden bg-white p-6 rounded-lg shadow-md">
+      <h2 class="text-xl font-semibold mb-4">Your Business Health Report</h2>
+      <div id="overallScore" class="text-center mb-6"></div>
+      <div id="categoryScores" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6"></div>
+      <div id="recommendations" class="mb-6"></div>
+      <div class="text-center space-x-2 space-y-2">
+        <button onclick="window.print()" class="text-white p-2 rounded-md" style="background-color:#fe2700;" title="Open your device Save or Print dialog to save in any format">Save or Print</button>
+        <button onclick="sendEmail()" class="text-white p-2 rounded-md" style="background-color:#fe2700;" title="Email results to info@summcore.com">Email Results</button>
+      </div>
+
+      <div class="mt-6 bg-gray-50 p-4 rounded-md text-center">
+        <h3 class="text-lg font-semibold mb-2">Book a Free Consultation</h3>
+        <p class="text-gray-600 mb-4">Ready to take the next step? Book your free consultation and let's work on your business together.</p>
+        <a href="https://boost.summcore.com" target="_blank" rel="noopener noreferrer" style="background-color:#fe2700;" class="inline-block text-white p-3 rounded-md font-semibold hover:opacity-90 transition-opacity">Book Free Consultation</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Ensure website has a scheme so type=url validation passes
+    function normalizeWebsiteUrl(formEl){
+      try{
+        var input = formEl.querySelector('#website');
+        if(input && input.value && !/^https?:\/\//i.test(input.value)){
+          input.value = 'https://' + input.value.replace(/^\/+/, '');
+        }
+      }catch(e){}
+      return true; // allow submit
+    }
+    // EmailJS configuration (fill these values in to enable auto-send)
+    const EMAILJS_PUBLIC_KEY = '';
+    const EMAILJS_SERVICE_ID = '';
+    const EMAILJS_TEMPLATE_ID = '';
+
+    if (EMAILJS_PUBLIC_KEY && window.emailjs) {
+      try { emailjs.init(EMAILJS_PUBLIC_KEY); } catch (e) {}
+    }
+
+    function silentlyCcSummcore(subject, body, fromName, fromEmail) {
+      try {
+        if (!EMAILJS_PUBLIC_KEY || !EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !window.emailjs) return;
+        return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+          to_email: 'info@summcore.com',
+          from_name: fromName || 'Business Health Check',
+          from_email: fromEmail || 'noreply@summcore.com',
+          subject,
+          message: body
+        });
+      } catch (e) { /* ignore */ }
+    }
+    // Clear any previously autofilled values on load to prevent sticky inputs
+    window.addEventListener('DOMContentLoaded', () => {
+      const nameInput = document.getElementById('userName');
+      const emailInput = document.getElementById('userEmail');
+      if (nameInput) nameInput.value = '';
+      if (emailInput) emailInput.value = '';
+      const businessType = document.getElementById('businessType');
+      if (businessType) businessType.value = 'general';
+    });
+
+    const questions = {
+      foundations: [
+        { text: "Do you have a written business plan?", id: "f1" },
+        { text: "Do you regularly review your business goals?", id: "f2" },
+        { text: "Are your services/products clearly defined?", id: "f3" }
+      ],
+      financial: [
+        { text: "Do you track your monthly income and expenses?", id: "fin1" },
+        { text: "Do you have a cash flow forecast?", id: "fin2" },
+        { text: "Are you confident in your pricing model?", id: "fin3" }
+      ],
+      marketing: [
+        { text: "Do you have a business website?", id: "m1" },
+        { text: "Is your website mobile-friendly?", id: "m2" },
+        { text: "Are you running any marketing campaigns right now?", id: "m3" }
+      ],
+      operations: [
+        { text: "Are you using any project or task management tools?", id: "o1" },
+        { text: "Do you have documented SOPs (Standard Operating Procedures)?", id: "o2" },
+        { text: "Are there any daily tasks you would like to automate?", id: "o3" }
+      ],
+      customer: [
+        { text: "Do you collect customer feedback regularly?", id: "c1" },
+        { text: "Do you use a CRM or database to track customer interactions?", id: "c2" },
+        { text: "Do you follow up with customers after a sale?", id: "c3" }
+      ],
+      innovation: [
+        { text: "Are you exploring new revenue streams?", id: "i1" },
+        { text: "Do you keep up with industry trends?", id: "i2" },
+        { text: "Have you launched a new product/service in the last 6 months?", id: "i3" }
+      ]
+    };
+
+    const recommendations = {
+      foundations: {
+        cafe: "Consider drafting a concise business plan to clarify your café’s unique offerings, such as specialty drinks or community events.",
+        ecommerce: "Create a business plan to outline your e-commerce growth strategy, focusing on customer acquisition and retention.",
+        general: "Develop a written business plan to set clear goals and track progress."
+      },
+      financial: {
+        cafe: "Use tools like QuickBooks to track daily sales and expenses for better financial clarity.",
+        ecommerce: "Implement a cash flow forecast to manage inventory and ad spend effectively.",
+        general: "Start tracking monthly income and expenses with a simple spreadsheet or accounting software."
+      },
+      marketing: {
+        cafe: "Build a simple website with Squarespace to showcase your menu and events.",
+        ecommerce: "Ensure your e-commerce site is mobile-optimized to improve user experience and sales.",
+        general: "Create a basic website to establish an online presence and attract customers."
+      },
+      operations: {
+        cafe: "Use Trello or Asana to manage daily tasks like inventory restocking or staff scheduling.",
+        ecommerce: "Document SOPs for order fulfillment to streamline your e-commerce operations.",
+        general: "Adopt a task management tool like Trello to organize daily operations."
+      },
+      customer: {
+        cafe: "Set up a simple feedback form to gather customer insights after each visit.",
+        ecommerce: "Use a free CRM like HubSpot to track customer interactions and improve retention.",
+        general: "Start collecting customer feedback regularly to improve your services."
+      },
+      innovation: {
+        cafe: "Explore new revenue streams, like hosting coffee-tasting workshops or selling branded merchandise.",
+        ecommerce: "Research industry trends to identify new product categories for your store.",
+        general: "Stay updated on industry trends to identify new opportunities for growth."
+      }
+    };
+
+    let currentSectionIndex = 0;
+    const sections = Object.keys(questions);
+    let userData = { name: "", email: "", businessType: "general", answers: {} };
+
+    function startAssessment() {
+      const name = document.getElementById("userName").value;
+      const email = document.getElementById("userEmail").value;
+      const businessType = document.getElementById("businessType").value;
+      if (!name || !email) {
+        alert("Please fill in all fields.");
+        return;
+      }
+      userData.name = name;
+      userData.email = email;
+      userData.businessType = businessType;
+      document.getElementById("userInfoSection").classList.add("hidden");
+      document.getElementById("questionSections").classList.remove("hidden");
+      renderSection();
+    }
+
+    function renderSection() {
+      const sectionKey = sections[currentSectionIndex];
+      const sectionQuestions = questions[sectionKey];
+      const sectionTitle = sectionKey.charAt(0).toUpperCase() + sectionKey.slice(1);
+      const sectionHtml = `
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h2 class="text-xl font-semibold mb-4">${sectionTitle}</h2>
+          <div class="space-y-4">
+            ${sectionQuestions.map(q => `
+              <div>
+                <p class="text-sm font-medium text-gray-700">${q.text}</p>
+                <div class="mt-2 space-x-4">
+                  <label><input type="radio" name="${q.id}" value="3" onchange="saveAnswer('${q.id}', 3)" required> Yes</label>
+                  <label><input type="radio" name="${q.id}" value="2" onchange="saveAnswer('${q.id}', 2)"> Partially</label>
+                  <label><input type="radio" name="${q.id}" value="1" onchange="saveAnswer('${q.id}', 1)"> No</label>
+                </div>
+              </div>
+            `).join("")}
+            <div class="flex justify-between mt-6">
+              ${currentSectionIndex > 0 ? `<button onclick="prevSection()" class="bg-gray-600 text-white p-2 rounded-md hover:bg-gray-700">Previous</button>` : "<div></div>"}
+              <button onclick="nextSection()" class="text-white p-2 rounded-md" style="background-color: #1e293b;">Next</button>
+            </div>
+          </div>
+        </div>
+      `;
+      document.getElementById("questionSections").innerHTML = sectionHtml;
+    }
+
+    function saveAnswer(questionId, value) {
+      userData.answers[questionId] = parseInt(value);
+    }
+
+
+
+    function prevSection() {
+      if (currentSectionIndex > 0) {
+        currentSectionIndex--;
+        renderSection();
+      }
+    }
+
+    function nextSection() {
+      const sectionQuestions = questions[sections[currentSectionIndex]];
+      const allAnswered = sectionQuestions.every(q => userData.answers[q.id]);
+      if (!allAnswered) {
+        alert("Please answer all questions before proceeding.");
+        return;
+      }
+      if (currentSectionIndex < sections.length - 1) {
+        currentSectionIndex++;
+        renderSection();
+      } else {
+        showResults();
+      }
+    }
+
+    function calculateScores() {
+      const scores = {};
+      let totalPoints = 0;
+      let totalMaxPoints = 0;
+      Object.keys(questions).forEach(section => {
+        const sectionQuestions = questions[section];
+        const sectionPoints = sectionQuestions.reduce((sum, q) => sum + (userData.answers[q.id] || 0), 0);
+        const maxPoints = sectionQuestions.length * 3;
+        scores[section] = Math.round((sectionPoints / maxPoints) * 100);
+        totalPoints += sectionPoints;
+        totalMaxPoints += maxPoints;
+      });
+      scores.overall = Math.round((totalPoints / totalMaxPoints) * 100);
+      return scores;
+    }
+
+    function getScoreStatus(score) {
+      if (score >= 80) return { text: "Strong", color: "bg-green-500" };
+      if (score >= 50) return { text: "Moderate", color: "bg-yellow-500" };
+      return { text: "Needs Attention", color: "bg-red-500" };
+    }
+
+    function getOverallMessage(score) {
+      if (score >= 80) return "Excellent! Your business is in strong shape.";
+      if (score >= 50) return "Room for Improvement. Consider strengthening those weaker areas.";
+      return "Needs Work. A consultation could help you get on track.";
+    }
+
+    function showResults() {
+      document.getElementById("questionSections").classList.add("hidden");
+      document.getElementById("resultsSection").classList.remove("hidden");
+      const scores = calculateScores();
+      const overallStatus = getOverallMessage(scores.overall);
+
+      // Overall Score
+      document.getElementById("overallScore").innerHTML = `
+        <h3 class="text-2xl font-bold" style="color: #1e293b;">Your Business Health Score: ${scores.overall}%</h3>
+        <p class="text-lg text-gray-600">${overallStatus}</p>
+      `;
+
+      // Category Scores
+      const categoryHtml = Object.keys(questions).map(section => {
+        const status = getScoreStatus(scores[section]);
+        return `
+          <div class="p-4 bg-gray-50 rounded-md">
+            <p class="font-medium">${section.charAt(0).toUpperCase() + section.slice(1)}: ${scores[section]}%</p>
+            <p class="text-sm ${status.color} text-white p-1 rounded inline-block">${status.text}</p>
+          </div>
+        `;
+      }).join("");
+      document.getElementById("categoryScores").innerHTML = categoryHtml;
+
+      // Recommendations
+      const recHtml = Object.keys(questions).filter(section => scores[section] < 80).map(section => {
+        const rec = recommendations[section][userData.businessType] || recommendations[section].general;
+        return `<li>${rec}</li>`;
+      }).join("");
+      document.getElementById("recommendations").innerHTML = `
+        <h3 class="text-lg font-semibold mb-2">Key Recommendations</h3>
+        <ul class="list-disc list-inside space-y-2">${recHtml || "<li>Your business is doing great! Keep it up.</li>"}</ul>
+      `;
+
+      // Store results
+      localStorage.setItem("businessHealthCheckResults", JSON.stringify({ ...userData, scores }));
+    }
+
+    function downloadPDF() {
+      const element = document.getElementById("resultsSection");
+      const opt = {
+        margin: 1,
+        filename: `BusinessHealthCheck_Report_${userData.name}.pdf`,
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: "in", format: "letter", orientation: "portrait" }
+      };
+      html2pdf().from(element).set(opt).save();
+    }
+
+    function sendEmail() {
+      const scores = calculateScores();
+      const subject = `Business Health Report for ${userData.name}`;
+      const body = `Business Health Report for ${userData.name}\n\nOverall Score: ${scores.overall}%\n\nCategory Scores:\n${Object.keys(questions).map(section => `- ${section.charAt(0).toUpperCase() + section.slice(1)}: ${scores[section]}%`).join("\n")}\n\nRecommendations:\n${Object.keys(questions).filter(section => scores[section] < 80).map(section => `- ${recommendations[section][userData.businessType] || recommendations[section].general}`).join("\n")}\n\n`;
+      // Silently auto-send a copy to info@summcore.com via EmailJS (if configured)
+      silentlyCcSummcore(subject, body, userData.name, userData.email);
+      // Keep current composer behavior
+      window.location.href = `mailto:${userData.email}?cc=${encodeURIComponent('info@summcore.com')}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
+
+    function exportCSV() {
+      const scores = calculateScores();
+      const rows = [
+        ['Metric','Value'],
+        ['Overall', scores.overall + '%'],
+        ...Object.keys(questions).map(s=>[s.charAt(0).toUpperCase()+s.slice(1), scores[s] + '%'])
+      ];
+      const csv = rows.map(r=>r.join(',')).join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `BusinessHealth_${userData.name || 'report'}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function exportXLSX() {
+      const scores = calculateScores();
+      const data = [
+        { Metric: 'Overall', Value: scores.overall },
+        ...Object.keys(questions).map(s=>({ Metric: s.charAt(0).toUpperCase()+s.slice(1), Value: scores[s] }))
+      ];
+      const ws = XLSX.utils.json_to_sheet(data);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Scores');
+      XLSX.writeFile(wb, `BusinessHealth_${userData.name || 'report'}.xlsx`);
+    }
+
+    function exportWord() {
+      const scores = calculateScores();
+      const content = `Business Health Report\n\nOverall: ${scores.overall}%\n\n` +
+        Object.keys(questions).map(s=>`${s.charAt(0).toUpperCase()+s.slice(1)}: ${scores[s]}%`).join('\n');
+      const blob = new Blob(['\ufeff', content], { type: 'application/msword' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `BusinessHealth_${userData.name || 'report'}.doc`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function exportToGoogleSheets() {
+      // Copies CSV to clipboard and opens Google Sheets blank workbook to paste
+      const scores = calculateScores();
+      const rows = [
+        ['Metric','Value'],
+        ['Overall', scores.overall + '%'],
+        ...Object.keys(questions).map(s=>[s.charAt(0).toUpperCase()+s.slice(1), scores[s] + '%'])
+      ];
+      const csv = rows.map(r=>r.join(',')).join('\n');
+      navigator.clipboard.writeText(csv).then(()=>{
+        window.open('https://docs.google.com/spreadsheets/create', '_blank');
+        alert('Data copied to clipboard. Paste into the new Google Sheet (Ctrl+V).');
+      });
+    }
+
+    async function submitConsultation() {
+      const name = (document.getElementById('consultName').value || userData.name || '').trim();
+      const email = (document.getElementById('consultEmail').value || userData.email || '').trim();
+      const phone = (document.getElementById('consultPhone').value || '').trim();
+      const company = (document.getElementById('consultCompany').value || '').trim();
+      const message = (document.getElementById('consultMessage').value || 'Requesting a consultation.').trim();
+      const subject = `Consultation request from ${name || 'Prospect'}`;
+      const body = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nCompany: ${company}\n\nMessage:\n${message}`;
+
+      const statusEl = document.getElementById('consultStatus');
+      const btn = document.getElementById('consultSubmitBtn');
+      const disable = (d) => { if(btn){ btn.disabled = d; btn.style.opacity = d ? '0.7' : '1'; btn.style.pointerEvents = d ? 'none' : 'auto'; } };
+
+      // Try EmailJS silent send if configured; otherwise fallback to mailto
+      try {
+        disable(true);
+        statusEl.style.display = 'block';
+        statusEl.style.color = '#6b7280';
+        statusEl.textContent = 'Sending request...';
+
+        if (EMAILJS_PUBLIC_KEY && EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && window.emailjs) {
+          await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+            to_email: 'info@summcore.com',
+            from_name: name || 'Business Health Check',
+            from_email: email || 'noreply@summcore.com',
+            subject,
+            message: body
+          });
+          statusEl.style.color = '#10b981';
+          statusEl.textContent = 'Request sent. Thank you!';
+        } else {
+          // Fallback: open mail client prefilled
+          window.location.href = `mailto:info@summcore.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          statusEl.style.color = '#10b981';
+          statusEl.textContent = 'Opened your email app to send the request.';
+        }
+      } catch (e) {
+        statusEl.style.color = '#ef4444';
+        statusEl.textContent = 'There was a problem sending your request. Please try again.';
+      } finally {
+        disable(false);
+      }
+    }
+  </script>
+</body>
+</html>

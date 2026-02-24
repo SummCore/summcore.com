@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Innovation Consulting for SMEs and Startups | SummCore</title>
+  <meta name="description" content="SummCore provides innovation consulting and growth strategies for SMEs and startups. Explore free business tools, revenue forecasting, strategy generators, and expert consultation.">
+  <link rel="canonical" href="https://summcore.com/">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Innovation Consulting for SMEs and Startups | SummCore">
+  <meta property="og:description" content="Unlock measurable growth with SummCore. Free business tools, strategy frameworks, and expert innovation consultancy.">
+  <meta property="og:url" content="https://summcore.com/">
+  <meta property="og:image" content="https://summcore.com/Logo/SC25.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Innovation Consulting for SMEs and Startups | SummCore">
+  <meta name="twitter:description" content="Unlock measurable growth with SummCore. Free tools and expert consulting for SMEs and startups.">
+  <meta name="twitter:image" content="https://summcore.com/Logo/SC25.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "SummCore",
+    "url": "https://summcore.com/",
+    "logo": "https://summcore.com/Logo/SC25.png",
+    "sameAs": [
+      "https://x.com/SummCoreIdeas",
+      "https://www.instagram.com/summcoreideas/",
+      "https://www.tiktok.com/@summcore"
+    ],
+    "description": "Innovation consulting and growth strategy for SMEs and startups"
+  }
+  </script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div id="root">
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: Arial, sans-serif;">
+      <div style="text-align: center;">
+        <div style="border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; width: 40px; height: 40px; animation: spin 2s linear infinite; margin: 0 auto 20px;"></div>
+        <p>Loading SummCore...</p>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    @keyframes wordSwitch1 {
+      0% { opacity: 1; }
+      30% { opacity: 1; }
+      40% { opacity: 0.7; }
+      50% { opacity: 0; }
+      60% { opacity: 0; }
+      70% { opacity: 0.7; }
+      80% { opacity: 1; }
+      100% { opacity: 1; }
+    }
+    
+    @keyframes wordSwitch2 {
+      0% { opacity: 0; }
+      20% { opacity: 0; }
+      30% { opacity: 0.7; }
+      40% { opacity: 1; }
+      60% { opacity: 1; }
+      70% { opacity: 0.7; }
+      80% { opacity: 0; }
+      100% { opacity: 0; }
+    }
+    
+    @keyframes cogRotateClockwise {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    @keyframes cogRotateCounterClockwise {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(-360deg); }
+    }
+    
+    .cog {
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+    /* Footer polish */
+    .footer-link { transition: color 160ms ease, text-decoration-color 160ms ease; }
+    .footer-link:hover { color: #fe2700; text-decoration: underline; text-underline-offset: 2px; }
+    .social-icon { transition: transform 160ms ease, filter 160ms ease; }
+    .social-icon:hover { transform: scale(1.06); }
+
+    /* Mobile Optimizations */
+    @media (max-width: 768px) {
+      /* Prevent horizontal scroll */
+      body {
+        overflow-x: hidden;
+      }
+      
+      /* Better mobile typography */
+      .text-4xl {
+        font-size: 2rem !important;
+        line-height: 1.2 !important;
+      }
+      
+      .text-3xl {
+        font-size: 1.75rem !important;
+        line-height: 1.3 !important;
+      }
+      
+      .text-2xl {
+        font-size: 1.5rem !important;
+        line-height: 1.4 !important;
+      }
+      
+      .text-xl {
+        font-size: 1.125rem !important;
+        line-height: 1.5 !important;
+      }
+      
+      .text-lg {
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+      }
+      
+      /* Mobile spacing improvements */
+      .py-16 {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+      }
+      
+      .py-8 {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+      }
+      
+      .mb-12 {
+        margin-bottom: 2rem !important;
+      }
+      
+      .mb-8 {
+        margin-bottom: 1.5rem !important;
+      }
+      
+      .gap-8 {
+        gap: 1rem !important;
+      }
+      
+      /* Mobile form improvements */
+      input, textarea, button {
+        font-size: 16px !important; /* Prevents zoom on iOS */
+        min-height: 44px !important; /* iOS recommended touch target */
+      }
+      
+      textarea {
+        min-height: 120px !important;
+      }
+      
+      /* Mobile navigation */
+      .max-w-7xl {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+      
+      /* Tool cards mobile */
+      .grid.grid-cols-1.md\\:grid-cols-2 {
+        gap: 1rem !important;
+      }
+      
+      .grid.grid-cols-1.md\\:grid-cols-3 {
+        gap: 1rem !important;
+      }
+      
+      /* Footer mobile */
+      .grid.grid-cols-1.md\\:grid-cols-3 {
+        text-align: center !important;
+      }
+      
+      .md\\:justify-self-start,
+      .md\\:justify-self-center,
+      .md\\:justify-self-end {
+        justify-self: center !important;
+      }
+      
+      /* Social icons mobile */
+      .flex.items-center.gap-4 {
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        gap: 1rem !important;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      /* Extra small mobile adjustments */
+      .text-4xl {
+        font-size: 1.75rem !important;
+      }
+      
+      .text-3xl {
+        font-size: 1.5rem !important;
+      }
+      
+      .text-2xl {
+        font-size: 1.25rem !important;
+      }
+      
+      .px-4 {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+      }
+      
+      .p-6 {
+        padding: 1rem !important;
+      }
+      
+      .p-3 {
+        padding: 0.75rem !important;
+      }
+      
+      /* Smaller buttons on very small screens */
+      .px-6 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+      
+      .py-3 {
+        padding-top: 0.75rem !important;
+        padding-bottom: 0.75rem !important;
+      }
+      
+      .py-2 {
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+      }
+    }
+
+  </style>
+  <script type="text/babel">
+    // Debug logging
+    console.log('Script starting...');
+    console.log('React:', typeof React, React);
+    console.log('ReactDOM:', typeof ReactDOM, ReactDOM);
+    console.log('Babel:', typeof Babel);
+    
+    // Check if React and ReactDOM are loaded
+    if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
+      console.error('React libraries not loaded!');
+      document.getElementById('root').innerHTML = '<div style="padding: 20px; text-align: center; color: red;">Error: React libraries failed to load. Please check your internet connection and refresh the page.</div>';
+    } else {
+      console.log('React libraries loaded successfully!');
+    // Ensure website URL has scheme before submit (homepage consultation form)
+    const normalizeWebsiteUrlHome = (e) => {
+      try {
+        const input = e.target.querySelector('#home_website');
+        if (input && input.value && !/^https?:\/\//i.test(input.value)) {
+          input.value = 'https://' + input.value.replace(/^\/+/, '');
+        }
+      } catch (err) {}
+    };
+
+    const NavBar = () => {
+      const [mobileOpen, setMobileOpen] = React.useState(false);
+      return (
+        <nav className="bg-white shadow-lg sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div className="flex items-center space-x-4 transform hover:scale-105 transition-all duration-300">
+              <div className="relative">
+                  <img 
+                  src="Logo/SC25.png" 
+                  alt="SummCore company logo" 
+                  className="h-20 filter drop-shadow-2xl hover:drop-shadow-3xl transition-all duration-300 transform hover:-translate-y-1" 
+                  style={{
+                    filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3)) drop-shadow(0 6px 6px rgba(0,0,0,0.2))',
+                    transform: 'perspective(1000px) rotateX(5deg)'
+                  }}
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative">
+                                 <div className="text-4xl font-bold tracking-tight transform hover:-translate-y-1 transition-all duration-300 flex items-center">
+                   <span 
+                     className="text-gray-800"
+                     style={{
+                       WebkitTextStroke: '0px transparent',
+                       textShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                       filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))',
+                       fontWeight: 'bold',
+                       fontSize: '2.25rem',
+                       lineHeight: '1'
+                     }}
+                   >
+                     S
+                   </span>
+                   <span 
+                     className="text-gray-800"
+                     style={{
+                       WebkitTextStroke: '1px #000',
+                       textShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                       filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))'
+                     }}
+                   >
+                     umm
+                   </span>
+                   <span 
+                     className="text-gray-800"
+                     style={{
+                       WebkitTextStroke: '0px transparent',
+                       textShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                       filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))',
+                       fontWeight: 'bold',
+                       fontSize: '2.25rem',
+                       lineHeight: '1'
+                     }}
+                   >
+                     C
+                   </span>
+                   <span 
+                     className="text-gray-800"
+                     style={{
+                       WebkitTextStroke: '1px #000',
+                       textShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                       filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))'
+                     }}
+                   >
+                     ore
+                   </span>
+                 </div>
+                <div 
+                  className="absolute inset-0 text-4xl font-bold text-gray-300 -z-10 flex items-center"
+                  style={{
+                    transform: 'translate(2px, 2px)',
+                    opacity: '0.6'
+                  }}
+                >
+                  <span>S</span>
+                  <span>umm</span>
+                  <span>C</span>
+                  <span>ore</span>
+                </div>
+              </div>
+            </div>
+          {/* Desktop nav */}
+          <div className="hidden md:flex space-x-4">
+              <a href="#services" className="text-gray-700 hover:text-amber-600 transition-colors duration-300">Services</a>
+              <a href="#tools" className="text-gray-700 hover:text-amber-600 transition-colors duration-300">Free Tools</a>
+              {/* <a href="blog/index.html" className="text-gray-700 hover:text-amber-600 transition-colors duration-300">Blog</a> */}
+              <a href="#consultation" className="text-gray-700 hover:text-amber-600 transition-colors duration-300">Consultation</a>
+              <a href="#contact" className="text-gray-700 hover:text-amber-600 transition-colors duration-300">Contact</a>
+          </div>
+          {/* Mobile hamburger */}
+          <button
+            className="md:hidden p-2 rounded border border-gray-200 hover:bg-gray-100"
+            onClick={() => setMobileOpen(o => !o)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={mobileOpen}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 6h16M4 12h16M4 18h16" stroke="#374151" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </button>
+        </div>
+        {/* Mobile dropdown menu */}
+        {mobileOpen && (
+          <div className="md:hidden bg-white border-t border-gray-200 shadow-sm">
+            <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col space-y-2">
+              <a href="#services" className="py-2 text-gray-700 hover:text-amber-600">Services</a>
+              <a href="#tools" className="py-2 text-gray-700 hover:text-amber-600">Free Tools</a>
+              {/* <a href=\"blog/index.html\" className=\"py-2 text-gray-700 hover:text-amber-600\">Blog</a> */}
+              <a href="#consultation" className="py-2 text-gray-700 hover:text-amber-600">Consultation</a>
+              <a href="#contact" className="py-2 text-gray-700 hover:text-amber-600">Contact</a>
+            </div>
+          </div>
+        )}
+      </nav>
+      );
+    };
+
+    const Hero = () => (
+         <section className="text-white py-20 relative overflow-hidden" style={{
+           background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)'
+         }}>
+           {/* Background decoration intentionally minimized to a single star/cog in the Consultation section */}
+           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+           <h1 className="text-4xl md:text-5xl font-bold mb-4">Innovation Consulting and Growth Strategies for SMEs</h1>
+             <div className="mb-6">
+               <div className="text-2xl md:text-3xl font-light text-amber-200 mb-2 relative" style={{
+                 textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+                 letterSpacing: '0.05em',
+                 fontFamily: 'Georgia, "Times New Roman", serif'
+               }}>
+                 <span className="text-amber-100" style={{fontStyle: 'italic'}}>"Where </span>
+                 <span className="relative inline-block" style={{minWidth: '220px', height: '1.2em'}}>
+                   <span 
+                     className="absolute inset-0 bg-gradient-to-r from-amber-300 via-yellow-300 to-amber-400 bg-clip-text text-transparent font-semibold"
+                     style={{
+                       animation: 'wordSwitch1 10s infinite ease-in-out',
+                       fontStyle: 'italic',
+                       fontFamily: 'Georgia, "Times New Roman", serif',
+                       letterSpacing: '0.02em'
+                     }}
+                   >
+                     imagination
+                   </span>
+                   <span 
+                     className="absolute inset-0 bg-gradient-to-r from-yellow-300 via-amber-300 to-orange-400 bg-clip-text text-transparent font-semibold"
+                     style={{
+                       animation: 'wordSwitch2 10s infinite ease-in-out',
+                       fontStyle: 'italic',
+                       fontFamily: 'Georgia, "Times New Roman", serif',
+                       letterSpacing: '0.02em'
+                     }}
+                   >
+                     possibility
+                   </span>
+                 </span>
+                 <span className="text-amber-200 mx-2" style={{fontSize: '1.2em'}}>✨</span>
+                 <span className="text-amber-100" style={{fontStyle: 'italic'}}>meets </span>
+                 <span className="relative inline-block" style={{minWidth: '220px', height: '1.2em'}}>
+                   <span 
+                     className="absolute inset-0 bg-gradient-to-r from-yellow-300 via-amber-300 to-orange-400 bg-clip-text text-transparent font-semibold"
+                     style={{
+                       animation: 'wordSwitch1 10s infinite ease-in-out',
+                       fontStyle: 'italic',
+                       fontFamily: 'Georgia, "Times New Roman", serif',
+                       letterSpacing: '0.02em'
+                     }}
+                   >
+                     possibility
+                   </span>
+                   <span 
+                     className="absolute inset-0 bg-gradient-to-r from-amber-300 via-yellow-300 to-amber-400 bg-clip-text text-transparent font-semibold"
+                     style={{
+                       animation: 'wordSwitch2 10s infinite ease-in-out',
+                       fontStyle: 'italic',
+                       fontFamily: 'Georgia, "Times New Roman", serif',
+                       letterSpacing: '0.02em'
+                     }}
+                   >
+                     imagination
+                   </span>
+                 </span>
+                 <span className="text-amber-100" style={{fontStyle: 'italic'}}>"</span>
+               </div>
+               <div className="w-24 h-1 bg-amber-400 mx-auto rounded-full opacity-60"></div>
+             </div>
+          <p className="text-lg md:text-xl mb-8">SummCore helps SMEs and startups unlock new ideas to boost revenue and engagement.</p>
+             <a href="#consultation" className="text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-1" style={{background:'#fe2700'}}>Get a Free Consultation</a>
+        </div>
+      </section>
+    );
+
+    const Services = () => (
+        <section id="services" className="py-16 bg-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold text-white text-center mb-12">Our Services</h2>
+          <div className="pt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-slate-700 p-6 rounded-lg shadow-md border border-slate-600 hover:border-amber-500 transition-colors duration-300">
+                <h3 className="text-xl font-semibold text-white mb-4">Idea Generation</h3>
+                <p className="text-gray-300">Creative solutions tailored to your business needs and challenges.</p>
+            </div>
+              <div className="bg-slate-700 p-6 rounded-lg shadow-md border border-slate-600 hover:border-amber-500 transition-colors duration-300">
+                <h3 className="text-xl font-semibold text-white mb-4">Revenue Strategy</h3>
+                <p className="text-gray-300">Custom strategies to optimize revenue streams and attract new customers.</p>
+            </div>
+              <div className="bg-slate-700 p-6 rounded-lg shadow-md border border-slate-600 hover:border-amber-500 transition-colors duration-300">
+                <h3 className="text-xl font-semibold text-white mb-4">Ongoing Support</h3>
+                <p className="text-gray-300">Continuous engagement to refine and implement innovative ideas for growth.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+
+    const Pitch = () => (
+        <section className="py-16 text-white relative overflow-hidden" style={{
+          background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #1e293b 100%)'
+        }}>
+          {/* Rotating Cogs Background (removed per request) */}
+          <div className="absolute inset-0"></div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-amber-400">Turn Ideas Into Measurable Growth – Starting Today</h2>
+              <div className="max-w-4xl mx-auto space-y-6 text-lg md:text-xl leading-relaxed">
+                <p>For years, we have been working behind the scenes, helping businesses grow and thrive, but always for someone else's bottom line. Now, it's time to put that expertise to work for you.</p>
+                <p>Our ideas deliver results. I've seen them increase profitability, streamline operations, and unlock opportunities others didn't even know existed. But to take our business to the next level, we need something every great business has: a portfolio of proven client success stories.</p>
+                <p className="text-amber-200 font-semibold">That's where you come in.</p>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-12 mb-12">
+              <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-amber-500/20">
+                <h3 className="text-2xl font-bold mb-6 text-amber-400">The Opportunity</h3>
+                <p className="mb-6 text-lg">I'm offering <span className="text-amber-300 font-semibold">free innovation and growth consultancy</span> to the first five forward-thinking businesses who want to:</p>
+                <ul className="space-y-3 text-lg">
+                  <li className="flex items-start">
+                    <span className="text-amber-400 mr-3">•</span>
+                    Discover untapped revenue streams
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-amber-400 mr-3">•</span>
+                    Reduce waste and operational inefficiencies
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-amber-400 mr-3">•</span>
+                    Leverage creative, practical solutions to scale faster
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-amber-400 mr-3">•</span>
+                    Position themselves for long-term success
+                  </li>
+                </ul>
+                <p className="mt-6 text-lg">You'll get the same strategic insight and problem-solving expertise I've used to generate results in my career, <span className="text-amber-300 font-semibold">without paying a penny</span>. In return, I'll use your project as part of my portfolio to showcase what's possible when businesses embrace smart, innovative thinking.</p>
+              </div>
+
+              <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-amber-500/20">
+                <h3 className="text-2xl font-bold mb-6 text-amber-400">Why You Should Act Now</h3>
+                <ul className="space-y-4 text-lg">
+                  <li className="flex items-start">
+                    <span className="text-amber-400 mr-3 text-xl">🔥</span>
+                    <span><span className="font-semibold text-amber-300">This offer is strictly limited to five businesses.</span></span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-amber-400 mr-3 text-xl">🎯</span>
+                    <span>You'll get tailor-made strategies, not cookie-cutter advice.</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-amber-400 mr-3 text-xl">📈</span>
+                    <span>My goal is to make you more profitable, more efficient, and more competitive.</span>
+                  </li>
+                </ul>
+                <div className="mt-8 text-center">
+                  <p className="text-xl font-semibold mb-4 text-amber-200">Ready to be one of my five portfolio partners?</p>
+                  <a href="#consultation" className="inline-block text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 transform" style={{background:'#fe2700'}}>
+                    Start Transforming Your Business Today
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+    );
+
+    const Tools = () => (
+        <section id="tools" className="py-16 bg-slate-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold text-white text-center mb-12">Free Tools for Growth</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* A */}
+            <div className="bg-gradient-to-br from-slate-800 to-slate-700 p-6 rounded-lg border border-slate-600 hover:border-amber-500 transition-colors duration-300">
+              <h3 className="text-xl font-semibold text-white mb-4">Business Health Check</h3>
+              <p className="text-gray-300 mb-4">Comprehensive assessment tool to evaluate your business performance and identify growth opportunities.</p>
+              <a href="https://boost.summcore.com" className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-md font-semibold hover:from-amber-700 hover:to-amber-800 transition-all duration-300 shadow-md">Assessment</a>
+            </div>
+            {/* B */}
+            <div className="bg-gradient-to-br from-slate-800 to-slate-700 p-6 rounded-lg border border-slate-600 hover:border-amber-500 transition-colors duration-300">
+              <h3 className="text-xl font-semibold text-white mb-4">Business Plan Template</h3>
+              <p className="text-gray-300 mb-4">Map customer touchpoints to improve experience and conversions.</p>
+              <a href="Customer Journey Mapper/index.html" className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-md font-semibold hover:from-amber-700 hover:to-amber-800 transition-all duration-300 shadow-md">Launch Tool</a>
+            </div>
+            {/* C */}
+            <div className="bg-gradient-to-br from-slate-800 to-slate-700 p-6 rounded-lg border border-slate-600 hover:border-amber-500 transition-colors duration-300">
+              <h3 className="text-xl font-semibold text-white mb-4">Business Strategy Generator</h3>
+              <p className="text-gray-300 mb-4">Generate smart strategies tailored to your business objectives.</p>
+              <a href="Business Strategy Generator/smart-business-strategy-generator.html" className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-md font-semibold hover:from-amber-700 hover:to-amber-800 transition-all duration-300 shadow-md">Launch Tool</a>
+            </div>
+            {/* D */}
+            <div className="bg-gradient-to-br from-slate-800 to-slate-700 p-6 rounded-lg border border-slate-600 hover:border-amber-500 transition-colors duration-300">
+              <h3 className="text-xl font-semibold text-white mb-4">Free Financial Health Checker</h3>
+              <p className="text-gray-300 mb-4">Analyze your financial health and identify areas for improvement.</p>
+              <a href="Free Financial Health Checker/financial-calculator.html" className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-md font-semibold hover:from-amber-700 hover:to-amber-800 transition-all duration-300 shadow-md">Launch Tool</a>
+            </div>
+            {/* E */}
+            <div className="bg-gradient-to-br from-slate-800 to-slate-700 p-6 rounded-lg border border-slate-600 hover:border-amber-500 transition-colors duration-300">
+              <h3 className="text-xl font-semibold text-white mb-4">Invoicing & Quotation</h3>
+              <p className="text-gray-300 mb-4">Create professional invoices and quotations quickly.</p>
+              <a href="Invoicing & Quotation/index.html" className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-md font-semibold hover:from-amber-700 hover:to-amber-800 transition-all duration-300 shadow-md">Launch Tool</a>
+            </div>
+            {/* F */}
+            <div className="tool-card bg-gradient-to-br from-slate-800 to-slate-700 p-6 rounded-lg border border-slate-600 hover:border-amber-500 transition-colors duration-300">
+              <h3 className="text-xl font-semibold text-white mb-4">Revenue Checker</h3>
+              <p className="text-gray-300 mb-4">Estimate potential revenue from new initiatives with our easy-to-use tool.</p>
+              <a href="Revenue Calculator/index.html" className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-md font-semibold hover:from-amber-700 hover:to-amber-800 transition-all duration-300 shadow-md">Launch Tool</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+
+
+
+    const Footer = () => (
+        <footer id="contact" className="bg-slate-900 text-white py-8">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+            <div className="md:justify-self-start">
+              <h3 className="text-lg font-semibold mb-4">SummCore</h3>
+              <p className="text-gray-400">Empowering SMEs and startups with innovative solutions for growth.</p>
+            </div>
+            <div className="md:justify-self-center text-center md:text-left">
+              <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+              <ul className="space-y-2">
+                  <li><a href="#services" className="text-gray-400 footer-link">Services</a></li>
+                  <li><a href="#tools" className="text-gray-400 footer-link">Free Tools</a></li>
+                  <li><a href="#consultation" className="text-gray-400 footer-link">Consultation</a></li>
+              </ul>
+            </div>
+            <div className="md:justify-self-end text-left">
+              <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
+              <p className="text-gray-400">Email:</p>
+              <p className="text-gray-400">info@summcore.com</p>
+              <p className="text-gray-400">support@summcore.com</p>
+              <p className="text-gray-400">DM us through Social Media</p>
+            </div>
+            
+          </div>
+          {/* Social row between footer columns and copyright */}
+          <div className="mt-8 flex flex-col items-start">
+            <div className="flex items-center gap-4 text-gray-400">
+              <span>Follow us on:</span>
+              <a href="https://x.com/SummCoreIdeas" target="_blank" rel="noopener" aria-label="SummCore on X (Twitter)">
+                <img className="social-icon" src="Logo/Social Media/XAI.svg" alt="SummCore on X (Twitter)" width="36" height="36" style={{objectFit:'contain'}} loading="lazy" />
+              </a>
+              <a href="https://www.instagram.com/summcoreideas/" target="_blank" rel="noopener" aria-label="SummCore on Instagram">
+                <img className="social-icon" src="Logo/Social Media/Instagram.png" alt="SummCore on Instagram" width="36" height="36" style={{objectFit:'contain'}} loading="lazy" />
+              </a>
+              <a href="https://www.tiktok.com/@summcore?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener" aria-label="SummCore on TikTok">
+                <img className="social-icon" src="Logo/Social Media/tiktok.webp" alt="SummCore on TikTok" width="36" height="36" style={{objectFit:'contain'}} loading="lazy" />
+              </a>
+            </div>
+          </div>
+          <div className="mt-6 text-center text-gray-400">
+            &copy; 2026 SummCore. All rights reserved.
+          </div>
+        </div>
+      </footer>
+    );
+
+    const Consultation = () => (
+      <section id="consultation" className="py-16 text-white relative overflow-hidden" style={{
+        background: 'linear-gradient(135deg, #334155 0%, #1e293b 50%, #0f172a 100%)'
+      }}>
+        {/* Single decorative star/cog kept as requested */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-16 left-1/3 w-6 h-6 bg-amber-400 cog opacity-80" style={{animation: 'cogRotateClockwise 10s linear infinite'}}></div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <h2 className="text-3xl font-bold mb-4">Ready to Innovate?</h2>
+          <p className="text-lg mb-8">Book a free consultation with our experts to explore new opportunities for your business.</p>
+          <form action="send.php" method="POST" className="max-w-md mx-auto space-y-3 text-left" onSubmit={normalizeWebsiteUrlHome}>
+            <input type="text" id="home_business_name" name="business_name" placeholder="Business Name" required className="w-full p-3 rounded-md text-gray-800" />
+            <input type="url" id="home_website" name="website" placeholder="https://www.yourwebsite.com (Optional)" className="w-full p-3 rounded-md text-gray-800" />
+            <input type="text" id="home_your_name" name="your_name" placeholder="Your Name" required className="w-full p-3 rounded-md text-gray-800" />
+            <input type="tel" id="home_phone" name="phone" placeholder="Phone Number (Optional)" className="w-full p-3 rounded-md text-gray-800" />
+            <input type="email" id="home_email" name="email" placeholder="Email" required className="w-full p-3 rounded-md text-gray-800" />
+            <textarea id="home_needs" name="needs" rows="5" placeholder="Briefly Describe Your Needs" required className="w-full p-3 rounded-md text-gray-800"></textarea>
+            <button type="submit" className="w-full text-white px-6 py-3 rounded-md font-semibold transition-colors duration-300" style={{background:'#fe2700'}}>Schedule Now</button>
+          </form>
+        </div>
+      </section>
+    );
+
+    const App = () => (
+      <div>
+        <NavBar />
+        <Hero />
+        <Services />
+        <Pitch />
+        <Tools />
+        <Consultation />
+        <Footer />
+      </div>
+    );
+
+      // Use React 18 createRoot API if available, otherwise fallback to legacy render
+      console.log('About to render app...');
+      console.log('ReactDOM.createRoot available:', typeof ReactDOM.createRoot);
+      
+      try {
+        if (ReactDOM.createRoot) {
+          console.log('Using React 18 createRoot API');
+          const root = ReactDOM.createRoot(document.getElementById('root'));
+          root.render(<App />);
+          console.log('App rendered successfully with createRoot');
+        } else {
+          console.log('Using legacy ReactDOM.render');
+    ReactDOM.render(<App />, document.getElementById('root'));
+          console.log('App rendered successfully with legacy render');
+        }
+      } catch (error) {
+        console.error('Rendering error:', error);
+        document.getElementById('root').innerHTML = '<div style="padding: 20px; text-align: center; color: red;">Rendering error: ' + error.message + '</div>';
+      }
+    }
+
+    // Handle anchor navigation from external pages
+    window.addEventListener('load', function() {
+      if (window.location.hash) {
+        setTimeout(function() {
+          const element = document.querySelector(window.location.hash);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 100);
+      }
+    });
+  </script>
+</body>
+</html>

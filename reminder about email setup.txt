@@ -1,0 +1,55 @@
+Here’s a concise reminder you can save as reminder.md in the project root:
+Reminder: Enable silent auto-CC email (EmailJS)
+What to do
+Create an EmailJS account: https://www.emailjs.com/
+Connect an email service and copy the Service ID
+Create a template with variables: to_email, from_name, from_email, subject, message; copy the Template ID
+Get your Public Key (Account → API Keys)
+Security → Allowed Origins: add your site origin(s) (e.g., http://localhost and your production domain)
+Where to paste keys
+Business Health Check & Audit Tool/businesshealthcheck.html (top script)
+Set: EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID
+Invoicing & Quotation/script.js (inside sendEmail())
+Set: EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID
+Customer Journey Mapper/index.html (top script; Business Plan Templates page)
+Set: EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID
+How it behaves
+If keys present: silently emails info@summcore.com via EmailJS, then opens the user’s mail app with cc=info@summcore.com
+If keys empty: only opens the user’s mail app
+Quick test
+Fill keys in the three files
+Click Email/Send Results
+Verify copy arrives at info@summcore.com
+Notes
+You can customize the EmailJS template format; keep the same variable names
+For deliverability, consider custom domain + SMTP and SPF/DKIM
+If you want, I can try writing this file into the repo again now.
+please create the file
+
+I’m hitting a write glitch creating the file through the tool. I’ll drop the content here and can try again in the next step if you want me to place it directly.
+Save as SummCore - Copy (3)/reminder.md:
+Reminder: Enable silent auto-CC email (EmailJS)
+What to do
+Create an EmailJS account: https://www.emailjs.com/
+Connect an email service (Gmail/Outlook/SMTP) and copy the Service ID
+Create a template with variables: to_email, from_name, from_email, subject, message; copy the Template ID
+Get your Public Key (Account → API Keys)
+Security → Allowed Origins: add your site origin(s) (e.g., http://localhost and your production domain)
+Where to paste keys
+Business Health Check & Audit Tool/businesshealthcheck.html (top script block)
+Set: EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID
+Invoicing & Quotation/script.js (inside sendEmail())
+Set: EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID
+Customer Journey Mapper/index.html (top script block; Business Plan Templates page)
+Set: EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID
+How it behaves
+If keys are present: silently emails a copy to info@summcore.com via EmailJS, then opens the user’s mail app with cc=info@summcore.com
+If keys are empty: only opens the user’s mail app
+Quick test
+Fill keys in the three places above
+Open each tool, click Email/Send Results
+Confirm you receive a copy at info@summcore.com
+Notes
+You can customize the EmailJS template format; keep the same variable names
+For deliverability, consider using a custom domain + SMTP and add SPF/DKIM records
+If you want me to attempt creating the file again, say “write it now” and I’ll retry.

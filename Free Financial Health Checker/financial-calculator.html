@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Health Checker | Cash Flow, Runway, Break-Even</title>
+    <meta name="description" content="Free Financial Health Checker. Calculate cash flow, burn rate, runway, break-even and profit margin across currencies.">
+    <link rel="canonical" href="https://summcore.com/Free%20Financial%20Health%20Checker/financial-calculator.html">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Financial Health Checker | Cash Flow, Runway, Break-Even">
+    <meta property="og:description" content="Calculate cash flow, burn rate, runway, break-even and margins. Free tool by SummCore.">
+    <meta property="og:url" content="https://summcore.com/Free%20Financial%20Health%20Checker/financial-calculator.html">
+    <meta property="og:image" content="https://summcore.com/Logo/SC25.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Financial Health Checker | Cash Flow, Runway, Break-Even">
+    <meta name="twitter:description" content="Calculate key financial health metrics in seconds. Free tool by SummCore.">
+    <meta name="twitter:image" content="https://summcore.com/Logo/SC25.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Financial Health Checker",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "url": "https://summcore.com/Free%20Financial%20Health%20Checker/financial-calculator.html",
+      "publisher": {"@type": "Organization", "name": "SummCore"}
+    }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: transparent;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            min-height: 600px;
+        }
+
+        .input-section {
+            padding: 40px;
+            background: #f8f9fa;
+            border-right: 1px solid #e9ecef;
+        }
+
+        .results-section {
+            padding: 40px;
+            background: white;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            background-color: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .form-group select {
+            cursor: pointer;
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 20px;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+        }
+
+        .result-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+            transition: transform 0.2s ease;
+        }
+
+        .result-card:hover {
+            transform: translateX(5px);
+        }
+
+        .result-card h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        .result-value.negative {
+            color: #e74c3c;
+        }
+
+        .result-value.warning {
+            color: #f39c12;
+        }
+
+        .result-description {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-top: 8px;
+        }
+
+        .warning-message {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .input-section {
+                border-right: none;
+                border-bottom: 1px solid #e9ecef;
+                padding: 30px 20px;
+            }
+
+            .results-section {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .input-section,
+            .results-section {
+                padding: 20px 15px;
+            }
+
+            .form-group input {
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+            color: #3498db;
+            margin-left: 5px;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        @media print {
+            /* Hide everything except result cards */
+            body * {
+                visibility: hidden;
+            }
+            /* Show only the results section and result cards */
+            .results-section,
+            .results-section *,
+            #results,
+            #results *,
+            .result-card,
+            .result-card * {
+                visibility: visible;
+            }
+            /* Position the results at the top */
+            .results-section {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                box-shadow: none;
+                padding: 20px;
+                background: white;
+            }
+            /* Ensure text colors are readable */
+            * {
+                color: black !important;
+                background: white !important;
+            }
+            /* Preserve result card styling */
+            .result-card {
+                background: #f8f9fa !important;
+                border-left: 4px solid #3498db !important;
+            }
+            @page { margin: 12mm; }
+        }
+    </style>
+</head>
+<body style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);">
+    <a href="../index.html#tools" aria-label="Free Tools" style="position:fixed;top:16px;left:16px;z-index:1000;display:flex;flex-direction:column;align-items:center;text-decoration:none;line-height:1;gap:0;">
+      <img src="../Logo/SC25.png" alt="SummCore Free Tools home" loading="lazy" style="width:80px;height:80px;object-fit:contain;margin:0;filter:drop-shadow(0 0 6px rgba(255,255,255,0.9)) drop-shadow(0 0 12px rgba(255,255,255,0.6));" />
+      <div style="font-size:16px;margin-top:-12px;color:white;font-weight:700;line-height:1;">Free Tools</div>
+    </a>
+    <!-- App Title Section -->
+    <div style="text-align: center; margin-top: 40px; margin-bottom: 40px; padding: 20px;">
+      <h1 style="color: white; font-size: 2.5rem; margin-bottom: 10px; font-weight: 700;">💰 Financial Health Checker</h1>
+      <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; margin: 0;">Analyze your business financial metrics in real-time</p>
+    </div>
+
+    <div class="container">
+
+        <div class="main-content">
+            <div class="input-section">
+                <h2 class="section-title">Financial Data Input</h2>
+                
+                <div class="error-message" id="errorMessage"></div>
+                <div class="warning-message" id="warningMessage"></div>
+
+                <form id="financialForm">
+                    <div class="form-group">
+                        <label for="currency">Currency
+                            <span class="tooltip">ℹ️
+                                <span class="tooltiptext">Select your preferred currency for all calculations</span>
+                            </span>
+                        </label>
+                        <select id="currency" required title="Select your preferred currency for all calculations">
+                            <option value="USD">USD ($) - US Dollar</option>
+                            <option value="EUR">EUR (€) - Euro</option>
+                            <option value="GBP">GBP (£) - British Pound</option>
+                            <option value="CAD">CAD ($) - Canadian Dollar</option>
+                            <option value="AUD">AUD ($) - Australian Dollar</option>
+                            <option value="JPY">JPY (¥) - Japanese Yen</option>
+                            <option value="CHF">CHF (₣) - Swiss Franc</option>
+                            <option value="CNY">CNY (¥) - Chinese Yuan</option>
+                            <option value="INR">INR (₹) - Indian Rupee</option>
+                            <option value="BRL">BRL (R$) - Brazilian Real</option>
+                            <option value="MXN">MXN ($) - Mexican Peso</option>
+                            <option value="ZAR">ZAR (R) - South African Rand</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="revenue">Monthly Revenue (<span id="revenueSymbol">$</span>)
+                            <span class="tooltip">ℹ️
+                                <span class="tooltiptext">Total monthly income (revenue) generated by your business</span>
+                            </span>
+                        </label>
+                        <input type="number" id="revenue" step="0.01" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="expenses">Monthly Expenses (<span id="expensesSymbol">$</span>)
+                            <span class="tooltip">ℹ️
+                                <span class="tooltiptext">Total operating costs per month</span>
+                            </span>
+                        </label>
+                        <input type="number" id="expenses" step="0.01" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fixedCosts">Fixed Costs (<span id="fixedCostsSymbol">$</span>)
+                            <span class="tooltip">ℹ️
+                                <span class="tooltiptext">Costs that don't change with sales volume (rent, salaries, etc.)</span>
+                            </span>
+                        </label>
+                        <input type="number" id="fixedCosts" step="0.01" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="variableCosts">Variable Costs (<span id="variableCostsSymbol">$</span>)
+                            <span class="tooltip">ℹ️
+                                <span class="tooltiptext">Costs that change with sales volume (materials, commissions, etc.)</span>
+                            </span>
+                        </label>
+                        <input type="number" id="variableCosts" step="0.01" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cashOnHand">Cash on Hand (<span id="cashOnHandSymbol">$</span>)
+                            <span class="tooltip">ℹ️
+                                <span class="tooltiptext">Current available cash reserves</span>
+                            </span>
+                        </label>
+                        <input type="number" id="cashOnHand" step="0.01" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="costOfGoodsSold">Cost of Goods/Services Sold (<span id="cogsSymbol">$</span>)
+                            <span class="tooltip">ℹ️
+                                <span class="tooltiptext">Direct costs to deliver your product/service (materials, labor, etc.)</span>
+                            </span>
+                        </label>
+                        <input type="number" id="costOfGoodsSold" step="0.01" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="averageOrderValue">Average Order/Contract Value (<span id="aovSymbol">$</span>)
+                            <span class="tooltip">ℹ️
+                                <span class="tooltiptext">Average revenue per customer transaction or contract</span>
+                            </span>
+                        </label>
+                        <input type="number" id="averageOrderValue" step="0.01" min="0" required>
+                    </div>
+
+                    <div style="display:flex; gap:10px; align-items:center;">
+                      <button type="button" onclick="window.print()" class="calculate-btn" style="background:#6b7280; width:100%;">Save or Print</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="results-section">
+                <h2 class="section-title">Financial Analysis Results</h2>
+                
+                <div id="results" style="display: none;">
+                    <div class="result-card">
+                        <h3>Cash Flow</h3>
+                        <div class="result-value" id="cashFlow">$0</div>
+                        <div class="result-description">Monthly cash inflow minus outflow</div>
+                    </div>
+
+                    <div class="result-card">
+                        <h3>Burn Rate</h3>
+                        <div class="result-value" id="burnRate">$0</div>
+                        <div class="result-description">Monthly cash consumption rate</div>
+                    </div>
+
+                    <div class="result-card">
+                        <h3>Runway</h3>
+                        <div class="result-value" id="runway">0 months</div>
+                        <div class="result-description">Time until cash runs out at current burn rate</div>
+                    </div>
+
+                    <div class="result-card">
+                        <h3>Break-Even Point</h3>
+                        <div class="result-value" id="breakEven">0 orders</div>
+                        <div class="result-description">Orders/contracts or revenue needed to cover all costs</div>
+                    </div>
+
+                    <div class="result-card">
+                        <h3>Profit Margin</h3>
+                        <div class="result-value" id="profitMargin">0%</div>
+                        <div class="result-description">Percentage of revenue that is profit</div>
+                    </div>
+                </div>
+
+                <div id="noResults" style="text-align: center; color: #7f8c8d; padding: 40px;">
+                    <h3>Enter your financial data to see results</h3>
+                    <p>Fill out the form on the left to calculate your financial metrics</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form submit not needed since auto-calculation is enabled; prevent default if triggered
+        document.getElementById('financialForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+        });
+
+        function calculateMetrics() {
+            // Clear previous messages
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('warningMessage').style.display = 'none';
+
+            try {
+                // Get input values
+                const revenue = parseFloat(document.getElementById('revenue').value) || 0;
+                const expenses = parseFloat(document.getElementById('expenses').value) || 0;
+                const fixedCosts = parseFloat(document.getElementById('fixedCosts').value) || 0;
+                const variableCosts = parseFloat(document.getElementById('variableCosts').value) || 0;
+                const cashOnHand = parseFloat(document.getElementById('cashOnHand').value) || 0;
+                const costOfGoodsSold = parseFloat(document.getElementById('costOfGoodsSold').value) || 0;
+                const averageOrderValue = parseFloat(document.getElementById('averageOrderValue').value) || 0;
+
+                // Validate inputs
+                if (revenue < 0 || expenses < 0 || fixedCosts < 0 || variableCosts < 0 || 
+                    cashOnHand < 0 || costOfGoodsSold < 0 || averageOrderValue < 0) {
+                    throw new Error('All values must be positive numbers. Please check your entries.');
+                }
+
+                // Calculate metrics
+                const cashFlow = revenue - expenses;
+                const burnRate = expenses;
+                const runway = cashFlow < 0 ? (cashOnHand / Math.abs(cashFlow)) : Infinity;
+                
+                // Calculate break-even using contribution margin approach (universal for all business types)
+                const grossProfit = revenue - costOfGoodsSold;
+                const contributionMargin = grossProfit > 0 ? grossProfit : 0;
+                const contributionMarginPerOrder = averageOrderValue > 0 ? 
+                    (contributionMargin / (revenue / averageOrderValue)) : 0;
+                
+                // Break-even in number of orders/contracts needed
+                const breakEvenOrders = contributionMarginPerOrder > 0 ? 
+                    Math.ceil(fixedCosts / contributionMarginPerOrder) : 0;
+                
+                // Break-even in revenue terms
+                const breakEvenRevenue = contributionMargin > 0 ? 
+                    (fixedCosts / (contributionMargin / revenue)) : 0;
+                
+                const profitMargin = revenue > 0 ? ((revenue - expenses) / revenue) * 100 : 0;
+
+                // Display results
+                displayResults({
+                    cashFlow,
+                    burnRate,
+                    runway,
+                    breakEvenOrders,
+                    breakEvenRevenue,
+                    profitMargin
+                });
+
+                // Show warnings if needed
+                showWarnings(cashFlow, runway, profitMargin);
+
+            } catch (error) {
+                showError(error.message);
+            }
+        }
+
+        function displayResults(metrics) {
+            // Show results section
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('noResults').style.display = 'none';
+
+            // Cash Flow
+            const cashFlowElement = document.getElementById('cashFlow');
+            cashFlowElement.textContent = formatCurrency(metrics.cashFlow);
+            cashFlowElement.className = 'result-value ' + (metrics.cashFlow < 0 ? 'negative' : 'positive');
+
+            // Burn Rate
+            document.getElementById('burnRate').textContent = formatCurrency(metrics.burnRate);
+
+            // Runway
+            const runwayElement = document.getElementById('runway');
+            if (metrics.runway === Infinity || metrics.runway < 0) {
+                runwayElement.textContent = 'Infinite';
+                runwayElement.className = 'result-value positive';
+            } else {
+                runwayElement.textContent = metrics.runway.toFixed(1) + ' months';
+                runwayElement.className = 'result-value ' + (metrics.runway < 6 ? 'negative' : 
+                                                          metrics.runway < 12 ? 'warning' : 'positive');
+            }
+
+            // Break-Even Point
+            const breakEvenElement = document.getElementById('breakEven');
+            if (isFinite(metrics.breakEvenOrders) && metrics.breakEvenOrders > 0) {
+                breakEvenElement.textContent = metrics.breakEvenOrders.toLocaleString() + ' orders/contracts';
+            } else if (isFinite(metrics.breakEvenRevenue) && metrics.breakEvenRevenue > 0) {
+                breakEvenElement.textContent = formatCurrency(metrics.breakEvenRevenue) + ' revenue';
+            } else {
+                breakEvenElement.textContent = 'Already profitable';
+            }
+
+            // Profit Margin
+            const profitMarginElement = document.getElementById('profitMargin');
+            profitMarginElement.textContent = metrics.profitMargin.toFixed(2) + '%';
+            profitMarginElement.className = 'result-value ' + (metrics.profitMargin < 0 ? 'negative' : 
+                                                             metrics.profitMargin < 10 ? 'warning' : 'positive');
+        }
+
+        function showWarnings(cashFlow, runway, profitMargin) {
+            const warnings = [];
+
+            if (cashFlow < 0) {
+                warnings.push('Negative cash flow detected. Your business is spending more than it earns.');
+            }
+
+            if (runway < 6 && runway > 0) {
+                warnings.push('Low runway - less than 6 months of cash remaining');
+            }
+
+            if (profitMargin < 5) {
+                warnings.push('Low profit margin - consider reducing costs or increasing prices');
+            }
+
+            if (warnings.length > 0) {
+                const warningElement = document.getElementById('warningMessage');
+                warningElement.innerHTML = '<strong>Warnings:</strong><br>' + warnings.join('<br>');
+                warningElement.style.display = 'block';
+            }
+        }
+
+        function showError(message) {
+            const errorElement = document.getElementById('errorMessage');
+            errorElement.textContent = 'Error: ' + message;
+            errorElement.style.display = 'block';
+        }
+
+        function formatCurrency(amount) {
+            const selectedCurrency = document.getElementById('currency').value;
+            
+            // Special handling for JPY (no decimal places)
+            const decimals = selectedCurrency === 'JPY' ? 0 : 0;
+            
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: selectedCurrency,
+                minimumFractionDigits: decimals,
+                maximumFractionDigits: decimals
+            }).format(amount);
+        }
+
+        function getCurrencySymbol(currencyCode) {
+            const symbols = {
+                'USD': '$',
+                'EUR': '€',
+                'GBP': '£',
+                'CAD': '$',
+                'AUD': '$',
+                'JPY': '¥',
+                'CHF': '₣',
+                'CNY': '¥',
+                'INR': '₹',
+                'BRL': 'R$',
+                'MXN': '$',
+                'ZAR': 'R'
+            };
+            return symbols[currencyCode] || '$';
+        }
+
+        function updateCurrencySymbols() {
+            const selectedCurrency = document.getElementById('currency').value;
+            const symbol = getCurrencySymbol(selectedCurrency);
+            
+            // Update all currency symbols in labels
+            document.getElementById('revenueSymbol').textContent = symbol;
+            document.getElementById('expensesSymbol').textContent = symbol;
+            document.getElementById('fixedCostsSymbol').textContent = symbol;
+            document.getElementById('variableCostsSymbol').textContent = symbol;
+            document.getElementById('cashOnHandSymbol').textContent = symbol;
+            document.getElementById('cogsSymbol').textContent = symbol;
+            document.getElementById('aovSymbol').textContent = symbol;
+        }
+
+        // Initialize currency symbols on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCurrencySymbols();
+        });
+
+        // Update currency symbols when currency selection changes
+        document.getElementById('currency').addEventListener('change', function() {
+            updateCurrencySymbols();
+            // Recalculate if form is valid
+            if (document.getElementById('financialForm').checkValidity()) {
+                calculateMetrics();
+            }
+        });
+
+        // Auto-calculate on input change (with debounce)
+        let debounceTimer;
+        const inputs = document.querySelectorAll('input[type="number"]');
+        inputs.forEach(input => {
+            input.addEventListener('input', function() {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    if (document.getElementById('financialForm').checkValidity()) {
+                        calculateMetrics();
+                    }
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>

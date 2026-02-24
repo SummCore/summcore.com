@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenue Forecasting Tool | Multi-Sector Sales & Profit Projections</title>
+    <meta name="description" content="Forecast revenue, costs, profit and break-even across multiple business models. Free Revenue Forecasting Tool by SummCore.">
+    <link rel="canonical" href="https://summcore.com/Revenue%20Calculator/index.html">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Revenue Forecasting Tool | Multi-Sector Sales & Profit Projections">
+    <meta property="og:description" content="Forecast revenue and profit across sectors, visualize monthly breakdowns, and export.">
+    <meta property="og:url" content="https://summcore.com/Revenue%20Calculator/index.html">
+    <meta property="og:image" content="https://summcore.com/Logo/SC25.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Revenue Forecasting Tool | Multi-Sector Sales & Profit Projections">
+    <meta name="twitter:description" content="Estimate revenue, costs, profit and break-even across models. Free tool by SummCore.">
+    <meta name="twitter:image" content="https://summcore.com/Logo/SC25.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Revenue Forecasting Tool",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "url": "https://summcore.com/Revenue%20Calculator/index.html",
+      "publisher": {"@type": "Organization", "name": "SummCore"}
+    }
+    </script>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Print: show card content only, no background/logo */
+        @media print {
+            body { background: #ffffff !important; }
+            a[aria-label="Free Tools"] { display: none !important; }
+            .bg-white, .bg-gray-50 { background: #ffffff !important; }
+            body * { visibility: visible !important; }
+            @page { margin: 12mm; }
+        }
+    </style>
+    <style>
+        /* Tooltip styles */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #1f2937;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1000;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        /* Sensitivity slider styles */
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+        }
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #fe2700;
+            cursor: pointer;
+        }
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #fe2700;
+            cursor: pointer;
+        }
+        /* Visual cues */
+        .profit-positive { border-left: 4px solid #10b981; background-color: rgba(16, 185, 129, 0.05); }
+        .profit-negative { border-left: 4px solid #ef4444; background-color: rgba(239, 68, 68, 0.05); }
+        .profit-neutral { border-left: 4px solid #6b7280; background-color: rgba(107, 114, 128, 0.05); }
+    </style>
+</head>
+<body class="min-h-screen" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);">
+    <a href="../index.html#tools" aria-label="Free Tools" style="position:fixed;top:16px;left:16px;z-index:1000;display:flex;flex-direction:column;align-items:center;text-decoration:none;line-height:1;gap:0;">
+      <img src="../Logo/SC25.png" alt="SummCore Free Tools home" loading="lazy" style="width:80px;height:80px;object-fit:contain;margin:0;filter:drop-shadow(0 0 6px rgba(255,255,255,0.9)) drop-shadow(0 0 12px rgba(255,255,255,0.6));" />
+      <div style="font-size:16px;margin-top:-12px;color:white;font-weight:700;line-height:1;">Free Tools</div>
+    </a>
+    <div class="container mx-auto px-4 py-8">
+        
+        <!-- Header -->
+        <header class="text-center text-white mb-8">
+            <h1 class="text-4xl font-bold mb-2">
+                <i class="fas fa-chart-line mr-2"></i>Revenue Forecasting Tool
+            </h1>
+            <p class="text-xl opacity-90">Plan your business growth across any sector</p>
+        </header>
+
+        <!-- Main Content -->
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-6">
+            <!-- Input Panel -->
+            <div class="bg-white rounded-xl shadow-lg p-4 lg:p-6">
+                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
+                    <h2 class="text-xl lg:text-2xl font-semibold text-gray-800">
+                        <i class="fas fa-cog mr-2"></i>Business Model
+                    </h2>
+                    <div class="flex items-center gap-2">
+                        <label class="font-medium text-gray-700 text-sm">Currency:</label>
+                        <select id="currencySelect" class="p-2 border rounded border-gray-300 text-sm" title="Select your preferred currency for all financial calculations and results">
+                            <option value="USD">$ USD</option>
+                            <option value="EUR">€ EUR</option>
+                            <option value="GBP">£ GBP</option>
+                            <option value="JPY">¥ JPY</option>
+                            <option value="AUD">$ AUD</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Business Model Selector -->
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="businessModel">
+                        Select Your Business Model
+                        <span class="tooltip ml-1">
+                            <i class="fas fa-info-circle text-gray-500 cursor-help"></i>
+                            <span class="tooltiptext">Choose a business model to auto-fill sample default values</span>
+                        </span>
+                    </label>
+                    <select id="businessModel" class="w-full p-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="loadBusinessModel()">
+                        <option value="agency">Agency / Consulting</option>
+                        <option value="content_media">Content Creation / Media</option>
+                        <option value="ecommerce">E-commerce / Retail</option>
+                        <option value="education">Education / Courses</option>
+                        <option value="franchise">Franchise Business</option>
+                        <option value="healthcare">Healthcare Practice</option>
+                        <option value="marketplace">Marketplace / Platform</option>
+                        <option value="product">Product-Based Business</option>
+                        <option value="services">Professional Services</option>
+                        <option value="real_estate">Real Estate / Property</option>
+                        <option value="saas">SaaS / Subscription</option>
+                        <option value="software_dev">Software Development Agency</option>
+                        <option value="subscription_box">Subscription Box</option>
+                        <option value="restaurant">Restaurant / Food Service</option>
+                        <option value="retail">Retail Store</option>
+                        <option value="manufacturing">Manufacturing</option>
+                        <option value="freelance">Freelance / Creative Services</option>
+                        <option value="fitness">Fitness / Wellness</option>
+                        <option value="beauty">Beauty / Personal Care</option>
+                        <option value="automotive">Automotive Services</option>
+                        <option value="custom">Custom / Manual Entry</option>
+                    </select>
+                </div>
+
+                <!-- Universal Health Inputs -->
+                <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">
+                        <i class="fas fa-heartbeat mr-2"></i>Universal Financial Inputs
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Total Revenue (monthly)</label>
+                            <input type="number" id="uni_totalRevenue" value="0" class="w-full p-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="calculateForecast()">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Total Expenses (monthly)</label>
+                            <input type="number" id="uni_totalExpenses" value="0" class="w-full p-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="calculateForecast()">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Available Funds / Reserves</label>
+                            <input type="number" id="uni_availableFunds" value="0" class="w-full p-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="calculateForecast()">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Fixed Costs (monthly)</label>
+                            <input type="number" id="uni_fixedCosts" value="0" class="w-full p-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="calculateForecast()">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2"><span id="label_variableCosts">Variable Costs (monthly)</span></label>
+                            <input type="number" id="uni_variableCosts" value="0" class="w-full p-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="calculateForecast()">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2"><span id="label_revenuePerUnit">Revenue per Unit / Service / Subscription</span></label>
+                            <input type="number" id="uni_revenuePerUnit" value="0" class="w-full p-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="calculateForecast()">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Sector-Specific Inputs -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">
+                        <i class="fas fa-sliders-h mr-2"></i>Sector Inputs
+                    </h3>
+                    <div id="dynamicInputs" class="space-y-4"></div>
+                </div>
+
+                <!-- Scenario Management -->
+                <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+                    
+                    <select id="scenarioSelect" class="w-full p-2 border rounded border-gray-300 text-sm" style="display:none;" aria-hidden="true">
+                        <option value="">Select saved scenario...</option>
+                    </select>
+                </div>
+
+                <!-- Simple Revenue Calculator Form -->
+                <div id="legacyInputs" class="space-y-4">
+                    <div id="priceWrapper">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">
+                            Price per Unit (£)
+                            <span class="tooltip ml-1">
+                                <i class="fas fa-info-circle text-gray-500 cursor-help"></i>
+                                <span class="tooltiptext">The selling price for each unit of your product or service</span>
+                            </span>
+                        </label>
+                        <input type="number" id="price" value="0" class="w-full p-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="calculateForecast()">
+                    </div>
+                    <div id="unitsWrapper">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">
+                            Units Sold per Month
+                            <span class="tooltip ml-1">
+                                <i class="fas fa-info-circle text-gray-500 cursor-help"></i>
+                                <span class="tooltiptext">Expected number of units you'll sell each month</span>
+                            </span>
+                        </label>
+                        <input type="number" id="units" value="0" class="w-full p-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="calculateForecast()">
+                    </div>
+                    <div id="costWrapper">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">
+                            Cost per Unit (£)
+                            <span class="tooltip ml-1">
+                                <i class="fas fa-info-circle text-gray-500 cursor-help"></i>
+                                <span class="tooltiptext">Direct costs to produce or deliver one unit (materials, labor, etc.)</span>
+                            </span>
+                        </label>
+                        <input type="number" id="cost" value="0" class="w-full p-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="calculateForecast()">
+                    </div>
+                    <div id="fixedWrapper">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">
+                            Fixed Monthly Costs (£)
+                            <span class="tooltip ml-1">
+                                <i class="fas fa-info-circle text-gray-500 cursor-help"></i>
+                                <span class="tooltiptext">Regular monthly expenses like rent, salaries, insurance, utilities</span>
+                            </span>
+                        </label>
+                        <input type="number" id="fixed" value="0" class="w-full p-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="calculateForecast()">
+                    </div>
+                    <div id="growthWrapper">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">
+                            Monthly Growth Rate (%)
+                            <span class="tooltip ml-1">
+                                <i class="fas fa-info-circle text-gray-500 cursor-help"></i>
+                                <span class="tooltiptext">Expected percentage increase in sales each month</span>
+                            </span>
+                        </label>
+                        <input type="number" id="growth" value="0" class="w-full p-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="calculateForecast()">
+                    </div>
+                    <div id="monthsWrapper">
+                        <label class="block text-gray-700 text-sm font-bold mb-2">
+                            Forecast Months
+                            <span class="tooltip ml-1">
+                                <i class="fas fa-info-circle text-gray-500 cursor-help"></i>
+                                <span class="tooltiptext">Number of months to project into the future</span>
+                            </span>
+                        </label>
+                        <input type="number" id="months" value="12" class="w-full p-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" oninput="calculateForecast()">
+                    </div>
+                </div>
+
+                <!-- Sensitivity Analysis -->
+                <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                        <i class="fas fa-sliders-h mr-2"></i>Sensitivity Analysis
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Price Sensitivity: <span id="priceMultiplier">100%</span></label>
+                            <input type="range" id="priceSlider" min="50" max="200" value="100" class="slider" oninput="updateSensitivity('price', this.value)">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Volume Sensitivity: <span id="volumeMultiplier">100%</span></label>
+                            <input type="range" id="volumeSlider" min="50" max="200" value="100" class="slider" oninput="updateSensitivity('volume', this.value)">
+                        </div>
+                    </div>
+                </div>
+                <!-- Action buttons under Sensitivity Analysis -->
+                <div class="mt-4 flex gap-3">
+                    <button onclick="window.print()" class="px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-all">
+                        Save or Print
+                    </button>
+                    <button onclick="resetCalculator()" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all">
+                        <i class="fas fa-undo mr-2"></i>Reset
+                    </button>
+                </div>
+                
+            </div>
+
+            <!-- Results Panel -->
+            <div class="bg-white rounded-xl shadow-lg p-4 lg:p-6">
+                <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center mb-6 gap-4">
+                    <h2 class="text-xl lg:text-2xl font-semibold text-gray-800">
+                        <i class="fas fa-chart-bar mr-2"></i>Forecast Results
+                    </h2>
+                            </div>
+
+                <!-- AI Summary -->
+                <div class="mb-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-200">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">
+                        <i class="fas fa-robot mr-2 text-blue-600"></i>AI Summary
+                    </h3>
+                    <div id="aiSummary" class="text-gray-700 leading-relaxed"></div>
+                </div>
+
+                <!-- Summary Cards -->
+                <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+                    <div id="summary" class="text-lg"></div>
+                </div>
+
+                <!-- Financial Health Results -->
+                <div class="mb-6 p-4 rounded-lg" id="healthCard" style="background-color: #f9fafb;">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                        <i class="fas fa-stethoscope mr-2"></i>Financial Health
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                        <div><strong>Cash Flow:</strong> <span id="healthCashFlow">£0</span></div>
+                        <div><strong>Break-even Point:</strong> <span id="healthBreakEven">N/A</span></div>
+                        <div><strong>Profit Margin:</strong> <span id="healthProfitMargin">0%</span></div>
+                        <div><strong>Runway:</strong> <span id="healthRunway">N/A</span></div>
+                        <div class="sm:col-span-2"><strong>Overall Status:</strong> <span id="healthStatus">Not yet calculated</span></div>
+                    </div>
+                </div>
+
+                <!-- Chart -->
+                <div class="mb-6 bg-gray-50 p-4 rounded-lg">
+                    <canvas id="revenueChart" height="300"></canvas>
+                </div>
+
+                <!-- Monthly Breakdown Table -->
+                <div class="mb-6 bg-gray-50 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                        <i class="fas fa-table mr-2"></i>Monthly Breakdown
+                    </h3>
+                <div class="overflow-x-auto">
+                        <table id="monthlyTable" class="w-full text-sm text-left text-gray-700 border-collapse">
+                            <thead class="bg-gray-100 text-gray-900 font-semibold">
+                                <tr>
+                                    <th class="px-4 py-3 border border-gray-200">Month</th>
+                                    <th class="px-4 py-3 border border-gray-200">Units Sold</th>
+                                    <th class="px-4 py-3 border border-gray-200">Revenue</th>
+                                    <th class="px-4 py-3 border border-gray-200">Variable Costs</th>
+                                    <th class="px-4 py-3 border border-gray-200">Fixed Costs</th>
+                                    <th class="px-4 py-3 border border-gray-200">Total Costs</th>
+                                    <th class="px-4 py-3 border border-gray-200">Profit</th>
+                                    <th class="px-4 py-3 border border-gray-200">Margin</th>
+                            </tr>
+                        </thead>
+                            <tbody id="monthlyTableBody">
+                            <!-- Table rows will be inserted by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+    </div>
+
+    <script>
+        let savedScenarios = JSON.parse(localStorage.getItem('revenueScenarios') || '{}');
+        let currentSensitivity = { price: 100, volume: 100 };
+
+        // Business Sector Configurations — Part 1 of 2
+        const sectorConfig = {
+          "Agency / Consulting": {
+            inputs: [
+              { name: "hourlyRate", label: "Hourly Rate", type: "number" },
+              { name: "billableHoursPerMonth", label: "Billable Hours Per Month", type: "number" },
+              { name: "utilizationRate", label: "Utilization Rate (%)", type: "percent" },
+              { name: "variableCosts", label: "Variable Costs per Hour", type: "number" },
+              { name: "fixedCosts", label: "Fixed Monthly Costs", type: "number" }
+            ],
+            calculate: (data) => {
+              const effectiveHours = data.billableHoursPerMonth * (data.utilizationRate / 100);
+              const revenue = effectiveHours * data.hourlyRate;
+              const totalVariableCosts = effectiveHours * data.variableCosts;
+              const totalCosts = totalVariableCosts + data.fixedCosts;
+              const profit = revenue - totalCosts;
+              const margin = revenue ? (profit / revenue) * 100 : 0;
+              return { revenue, totalVariableCosts, fixedCosts: data.fixedCosts, totalCosts, profit, margin, effectiveHours };
+            },
+            summaryTemplate: (result) =>
+              `With an hourly rate of $${result.hourlyRate}, working ${result.effectiveHours} billable hours, you could generate $${result.revenue} in revenue and achieve a ${result.margin.toFixed(1)}% profit margin.`
+          },
+
+          "Content Creation / Media": {
+            inputs: [
+              { name: "averageRevenuePerView", label: "Average Revenue Per View", type: "number" },
+              { name: "monthlyViews", label: "Monthly Views", type: "number" },
+              { name: "sponsorshipRevenue", label: "Sponsorship Revenue per Month", type: "number" },
+              { name: "productionCosts", label: "Production Costs per Month", type: "number" },
+              { name: "otherCosts", label: "Other Costs", type: "number" }
+            ],
+            calculate: (data) => {
+              const adRevenue = data.averageRevenuePerView * data.monthlyViews;
+              const revenue = adRevenue + data.sponsorshipRevenue;
+              const totalCosts = data.productionCosts + data.otherCosts;
+              const profit = revenue - totalCosts;
+              const margin = revenue ? (profit / revenue) * 100 : 0;
+              return { revenue, totalCosts, profit, margin };
+            },
+            summaryTemplate: (result) =>
+              `Based on your views and sponsorships, you could earn $${result.revenue} monthly with a ${result.margin.toFixed(1)}% margin.`
+          },
+
+          "E-commerce / Retail": {
+            inputs: [
+              { name: "unitsSold", label: "Units Sold per Month", type: "number" },
+              { name: "pricePerUnit", label: "Average Price Per Unit", type: "number" },
+              { name: "costPerUnit", label: "Cost Per Unit", type: "number" },
+              { name: "fixedCosts", label: "Fixed Monthly Costs", type: "number" },
+              { name: "returnRate", label: "Return Rate (%)", type: "percent" }
+            ],
+            calculate: (data) => {
+              const grossRevenue = data.unitsSold * data.pricePerUnit;
+              const returns = grossRevenue * (data.returnRate / 100);
+              const netRevenue = grossRevenue - returns;
+              const totalVariableCosts = data.unitsSold * data.costPerUnit;
+              const totalCosts = totalVariableCosts + data.fixedCosts;
+              const profit = netRevenue - totalCosts;
+              const margin = netRevenue ? (profit / netRevenue) * 100 : 0;
+              return { revenue: netRevenue, totalVariableCosts, fixedCosts: data.fixedCosts, totalCosts, profit, margin };
+            },
+            summaryTemplate: (result) =>
+              `Selling ${result.unitsSold} units at $${result.pricePerUnit} each gives you $${result.revenue} in monthly revenue after returns, with a ${result.margin.toFixed(1)}% margin.`
+          },
+
+          "Education / Courses": {
+            inputs: [
+              { name: "studentsPerMonth", label: "Students Enrolled per Month", type: "number" },
+              { name: "pricePerCourse", label: "Price Per Course", type: "number" },
+              { name: "courseDeliveryCost", label: "Cost to Deliver Course per Student", type: "number" },
+              { name: "marketingCosts", label: "Marketing Costs", type: "number" },
+              { name: "fixedCosts", label: "Fixed Costs", type: "number" }
+            ],
+            calculate: (data) => {
+              const revenue = data.studentsPerMonth * data.pricePerCourse;
+              const variableCosts = data.studentsPerMonth * data.courseDeliveryCost;
+              const totalCosts = variableCosts + data.marketingCosts + data.fixedCosts;
+              const profit = revenue - totalCosts;
+              const margin = revenue ? (profit / revenue) * 100 : 0;
+              return { revenue, variableCosts, totalCosts, profit, margin };
+            },
+            summaryTemplate: (result) =>
+              `Teaching ${result.studentsPerMonth} students at $${result.pricePerCourse} each generates $${result.revenue} with a ${result.margin.toFixed(1)}% margin.`
+          },
+
+          "Franchise Business": {
+            inputs: [
+              { name: "locations", label: "Number of Locations", type: "number" },
+              { name: "revenuePerLocation", label: "Revenue Per Location", type: "number" },
+              { name: "royaltyFeePercent", label: "Royalty Fee (%)", type: "percent" },
+              { name: "fixedCosts", label: "Total Fixed Costs", type: "number" },
+              { name: "variableCosts", label: "Variable Costs per Location", type: "number" }
+            ],
+            calculate: (data) => {
+              const grossRevenue = data.locations * data.revenuePerLocation;
+              const royaltyFees = grossRevenue * (data.royaltyFeePercent / 100);
+              const totalVariableCosts = data.locations * data.variableCosts;
+              const totalCosts = royaltyFees + totalVariableCosts + data.fixedCosts;
+              const profit = grossRevenue - totalCosts;
+              const margin = grossRevenue ? (profit / grossRevenue) * 100 : 0;
+              return { revenue: grossRevenue, totalVariableCosts, totalCosts, profit, margin };
+            },
+            summaryTemplate: (result) =>
+              `Operating ${result.locations} locations generates $${result.revenue}, with a ${result.margin.toFixed(1)}% margin after royalties and costs.`
+          },
+
+          "Healthcare Practice": {
+            inputs: [
+              { name: "patientsPerMonth", label: "Patients Per Month", type: "number" },
+              { name: "averageChargePerPatient", label: "Average Charge Per Patient", type: "number" },
+              { name: "variableCostsPerPatient", label: "Variable Costs Per Patient", type: "number" },
+              { name: "fixedCosts", label: "Fixed Monthly Costs", type: "number" }
+            ],
+            calculate: (data) => {
+              const revenue = data.patientsPerMonth * data.averageChargePerPatient;
+              const totalVariableCosts = data.patientsPerMonth * data.variableCostsPerPatient;
+              const totalCosts = totalVariableCosts + data.fixedCosts;
+              const profit = revenue - totalCosts;
+              const margin = revenue ? (profit / revenue) * 100 : 0;
+              return { revenue, totalVariableCosts, fixedCosts: data.fixedCosts, totalCosts, profit, margin };
+            },
+            summaryTemplate: (result) =>
+              `With ${result.patientsPerMonth} patients at $${result.averageChargePerPatient} each, your monthly revenue could be $${result.revenue}, with a ${result.margin.toFixed(1)}% margin.`
+          },
+
+          "Marketplace / Platform": {
+            inputs: [
+              { name: "activeSellers", label: "Active Sellers", type: "number" },
+              { name: "averageSalesPerSeller", label: "Average Sales Per Seller", type: "number" },
+              { name: "platformFeePercent", label: "Platform Fee (%)", type: "percent" },
+              { name: "fixedCosts", label: "Fixed Costs", type: "number" },
+              { name: "variableCostsPerSeller", label: "Variable Costs Per Seller", type: "number" }
+            ],
+            calculate: (data) => {
+              const grossSales = data.activeSellers * data.averageSalesPerSeller;
+              const revenue = grossSales * (data.platformFeePercent / 100);
+              const totalVariableCosts = data.activeSellers * data.variableCostsPerSeller;
+              const totalCosts = totalVariableCosts + data.fixedCosts;
+              const profit = revenue - totalCosts;
+              const margin = revenue ? (profit / revenue) * 100 : 0;
+              return { revenue, totalVariableCosts, totalCosts, profit, margin };
+            },
+            summaryTemplate: (result) =>
+              `With ${result.activeSellers} sellers generating $${result.averageSalesPerSeller} each, platform revenue is $${result.revenue} with a ${result.margin.toFixed(1)}% margin.`
+          },
+
+          "Product-Based Business": {
+            inputs: [
+              { name: "unitsProduced", label: "Units Produced per Month", type: "number" },
+              { name: "salePrice", label: "Sale Price per Unit", type: "number" },
+              { name: "productionCost", label: "Production Cost per Unit", type: "number" },
+              { name: "fixedCosts", label: "Fixed Monthly Costs", type: "number" }
+            ],
+            calculate: (data) => {
+              const revenue = data.unitsProduced * data.salePrice;
+              const totalVariableCosts = data.unitsProduced * data.productionCost;
+              const totalCosts = totalVariableCosts + data.fixedCosts;
+              const profit = revenue - totalCosts;
+              const margin = revenue ? (profit / revenue) * 100 : 0;
+              return { revenue, totalVariableCosts, totalCosts, profit, margin };
+            },
+            summaryTemplate: (result) =>
+              `Producing ${result.unitsProduced} units at $${result.salePrice} each yields $${result.revenue} in revenue and ${result.margin.toFixed(1)}% profit margin.`
+          },
+
+          "Professional Services": {
+            inputs: [
+              { name: "hourlyRate", label: "Hourly Rate", type: "number" },
+              { name: "hoursWorked", label: "Hours Worked per Month", type: "number" },
+              { name: "billableRate", label: "Billable Rate (%)", type: "percent" },
+              { name: "variableCostsPerHour", label: "Variable Costs per Hour", type: "number" },
+              { name: "fixedCosts", label: "Fixed Monthly Costs", type: "number" }
+            ],
+            calculate: (data) => {
+              const billableHours = data.hoursWorked * (data.billableRate / 100);
+              const revenue = billableHours * data.hourlyRate;
+              const totalVariableCosts = billableHours * data.variableCostsPerHour;
+              const totalCosts = totalVariableCosts + data.fixedCosts;
+              const profit = revenue - totalCosts;
+              const margin = revenue ? (profit / revenue) * 100 : 0;
+              return { revenue, totalVariableCosts, totalCosts, profit, margin, billableHours };
+            },
+            summaryTemplate: (result) =>
+              `Charging $${result.hourlyRate} for ${result.billableHours} billable hours gives $${result.revenue} monthly revenue with a ${result.margin.toFixed(1)}% margin.`
+          }
+        };
+
+        // Map dropdown values to sectorConfig keys
+        const sectorKeyMap = {
+            agency: "Agency / Consulting",
+            content_media: "Content Creation / Media",
+            ecommerce: "E-commerce / Retail",
+            education: "Education / Courses",
+            franchise: "Franchise Business",
+            healthcare: "Healthcare Practice",
+            marketplace: "Marketplace / Platform",
+            product: "Product-Based Business",
+            services: "Professional Services"
+            // More sectors will be added in Part 2
+        };
+
+        function renderInputs(dropdownValue) {
+            const formContainer = document.getElementById('dynamicInputs');
+            const sectionEl = formContainer ? formContainer.parentElement : null;
+            formContainer.innerHTML = '';
+            const mappedKey = sectorKeyMap[dropdownValue];
+            const cfg = mappedKey ? sectorConfig[mappedKey] : null;
+            if (!cfg) {
+                if (sectionEl) sectionEl.style.display = 'none';
+                // Show legacy inputs when no sector config
+                const legacy = document.getElementById('legacyInputs');
+                if (legacy) legacy.style.display = '';
+                return;
+            }
+            if (sectionEl) sectionEl.style.display = '';
+            // Hide legacy inputs for configured sectors
+            const legacy = document.getElementById('legacyInputs');
+            if (legacy) legacy.style.display = 'none';
+            cfg.inputs.forEach(field => {
+                const wrapper = document.createElement('div');
+                const label = document.createElement('label');
+                label.className = 'block text-gray-700 text-sm font-bold mb-2';
+                label.innerText = field.label;
+                const input = document.createElement('input');
+                input.type = field.type === 'percent' ? 'number' : (field.type || 'number');
+                input.id = field.name;
+                input.value = 0;
+                input.className = 'w-full p-3 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500';
+                input.addEventListener('input', calculateForecast);
+                wrapper.appendChild(label);
+                wrapper.appendChild(input);
+                formContainer.appendChild(wrapper);
+            });
+        }
+
+        function calculateForecast() {
+            const dropdownValue = document.getElementById('businessModel').value;
+            const mappedKey = sectorKeyMap[dropdownValue];
+            const months = parseInt(document.getElementById('months').value) || 12;
+            const cfg = mappedKey ? sectorConfig[mappedKey] : null;
+            if (!cfg) {
+                // Fallback to existing calculator if sector not configured
+                if (typeof calculate === 'function') return calculate();
+                return;
+            }
+            const values = {};
+            cfg.inputs.forEach(field => {
+                const el = document.getElementById(field.name);
+                values[field.name] = parseFloat(el && el.value) || 0;
+            });
+
+            // Apply sensitivity multipliers to sector models
+            const priceFactor = (currentSensitivity.price || 100) / 100;
+            const volumeFactor = (currentSensitivity.volume || 100) / 100;
+
+            // Explicit mapping of which inputs are price-like vs volume-like for each sector
+            const sensitivityMap = {
+                "Agency / Consulting": { price: ["hourlyRate"], volume: ["billableHoursPerMonth"] },
+                "Content Creation / Media": { price: ["averageRevenuePerView", "sponsorshipRevenue"], volume: ["monthlyViews"] },
+                "E-commerce / Retail": { price: ["pricePerUnit"], volume: ["unitsSold"] },
+                "Education / Courses": { price: ["pricePerCourse"], volume: ["studentsPerMonth"] },
+                "Franchise Business": { price: ["revenuePerLocation"], volume: ["locations"] },
+                "Healthcare Practice": { price: ["averageChargePerPatient"], volume: ["patientsPerMonth"] },
+                "Marketplace / Platform": { price: ["averageSalesPerSeller"], volume: ["activeSellers"] },
+                "Product-Based Business": { price: ["salePrice"], volume: ["unitsProduced"] },
+                "Professional Services": { price: ["hourlyRate"], volume: ["hoursWorked"] }
+            };
+
+            const adjustedValues = { ...values };
+            const mapEntry = sensitivityMap[mappedKey];
+            if (mapEntry) {
+                (mapEntry.price || []).forEach(k => { if (k in adjustedValues) adjustedValues[k] = adjustedValues[k] * priceFactor; });
+                (mapEntry.volume || []).forEach(k => { if (k in adjustedValues) adjustedValues[k] = adjustedValues[k] * volumeFactor; });
+            }
+
+            const baseResult = cfg.calculate(adjustedValues) || {};
+            // Enrich result with input values for templates that reference inputs directly
+            const enriched = { ...adjustedValues, ...baseResult };
+
+            // Universal metrics
+            const uniRevenue = parseFloat(document.getElementById('uni_totalRevenue').value) || 0;
+            const uniExpenses = parseFloat(document.getElementById('uni_totalExpenses').value) || 0;
+            const uniFunds = parseFloat(document.getElementById('uni_availableFunds').value) || 0;
+            const uniFixed = parseFloat(document.getElementById('uni_fixedCosts').value) || 0;
+            const uniVariable = parseFloat(document.getElementById('uni_variableCosts').value) || 0;
+            const uniRPU = parseFloat(document.getElementById('uni_revenuePerUnit').value) || 0;
+
+            const cashFlow = uniRevenue - uniExpenses;
+            const contribution = Math.max(uniRPU - uniVariable, 0);
+            const breakEvenUnits = contribution > 0 ? Math.ceil((uniFixed) / contribution) : null;
+            const profitMarginPct = uniRevenue > 0 ? ((uniRevenue - uniExpenses) / uniRevenue) * 100 : 0;
+            const burnRate = Math.max(uniExpenses - uniRevenue, 0);
+            const runwayMonths = burnRate > 0 ? Math.floor(uniFunds / burnRate) : null;
+
+            // Health status
+            let statusText = 'Not yet calculated';
+            let statusColor = '#f3f4f6';
+            if (cashFlow > 0 && profitMarginPct > 0) { statusText = '🟢 Healthy'; statusColor = '#ecfdf5'; }
+            else if (cashFlow >= -0.01 * (uniRevenue || 1)) { statusText = '🟡 Borderline'; statusColor = '#fffbeb'; }
+            else { statusText = '🔴 At Risk'; statusColor = '#fef2f2'; }
+
+            // Update Health UI
+            document.getElementById('healthCashFlow').textContent = '£' + Math.round(cashFlow).toLocaleString();
+            document.getElementById('healthBreakEven').textContent = breakEvenUnits != null ? `${breakEvenUnits} units/month` : 'N/A';
+            document.getElementById('healthProfitMargin').textContent = `${profitMarginPct.toFixed(1)}%`;
+            document.getElementById('healthRunway').textContent = runwayMonths != null ? `${runwayMonths} months` : 'N/A';
+            const healthCard = document.getElementById('healthCard');
+            if (healthCard) healthCard.style.backgroundColor = statusColor;
+            document.getElementById('healthStatus').textContent = statusText;
+
+            // Build monthly series. If universal inputs are provided, prioritize them for core metrics.
+            const useUniversal = (uniRevenue > 0) || (uniExpenses > 0) || (uniFixed > 0) || (uniVariable > 0);
+            const monthlyData = Array.from({ length: months }, (_, idx) => {
+                let revenue, variableCost, fixedCost, totalCost, profit;
+                if (useUniversal) {
+                    revenue = uniRevenue || 0;
+                    variableCost = uniVariable || 0;
+                    fixedCost = uniFixed || 0;
+                    totalCost = (uniExpenses > 0 ? uniExpenses : (variableCost + fixedCost));
+                    profit = revenue - totalCost;
+                } else {
+                    revenue = enriched.revenue || 0;
+                    variableCost = enriched.totalVariableCosts || enriched.variableCosts || 0;
+                    fixedCost = enriched.fixedCosts || 0;
+                    totalCost = enriched.totalCosts ?? (variableCost + fixedCost);
+                    profit = enriched.profit ?? (revenue - totalCost);
+                }
+                const margin = revenue ? (profit / revenue) * 100 : 0;
+                // Pick a sensible units-like metric for the table where possible
+                const units = adjustedValues.unitsSold || adjustedValues.studentsPerMonth || adjustedValues.activeSellers || adjustedValues.unitsProduced || adjustedValues.hoursWorked || adjustedValues.billableHoursPerMonth || 0;
+                return { month: idx + 1, units, revenue, variableCost, fixedCost, totalCost, profit, margin };
+            });
+            const breakEvenMonth = monthlyData.findIndex(m => m.profit > 0) + 1 || null;
+
+            // Build series for chart
+            const labels = monthlyData.map(d => 'Month ' + d.month);
+            const revenueData = monthlyData.map(d => d.revenue);
+            const costData = monthlyData.map(d => d.totalCost);
+            const profitData = monthlyData.map(d => d.profit);
+
+            // Summary metrics
+            const totalRevenue = revenueData.reduce((a,b) => a + b, 0);
+            const totalProfit = profitData.reduce((a,b) => a + b, 0);
+
+            // Visual cues for profitability (reuse existing styles)
+            const summaryDiv = document.getElementById('summary');
+            const cssClass = totalProfit > 0 ? 'profit-positive' : totalProfit < 0 ? 'profit-negative' : 'profit-neutral';
+            summaryDiv.innerHTML = `
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                    <div class="bg-blue-50 p-4 rounded-lg ${cssClass}">
+                        <h3 class="text-sm text-blue-700 font-medium">Total Revenue</h3>
+                        <p class="text-2xl font-bold text-blue-900">£${totalRevenue.toFixed(2).toLocaleString()}</p>
+                    </div>
+                    <div class="bg-${totalProfit >= 0 ? 'green' : 'red'}-50 p-4 rounded-lg ${cssClass}">
+                        <h3 class="text-sm text-${totalProfit >= 0 ? 'green' : 'red'}-700 font-medium">Total Profit</h3>
+                        <p class="text-2xl font-bold text-${totalProfit >= 0 ? 'green' : 'red'}-900">£${totalProfit.toFixed(2).toLocaleString()}</p>
+                    </div>
+                    <div class="bg-orange-50 p-4 rounded-lg ${cssClass}">
+                        <h3 class="text-sm text-orange-700 font-medium">Break-even</h3>
+                        <p class="text-2xl font-bold text-orange-900">${breakEvenMonth ? 'Month ' + breakEvenMonth : 'Not within forecast'}</p>
+                    </div>
+                </div>
+            `;
+
+            // AI Summary: if universal inputs are used, prefer generic summary
+            const aiSummaryText = (useUniversal || !cfg.summaryTemplate)
+                ? generateAISummary(totalRevenue, totalProfit, breakEvenMonth, months)
+                : cfg.summaryTemplate(enriched);
+            document.getElementById('aiSummary').textContent = aiSummaryText;
+
+            // Render chart (reuse existing logic)
+            if (window.revenueChart && typeof window.revenueChart.destroy === 'function') {
+                window.revenueChart.destroy();
+            }
+            const ctx = document.getElementById('revenueChart');
+            if (typeof Chart !== 'undefined' && ctx) {
+                window.revenueChart = new Chart(ctx.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels,
+                        datasets: [
+                            { label: 'Revenue', data: revenueData, borderColor: '#10b981', backgroundColor: 'rgba(16, 185, 129, 0.1)', fill: true, tension: 0.4 },
+                            { label: 'Costs', data: costData, borderColor: '#ef4444', backgroundColor: 'rgba(239, 68, 68, 0.1)', fill: true, tension: 0.4 },
+                            { label: 'Profit', data: profitData, borderColor: '#3b82f6', backgroundColor: profitData.some(p => p < 0) ? 'rgba(239, 68, 68, 0.1)' : 'rgba(59, 130, 246, 0.1)', fill: true, tension: 0.4 }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: { intersect: false, mode: 'index' },
+                        scales: { y: { beginAtZero: true, ticks: { callback: (v) => '£' + v.toLocaleString() }, grid: { color: (ctx) => ctx.tick.value === 0 ? '#374151' : '#e5e7eb' } } },
+                        plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: (c) => c.dataset.label + ': £' + c.parsed.y.toLocaleString() } } }
+                    }
+                });
+            }
+
+            // Populate table (reuse existing table structure)
+            const tableBody = document.getElementById('monthlyTableBody');
+            tableBody.innerHTML = monthlyData.map(d => {
+                const profitClass = d.profit >= 0 ? 'text-green-600 font-semibold' : 'text-red-600 font-semibold';
+                const marginClass = d.margin >= 0 ? 'text-green-600' : 'text-red-600';
+                return `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-3 border border-gray-200 font-medium">Month ${d.month}</td>
+                        <td class="px-4 py-3 border border-gray-200">${(d.units || 0).toLocaleString()}</td>
+                        <td class="px-4 py-3 border border-gray-200">£${d.revenue.toFixed(0).toLocaleString()}</td>
+                        <td class="px-4 py-3 border border-gray-200">£${(d.variableCost || 0).toFixed(0).toLocaleString()}</td>
+                        <td class="px-4 py-3 border border-gray-200">£${(d.fixedCost || 0).toFixed(0).toLocaleString()}</td>
+                        <td class="px-4 py-3 border border-gray-200">£${(d.totalCost || 0).toFixed(0).toLocaleString()}</td>
+                        <td class="px-4 py-3 border border-gray-200 ${profitClass}">£${d.profit.toFixed(0).toLocaleString()}</td>
+                        <td class="px-4 py-3 border border-gray-200 ${marginClass}">${(d.margin || 0).toFixed(1)}%</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        const businessModels = {
+            agency: { price: 5000, units: 5, cost: 1500, fixed: 8000, growth: 10, months: 12 },
+            content_media: { price: 500, units: 20, cost: 100, fixed: 3000, growth: 15, months: 12 },
+            ecommerce: { price: 45, units: 200, cost: 22, fixed: 2500, growth: 12, months: 12 },
+            education: { price: 199, units: 50, cost: 20, fixed: 5000, growth: 20, months: 12 },
+            franchise: { price: 25, units: 400, cost: 12, fixed: 8000, growth: 8, months: 12 },
+            healthcare: { price: 150, units: 80, cost: 40, fixed: 12000, growth: 5, months: 12 },
+            marketplace: { price: 50, units: 100, cost: 5, fixed: 15000, growth: 25, months: 18 },
+            product: { price: 35, units: 150, cost: 18, fixed: 4000, growth: 10, months: 12 },
+            services: { price: 125, units: 30, cost: 25, fixed: 6000, growth: 8, months: 12 },
+            real_estate: { price: 8000, units: 2, cost: 1000, fixed: 5000, growth: 15, months: 18 },
+            saas: { price: 49, units: 100, cost: 8, fixed: 12000, growth: 20, months: 24 },
+            software_dev: { price: 8000, units: 3, cost: 2500, fixed: 15000, growth: 12, months: 12 },
+            subscription_box: { price: 29, units: 200, cost: 12, fixed: 4000, growth: 18, months: 18 },
+            restaurant: { price: 18, units: 400, cost: 8, fixed: 12000, growth: 5, months: 12 },
+            retail: { price: 55, units: 120, cost: 28, fixed: 6000, growth: 7, months: 12 },
+            manufacturing: { price: 250, units: 40, cost: 150, fixed: 20000, growth: 8, months: 18 },
+            freelance: { price: 85, units: 25, cost: 15, fixed: 1500, growth: 15, months: 12 },
+            fitness: { price: 80, units: 60, cost: 20, fixed: 4000, growth: 12, months: 12 },
+            beauty: { price: 65, units: 80, cost: 25, fixed: 3500, growth: 10, months: 12 },
+            automotive: { price: 120, units: 50, cost: 45, fixed: 8000, growth: 6, months: 12 },
+            custom: { price: 10, units: 100, cost: 4, fixed: 500, growth: 5, months: 12 }
+        };
+
+        function loadBusinessModel() {
+            const selectedModel = document.getElementById('businessModel').value;
+            
+            console.log('Business model selected:', selectedModel, '- Resetting values to zero');
+            
+            // Always reset values to 0 when selecting any business model
+            document.getElementById('price').value = 0;
+            document.getElementById('units').value = 0;
+            document.getElementById('cost').value = 0;
+            document.getElementById('fixed').value = 0;
+            document.getElementById('growth').value = 0;
+            document.getElementById('months').value = 12;
+            
+            // Reset sensitivity sliders
+            currentSensitivity = { price: 100, volume: 100 };
+            document.getElementById('priceSlider').value = 100;
+            document.getElementById('volumeSlider').value = 100;
+            document.getElementById('priceMultiplier').textContent = '100%';
+            document.getElementById('volumeMultiplier').textContent = '100%';
+            
+            console.log('Values reset to zero for business model:', selectedModel);
+            // Render sector-specific inputs (and toggle legacy inputs)
+            renderInputs(selectedModel);
+        }
+
+        function updateSensitivity(type, value) {
+            currentSensitivity[type] = parseInt(value);
+            document.getElementById(type + 'Multiplier').textContent = value + '%';
+            calculateForecast();
+        }
+
+        function saveScenario() {
+            const name = prompt('Enter a name for this scenario:');
+            if (name) {
+                savedScenarios[name] = {
+                    price: document.getElementById('price').value,
+                    units: document.getElementById('units').value,
+                    cost: document.getElementById('cost').value,
+                    fixed: document.getElementById('fixed').value,
+                    growth: document.getElementById('growth').value,
+                    months: document.getElementById('months').value
+                };
+                localStorage.setItem('revenueScenarios', JSON.stringify(savedScenarios));
+                updateScenarioSelect();
+                alert('Scenario saved successfully!');
+            }
+        }
+
+        function loadScenario() {
+            const select = document.getElementById('scenarioSelect');
+            const scenarioName = select.value;
+            if (scenarioName && savedScenarios[scenarioName]) {
+                const scenario = savedScenarios[scenarioName];
+                document.getElementById('price').value = scenario.price;
+                document.getElementById('units').value = scenario.units;
+                document.getElementById('cost').value = scenario.cost;
+                document.getElementById('fixed').value = scenario.fixed;
+                document.getElementById('growth').value = scenario.growth;
+                document.getElementById('months').value = scenario.months;
+                calculate();
+            }
+        }
+
+        function updateScenarioSelect() {
+            const select = document.getElementById('scenarioSelect');
+            select.innerHTML = '<option value="">Select saved scenario...</option>';
+            for (const name in savedScenarios) {
+                const option = document.createElement('option');
+                option.value = name;
+                option.textContent = name;
+                select.appendChild(option);
+            }
+        }
+
+        function exportResults() {
+            const summary = document.getElementById('summary').textContent;
+            const aiSummary = document.getElementById('aiSummary').textContent;
+            
+            const exportData = `REVENUE FORECAST RESULTS
+${new Date().toLocaleDateString()}
+
+${aiSummary}
+
+FINANCIAL SUMMARY:
+${summary.replace(/\s+/g, ' ').trim()}
+
+Generated by SummCore Revenue Forecasting Tool
+Visit: ${window.location.origin}`;
+
+            const blob = new Blob([exportData], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'revenue-forecast-' + new Date().toISOString().split('T')[0] + '.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function resetCalculator() {
+            // Reset legacy inputs
+            document.getElementById('price').value = 0;
+            document.getElementById('units').value = 0;
+            document.getElementById('cost').value = 0;
+            document.getElementById('fixed').value = 0;
+            document.getElementById('growth').value = 0;
+            document.getElementById('months').value = 12; // Keep months at 12
+
+            // Reset universal inputs
+            const uniIds = ['uni_totalRevenue','uni_totalExpenses','uni_availableFunds','uni_fixedCosts','uni_variableCosts','uni_revenuePerUnit'];
+            uniIds.forEach(id => { const el = document.getElementById(id); if (el) el.value = 0; });
+
+            // Reset dynamic sector inputs
+            const dyn = document.getElementById('dynamicInputs');
+            if (dyn) dyn.querySelectorAll('input').forEach(i => i.value = 0);
+
+            // Reset sensitivity sliders
+            document.getElementById('priceSlider').value = 100;
+            document.getElementById('volumeSlider').value = 100;
+            document.getElementById('priceMultiplier').textContent = '100%';
+            document.getElementById('volumeMultiplier').textContent = '100%';
+
+            // Trigger recalculation to update results immediately
+            calculateForecast();
+        }
+
+        function generateAISummary(totalRevenue, totalProfit, breakEvenMonth, months) {
+            const profitMargin = ((totalProfit / totalRevenue) * 100).toFixed(1);
+            const monthlyAvgRevenue = (totalRevenue / months).toFixed(0);
+            
+            let summary = `Based on your inputs, here's what to expect: `;
+            
+            if (breakEvenMonth) {
+                summary += `You'll break even in month ${breakEvenMonth}, which is ${breakEvenMonth <= 6 ? 'excellent' : breakEvenMonth <= 12 ? 'good' : 'challenging but achievable'}. `;
+            } else {
+                summary += `You won't break even within the ${months}-month forecast period - consider adjusting your pricing or reducing costs. `;
+            }
+            
+            summary += `Over ${months} months, you're projected to generate £${totalRevenue.toLocaleString()} in total revenue with £${totalProfit.toLocaleString()} profit (${profitMargin}% margin). `;
+            
+            summary += `Your average monthly revenue will be £${monthlyAvgRevenue.toLocaleString()}. `;
+            
+            if (profitMargin > 20) {
+                summary += `Your profit margin is excellent - this looks like a very healthy business model!`;
+            } else if (profitMargin > 10) {
+                summary += `Your profit margin is solid - there's good potential here with room for optimization.`;
+            } else if (profitMargin > 0) {
+                summary += `Your profit margin is modest - consider ways to increase prices or reduce costs.`;
+            } else {
+                summary += `You're operating at a loss - urgent action needed on pricing or cost structure.`;
+            }
+            
+            return summary;
+        }
+
+        function calculate() {
+            console.log('Calculate function called');
+            
+            const basePrice = parseFloat(document.getElementById('price').value) || 0;
+            const baseUnits = parseFloat(document.getElementById('units').value) || 0;
+            const cost = parseFloat(document.getElementById('cost').value) || 0;
+            const fixed = parseFloat(document.getElementById('fixed').value) || 0;
+            const growth = parseFloat(document.getElementById('growth').value) / 100 || 0;
+            const months = parseInt(document.getElementById('months').value) || 12;
+            
+            console.log('Input values:', { basePrice, baseUnits, cost, fixed, growth, months });
+
+            // Apply sensitivity adjustments
+            const price = basePrice * (currentSensitivity.price / 100);
+            const units = baseUnits * (currentSensitivity.volume / 100);
+
+            let labels = [];
+            let revenueData = [], costData = [], profitData = [];
+            let monthlyData = [];
+            let currentUnits = units;
+            let breakEvenMonth = null;
+
+            for (let i = 1; i <= months; i++) {
+                let revenue = price * currentUnits;
+                let variableCost = cost * currentUnits;
+                let totalCost = variableCost + fixed;
+                let profit = revenue - totalCost;
+                let margin = revenue > 0 ? ((profit / revenue) * 100) : 0;
+
+                labels.push("Month " + i);
+                revenueData.push(revenue);
+                costData.push(totalCost);
+                profitData.push(profit);
+
+                monthlyData.push({
+                    month: i,
+                    units: Math.round(currentUnits),
+                    revenue: revenue,
+                    variableCost: variableCost,
+                    fixedCost: fixed,
+                    totalCost: totalCost,
+                    profit: profit,
+                    margin: margin
+                });
+
+                if (!breakEvenMonth && profit > 0) breakEvenMonth = i;
+                currentUnits *= (1 + growth);
+            }
+
+            const totalRevenue = revenueData.reduce((a,b) => a+b, 0);
+            const totalProfit = profitData.reduce((a,b) => a+b, 0);
+
+            // Visual cues for profitability
+            const summaryDiv = document.getElementById('summary');
+            let cssClass = totalProfit > 0 ? 'profit-positive' : totalProfit < 0 ? 'profit-negative' : 'profit-neutral';
+            
+            summaryDiv.innerHTML = `
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                    <div class="bg-blue-50 p-4 rounded-lg ${cssClass}">
+                        <h3 class="text-sm text-blue-700 font-medium">Total Revenue</h3>
+                        <p class="text-2xl font-bold text-blue-900">£${totalRevenue.toFixed(2).toLocaleString()}</p>
+                    </div>
+                    <div class="bg-${totalProfit >= 0 ? 'green' : 'red'}-50 p-4 rounded-lg ${cssClass}">
+                        <h3 class="text-sm text-${totalProfit >= 0 ? 'green' : 'red'}-700 font-medium">Total Profit</h3>
+                        <p class="text-2xl font-bold text-${totalProfit >= 0 ? 'green' : 'red'}-900">£${totalProfit.toFixed(2).toLocaleString()}</p>
+                    </div>
+                    <div class="bg-orange-50 p-4 rounded-lg ${cssClass}">
+                        <h3 class="text-sm text-orange-700 font-medium">Break-even</h3>
+                        <p class="text-2xl font-bold text-orange-900">${breakEvenMonth ? 'Month ' + breakEvenMonth : 'Not within forecast'}</p>
+                    </div>
+                </div>
+            `;
+
+            // Generate AI Summary
+            const aiSummary = generateAISummary(totalRevenue, totalProfit, breakEvenMonth, months);
+            document.getElementById('aiSummary').textContent = aiSummary;
+
+            // Render chart
+            console.log('Rendering chart with data:', { labels, revenueData, costData, profitData });
+            
+            // Safely destroy existing chart
+            if (window.revenueChart && typeof window.revenueChart.destroy === 'function') {
+                console.log('Destroying existing chart');
+                window.revenueChart.destroy();
+            }
+            
+            const ctx = document.getElementById('revenueChart');
+            if (!ctx) {
+                console.error('Chart canvas not found!');
+                return;
+            }
+            
+            // Check if Chart.js is available
+            if (typeof Chart === 'undefined') {
+                console.error('Chart.js not loaded!');
+                document.getElementById('revenueChart').innerHTML = '<p class="text-red-500 p-4">Chart.js failed to load. Please refresh the page.</p>';
+                return;
+            }
+            
+            console.log('Creating new chart');
+            try {
+                window.revenueChart = new Chart(ctx.getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        { 
+                            label: 'Revenue', 
+                            data: revenueData, 
+                            borderColor: '#10b981', 
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)', 
+                            fill: true,
+                            tension: 0.4
+                        },
+                        { 
+                            label: 'Costs', 
+                            data: costData, 
+                            borderColor: '#ef4444', 
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)', 
+                            fill: true,
+                            tension: 0.4
+                        },
+                        { 
+                            label: 'Profit', 
+                            data: profitData, 
+                            borderColor: '#3b82f6', 
+                            backgroundColor: profitData.some(p => p < 0) ? 'rgba(239, 68, 68, 0.1)' : 'rgba(59, 130, 246, 0.1)', 
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '£' + value.toLocaleString();
+                                }
+                            },
+                            grid: {
+                                color: function(context) {
+                                    if (context.tick.value === 0) {
+                                        return '#374151';
+                                    }
+                                    return '#e5e7eb';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': £' + context.parsed.y.toLocaleString();
+                                }
+                            }
+                        },
+                        legend: {
+                            position: 'top'
+                        }
+                    }
+                }
+            });
+            console.log('Chart created successfully');
+            
+            } catch (error) {
+                console.error('Error creating chart:', error);
+                ctx.style.display = 'none';
+                const errorMsg = document.createElement('div');
+                errorMsg.innerHTML = '<p class="text-red-500 p-4">Error creating chart: ' + error.message + '</p>';
+                ctx.parentNode.appendChild(errorMsg);
+            }
+
+            // Populate monthly breakdown table
+            console.log('Populating table with monthly data:', monthlyData);
+            
+            const tableBody = document.getElementById('monthlyTableBody');
+            if (!tableBody) {
+                console.error('Table body not found!');
+                return;
+            }
+            
+            console.log('Table body found, populating...');
+            tableBody.innerHTML = monthlyData.map(data => {
+                const profitClass = data.profit >= 0 ? 'text-green-600 font-semibold' : 'text-red-600 font-semibold';
+                const marginClass = data.margin >= 0 ? 'text-green-600' : 'text-red-600';
+                
+                return `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-3 border border-gray-200 font-medium">Month ${data.month}</td>
+                        <td class="px-4 py-3 border border-gray-200">${data.units.toLocaleString()}</td>
+                        <td class="px-4 py-3 border border-gray-200">£${data.revenue.toFixed(0).toLocaleString()}</td>
+                        <td class="px-4 py-3 border border-gray-200">£${data.variableCost.toFixed(0).toLocaleString()}</td>
+                        <td class="px-4 py-3 border border-gray-200">£${data.fixedCost.toFixed(0).toLocaleString()}</td>
+                        <td class="px-4 py-3 border border-gray-200">£${data.totalCost.toFixed(0).toLocaleString()}</td>
+                        <td class="px-4 py-3 border border-gray-200 ${profitClass}">£${data.profit.toFixed(0).toLocaleString()}</td>
+                        <td class="px-4 py-3 border border-gray-200 ${marginClass}">${data.margin.toFixed(1)}%</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Initialize
+        console.log('Initializing Revenue Calculator');
+        updateScenarioSelect();
+        // Render inputs for the default selected sector (and toggle legacy group)
+        renderInputs(document.getElementById('businessModel').value);
+        console.log('Initialization complete - Ready for user input');
+    </script>
+</body>
+</html>
