@@ -425,7 +425,9 @@ class RevenueForecastingTool {
 
     loadScenarios() {
         const stored = localStorage.getItem('revenueScenarios');
-        return stored ? JSON.parse(stored) : {};
+        if (!stored) return {};
+        try { return JSON.parse(stored); }
+        catch (e) { console.warn('Failed to parse saved scenarios'); return {}; }
     }
 
     loadScenarioOptions() {

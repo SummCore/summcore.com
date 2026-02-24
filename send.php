@@ -1,15 +1,27 @@
 <?php
-// Enable error reporting for debugging
+// Production: log errors to file, never display to users
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+
+// Simple rate limiting: max 5 submissions per 15 minutes per IP
+session_start();
+$rate_key = 'form_submissions_' . md5($_SERVER['REMOTE_ADDR'] ?? 'unknown');
+if (!isset($_SESSION[$rate_key])) $_SESSION[$rate_key] = [];
+$_SESSION[$rate_key] = array_filter($_SESSION[$rate_key], function($t) { return $t > time() - 900; });
+if (count($_SESSION[$rate_key]) >= 5) {
+    http_response_code(429);
+    echo "Too many requests. Please try again in a few minutes.";
+    exit();
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Required fields
-    $businessName = htmlspecialchars(trim($_POST['business_name']));
-    $website = htmlspecialchars(trim($_POST['website']));
-    $yourName = htmlspecialchars(trim($_POST['your_name']));
-    $email = htmlspecialchars(trim($_POST['email']));
-    $needs = htmlspecialchars(trim($_POST['needs']));
+    $businessName = htmlspecialchars(trim($_POST['business_name'] ?? ''));
+    $website = htmlspecialchars(trim($_POST['website'] ?? ''));
+    $yourName = htmlspecialchars(trim($_POST['your_name'] ?? ''));
+    $email = trim($_POST['email'] ?? '');
+    $needs = htmlspecialchars(trim($_POST['needs'] ?? ''));
 
     // Optional field
     $phone = isset($_POST['phone']) ? htmlspecialchars(trim($_POST['phone'])) : 'Not provided';
@@ -20,9 +32,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
+    // Validate email format
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "Error: Please provide a valid email address.";
+        exit();
+    }
+    $email = htmlspecialchars($email);
+
+    // Sanitise inputs for email header injection (strip newlines)
+    $yourName = str_replace(["\r", "\n", "\t"], '', $yourName);
+    $email = str_replace(["\r", "\n", "\t"], '', $email);
+
+    // Record this submission for rate limiting
+    $_SESSION[$rate_key][] = time();
+
     // Email settings
     $to = "info@summcore.com";
-    $subject = "[SummCore] New Business Consultation Request - $yourName";
+    $subject = "[SummCore] New Business Consultation Request - " . mb_substr($yourName, 0, 50);
     $body = "SUMMCORE CONSULTATION REQUEST\n";
     $body .= "================================\n\n";
     $body .= "A new consultation request has been submitted through your website.\n\n";
@@ -38,38 +64,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $body .= "================================\n";
     $body .= "Submitted: " . date('Y-m-d H:i:s') . "\n";
     $body .= "Source: SummCore Website Contact Form";
-    
+
     // Enhanced headers to avoid spam filters
     $headers = "From: SummCore Contact Form <info@summcore.com>\r\n";
-    $headers .= "Reply-To: $yourName <$email>\r\n";
+    $headers .= "Reply-To: " . $yourName . " <" . $email . ">\r\n";
     $headers .= "Return-Path: info@summcore.com\r\n";
     $headers .= "X-Mailer: SummCore Website\r\n";
-    $headers .= "X-Priority: 3\r\n";
-    $headers .= "X-MSMail-Priority: Normal\r\n";
     $headers .= "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
     $headers .= "Content-Transfer-Encoding: 8bit\r\n";
 
-    // Log attempt for debugging
-    $log_message = date('Y-m-d H:i:s') . " - Email attempt for: $email from $yourName\n";
-    file_put_contents('email_log.txt', $log_message, FILE_APPEND | LOCK_EX);
-
     // Try to send email
     $mail_sent = mail($to, $subject, $body, $headers);
-    
+
     if ($mail_sent) {
-        // Log success
-        file_put_contents('email_log.txt', date('Y-m-d H:i:s') . " - SUCCESS: Email sent\n", FILE_APPEND | LOCK_EX);
         header("Location: thank-you.html");
         exit();
     } else {
-        // Log failure
-        $error = error_get_last();
-        file_put_contents('email_log.txt', date('Y-m-d H:i:s') . " - FAILED: " . print_r($error, true) . "\n", FILE_APPEND | LOCK_EX);
         echo "Error: Email could not be sent. Please try again or contact us directly at info@summcore.com";
     }
 } else {
     echo "Invalid request.";
 }
 ?>
-
