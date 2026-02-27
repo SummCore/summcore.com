@@ -457,7 +457,9 @@
     </div>
 
     <script>
-        let savedScenarios = JSON.parse(localStorage.getItem('revenueScenarios') || '{}');
+        let savedScenarios;
+        try { savedScenarios = JSON.parse(localStorage.getItem('revenueScenarios') || '{}'); }
+        catch (e) { console.warn('Corrupted scenario data, resetting'); savedScenarios = {}; }
         let currentSensitivity = { price: 100, volume: 100 };
 
         // Business Sector Configurations — Part 1 of 2
@@ -1232,7 +1234,7 @@ Visit: ${window.location.origin}`;
                 console.error('Error creating chart:', error);
                 ctx.style.display = 'none';
                 const errorMsg = document.createElement('div');
-                errorMsg.innerHTML = '<p class="text-red-500 p-4">Error creating chart: ' + error.message + '</p>';
+                errorMsg.innerHTML = '<p class="text-red-500 p-4">Unable to display chart. Please refresh the page.</p>';
                 ctx.parentNode.appendChild(errorMsg);
             }
 

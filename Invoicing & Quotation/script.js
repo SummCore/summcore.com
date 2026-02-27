@@ -39,6 +39,11 @@ function handleLogoUpload() {
     const file = fileInput.files[0];
     
     if (file) {
+        if (file.size > 2 * 1024 * 1024) {
+            alert('Logo file is too large. Please use an image under 2MB.');
+            fileInput.value = '';
+            return;
+        }
         if (file.type.startsWith('image/')) {
             const reader = new FileReader();
             reader.onload = function(e) {
