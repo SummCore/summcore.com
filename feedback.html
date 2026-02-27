@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com; frame-src 'none'; object-src 'none'; base-uri 'self';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QNET28HLLR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QNET28HLLR');
+  </script>
+  <title>Help Us Improve | SummCore Feedback Survey</title>
+  <meta name="description" content="Take 2 minutes to help SummCore build better tools and services for your business. Your feedback shapes what we build next.">
+  <link rel="canonical" href="https://summcore.com/feedback.html">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Help Us Improve | SummCore Feedback Survey">
+  <meta property="og:description" content="Take 2 minutes to help SummCore build better tools and services for your business.">
+  <meta property="og:url" content="https://summcore.com/feedback.html">
+  <meta property="og:image" content="https://summcore.com/Logo/SC25.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Help Us Improve | SummCore Feedback Survey">
+  <meta name="twitter:description" content="Take 2 minutes to help SummCore build better tools and services for your business.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; margin: 0; background: #0f172a; color: #e2e8f0; }
+    .option-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #cbd5e1; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 14px; transition: all 0.15s; }
+    .option-btn:hover { border-color: rgba(255,255,255,0.25); }
+    .option-btn.selected { background: #fe2700; border-color: #fe2700; color: #fff; }
+    .star { font-size: 28px; cursor: pointer; color: rgba(255,255,255,0.2); transition: color 0.15s; user-select: none; }
+    .star.active { color: #fe2700; }
+    .star:hover { color: #fe2700; }
+    textarea, input { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #e2e8f0; border-radius: 8px; padding: 12px; font-size: 14px; width: 100%; box-sizing: border-box; outline: none; font-family: inherit; }
+    textarea:focus, input:focus { border-color: rgba(254,39,0,0.5); }
+    textarea { resize: none; }
+    .submit-btn { background: #fe2700; color: #fff; border: none; padding: 14px 32px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: opacity 0.15s; }
+    .submit-btn:hover { opacity: 0.9; }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .q-label { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 10px; display: block; }
+    .q-sub { font-size: 13px; color: #64748b; margin-bottom: 12px; }
+    .q-block { margin-bottom: 28px; }
+    .progress-bar { height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; margin-bottom: 32px; }
+    .progress-fill { height: 100%; background: #fe2700; transition: width 0.3s ease; }
+  </style>
+</head>
+<body>
+  <header style="background: rgba(15,23,42,0.95); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 16px 24px;">
+    <div style="max-width: 600px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+      <a href="/" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+        <img src="Logo/SC25.png" alt="SummCore" height="36" width="36">
+        <span style="color: #fff; font-weight: 600;">SummCore</span>
+      </a>
+      <a href="/" style="color: #94a3b8; text-decoration: none; font-size: 14px;">Back to Home</a>
+    </div>
+  </header>
+
+  <main style="max-width: 600px; margin: 0 auto; padding: 40px 24px 60px;">
+    <div id="survey">
+      <div style="text-align: center; margin-bottom: 32px;">
+        <h1 style="font-size: 28px; font-weight: 700; color: #fff; margin: 0 0 8px;">Help Us Build What You Need</h1>
+        <p style="color: #94a3b8; font-size: 15px; margin: 0;">6 quick questions. Takes about 2 minutes. Your answers shape what we build next.</p>
+      </div>
+
+      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 0%"></div></div>
+
+      <!-- Q1: How did you find us? -->
+      <div class="q-block">
+        <label class="q-label">1. How did you find SummCore?</label>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <button class="option-btn" onclick="selectOption(this, 'q1')">Google search</button>
+          <button class="option-btn" onclick="selectOption(this, 'q1')">Social media</button>
+          <button class="option-btn" onclick="selectOption(this, 'q1')">Word of mouth</button>
+          <button class="option-btn" onclick="selectOption(this, 'q1')">Blog / article</button>
+          <button class="option-btn" onclick="selectOption(this, 'q1')">Other</button>
+        </div>
+      </div>
+
+      <!-- Q2: Which tools have you used? -->
+      <div class="q-block">
+        <label class="q-label">2. Which tools have you tried?</label>
+        <p class="q-sub">Select all that apply</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <button class="option-btn" onclick="toggleMulti(this, 'q2')">Business Health Check</button>
+          <button class="option-btn" onclick="toggleMulti(this, 'q2')">Strategy Generator</button>
+          <button class="option-btn" onclick="toggleMulti(this, 'q2')">Financial Health Checker</button>
+          <button class="option-btn" onclick="toggleMulti(this, 'q2')">Revenue Calculator</button>
+          <button class="option-btn" onclick="toggleMulti(this, 'q2')">Invoicing & Quotation</button>
+          <button class="option-btn" onclick="toggleMulti(this, 'q2')">None yet</button>
+        </div>
+      </div>
+
+      <!-- Q3: Overall experience rating -->
+      <div class="q-block">
+        <label class="q-label">3. How would you rate your overall experience?</label>
+        <div id="stars" style="display: flex; gap: 6px; margin-top: 4px;">
+          <span class="star" onclick="setRating(1)">&#9733;</span>
+          <span class="star" onclick="setRating(2)">&#9733;</span>
+          <span class="star" onclick="setRating(3)">&#9733;</span>
+          <span class="star" onclick="setRating(4)">&#9733;</span>
+          <span class="star" onclick="setRating(5)">&#9733;</span>
+          <span id="ratingLabel" style="color: #64748b; font-size: 13px; margin-left: 8px; align-self: center;"></span>
+        </div>
+      </div>
+
+      <!-- Q4: What would you like us to offer? -->
+      <div class="q-block">
+        <label class="q-label">4. What would you like SummCore to offer next?</label>
+        <p class="q-sub">Select all that interest you</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <button class="option-btn" onclick="toggleMulti(this, 'q4')">More free tools</button>
+          <button class="option-btn" onclick="toggleMulti(this, 'q4')">Step-by-step guides</button>
+          <button class="option-btn" onclick="toggleMulti(this, 'q4')">Video tutorials</button>
+          <button class="option-btn" onclick="toggleMulti(this, 'q4')">Industry-specific templates</button>
+          <button class="option-btn" onclick="toggleMulti(this, 'q4')">1-on-1 consulting</button>
+          <button class="option-btn" onclick="toggleMulti(this, 'q4')">Online courses</button>
+          <button class="option-btn" onclick="toggleMulti(this, 'q4')">Community / forum</button>
+        </div>
+      </div>
+
+      <!-- Q5: What's your biggest business challenge? -->
+      <div class="q-block">
+        <label class="q-label">5. What is your biggest business challenge right now?</label>
+        <textarea id="q5" rows="3" placeholder="e.g. Getting more customers, managing cash flow, planning growth..."></textarea>
+      </div>
+
+      <!-- Q6: Anything else? + optional email -->
+      <div class="q-block">
+        <label class="q-label">6. Anything else you'd like us to know?</label>
+        <textarea id="q6" rows="2" placeholder="Suggestions, ideas, complaints — all welcome"></textarea>
+      </div>
+
+      <div class="q-block">
+        <label class="q-label" style="font-weight: 500;">Leave your email if you'd like us to follow up (optional)</label>
+        <input type="email" id="email" placeholder="you@company.com">
+      </div>
+
+      <div style="text-align: center; margin-top: 8px;">
+        <button class="submit-btn" onclick="submitSurvey()">Submit Feedback</button>
+        <p style="color: #475569; font-size: 12px; margin-top: 10px;">Your responses are confidential and help us improve.</p>
+      </div>
+    </div>
+
+    <div id="thankYou" style="display: none; text-align: center; padding: 60px 0;">
+      <div style="font-size: 48px; margin-bottom: 16px;">&#10003;</div>
+      <h2 style="font-size: 24px; font-weight: 700; color: #fff; margin: 0 0 8px;">Thank you for your feedback!</h2>
+      <p style="color: #94a3b8; font-size: 15px; margin: 0 0 24px;">Your input directly shapes what we build next. We read every response.</p>
+      <a href="/" style="color: #fe2700; text-decoration: none; font-weight: 600;">Back to SummCore</a>
+    </div>
+  </main>
+
+  <script>
+    const answers = { q1: '', q2: [], q3: 0, q4: [], q5: '', q6: '', email: '' };
+    const ratingLabels = ['', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent'];
+
+    function selectOption(btn, key) {
+      btn.parentElement.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      answers[key] = btn.textContent.trim();
+      updateProgress();
+    }
+
+    function toggleMulti(btn, key) {
+      btn.classList.toggle('selected');
+      const vals = [];
+      btn.parentElement.querySelectorAll('.option-btn.selected').forEach(b => vals.push(b.textContent.trim()));
+      answers[key] = vals;
+      updateProgress();
+    }
+
+    function setRating(n) {
+      answers.q3 = n;
+      document.querySelectorAll('#stars .star').forEach((s, i) => {
+        s.classList.toggle('active', i < n);
+      });
+      document.getElementById('ratingLabel').textContent = ratingLabels[n];
+      updateProgress();
+    }
+
+    function updateProgress() {
+      let filled = 0;
+      if (answers.q1) filled++;
+      if (answers.q2.length) filled++;
+      if (answers.q3) filled++;
+      if (answers.q4.length) filled++;
+      if (document.getElementById('q5').value.trim()) filled++;
+      if (document.getElementById('q6').value.trim()) filled++;
+      document.getElementById('progressFill').style.width = Math.round((filled / 6) * 100) + '%';
+    }
+
+    document.getElementById('q5').addEventListener('input', updateProgress);
+    document.getElementById('q6').addEventListener('input', updateProgress);
+
+    function submitSurvey() {
+      answers.q5 = document.getElementById('q5').value.trim();
+      answers.q6 = document.getElementById('q6').value.trim();
+      answers.email = document.getElementById('email').value.trim();
+
+      const summary = [
+        'SUMMCORE FEEDBACK SURVEY',
+        '========================',
+        '',
+        '1. How did you find us: ' + (answers.q1 || 'Not answered'),
+        '2. Tools tried: ' + (answers.q2.length ? answers.q2.join(', ') : 'Not answered'),
+        '3. Overall rating: ' + (answers.q3 ? answers.q3 + '/5 (' + ratingLabels[answers.q3] + ')' : 'Not answered'),
+        '4. What to offer next: ' + (answers.q4.length ? answers.q4.join(', ') : 'Not answered'),
+        '5. Biggest challenge: ' + (answers.q5 || 'Not answered'),
+        '6. Other feedback: ' + (answers.q6 || 'Not answered'),
+        '',
+        'Email: ' + (answers.email || 'Not provided'),
+      ].join('\n');
+
+      const body = new FormData();
+      body.append('business_name', 'Feedback Survey');
+      body.append('your_name', answers.email || 'Anonymous');
+      body.append('email', answers.email || 'feedback@summcore.com');
+      body.append('website', '');
+      body.append('needs', summary);
+      fetch('send.php', { method: 'POST', body }).catch(() => {});
+
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'feedback_submitted', { rating: answers.q3, source: answers.q1 });
+      }
+
+      document.getElementById('survey').style.display = 'none';
+      document.getElementById('thankYou').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

@@ -789,78 +789,21 @@
       );
     };
 
-    const Feedback = () => {
-      const [selected, setSelected] = React.useState(null);
-      const [comment, setComment] = React.useState('');
-      const [submitted, setSubmitted] = React.useState(false);
-
-      const options = [
-        { label: 'More tools', icon: '\u2699\uFE0F' },
-        { label: 'Better guides', icon: '\uD83D\uDCD6' },
-        { label: 'Video tutorials', icon: '\uD83C\uDFA5' },
-        { label: 'Industry templates', icon: '\uD83D\uDCC4' },
-      ];
-
-      const handleSubmit = () => {
-        if (!selected && !comment.trim()) return;
-        const body = new FormData();
-        body.append('business_name', 'Site Feedback');
-        body.append('your_name', 'Anonymous Visitor');
-        body.append('email', 'feedback@summcore.com');
-        body.append('website', '');
-        body.append('needs', 'Feedback: ' + (selected || 'No selection') + (comment.trim() ? ' | Comment: ' + comment.trim() : ''));
-        fetch('send.php', { method: 'POST', body }).catch(() => {});
-        setSubmitted(true);
-      };
-
-      if (submitted) {
-        return (
-          <section className="py-14" style={{background: '#0f172a', borderTop: '1px solid rgba(255,255,255,0.06)'}}>
-            <div className="max-w-xl mx-auto px-6 text-center">
-              <p className="text-2xl font-bold text-white mb-2">Thank you!</p>
-              <p style={{color: '#94a3b8'}}>Your feedback helps us build better tools for businesses like yours.</p>
-            </div>
-          </section>
-        );
-      }
-
-      return (
+    const Feedback = () => (
         <section className="py-14" style={{background: '#0f172a', borderTop: '1px solid rgba(255,255,255,0.06)'}}>
           <div className="max-w-xl mx-auto px-6 text-center">
             <p style={{color: '#94a3b8', fontSize: '13px', fontWeight: '600', letterSpacing: '0.08em', marginBottom: '8px'}}>HELP US IMPROVE</p>
-            <h2 className="text-2xl font-bold text-white mb-2">What would help your business most?</h2>
-            <p style={{color: '#94a3b8', fontSize: '15px', marginBottom: '24px'}}>Pick one, leave a note if you like. Takes 10 seconds.</p>
-            <div className="flex flex-wrap justify-center gap-3 mb-6">
-              {options.map((opt, i) => (
-                <button key={i} onClick={() => setSelected(opt.label)}
-                  className="px-4 py-2.5 rounded-lg font-medium text-sm transition-all"
-                  style={{
-                    background: selected === opt.label ? '#fe2700' : 'rgba(255,255,255,0.06)',
-                    color: selected === opt.label ? '#fff' : '#cbd5e1',
-                    border: selected === opt.label ? '1px solid #fe2700' : '1px solid rgba(255,255,255,0.1)',
-                    cursor: 'pointer'
-                  }}>
-                  {opt.icon} {opt.label}
-                </button>
-              ))}
-            </div>
-            <textarea
-              value={comment} onChange={(e) => setComment(e.target.value)}
-              placeholder="Anything else? (optional)"
-              rows="2"
-              className="w-full rounded-lg px-4 py-3 text-sm mb-4"
-              style={{background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: '#e2e8f0', resize: 'none', outline: 'none'}}
-            />
-            <button onClick={handleSubmit}
-              className="text-white font-semibold px-8 py-3 rounded-md transition-all hover:opacity-90"
-              style={{background: '#fe2700', cursor: 'pointer', border: 'none'}}>
-              Send Feedback
-            </button>
-            <p style={{color: '#475569', fontSize: '12px', marginTop: '10px'}}>Anonymous. No email required.</p>
+            <h2 className="text-2xl font-bold text-white mb-2">Help Us Build What You Need</h2>
+            <p style={{color: '#94a3b8', fontSize: '15px', marginBottom: '24px'}}>Tell us what's working, what's not, and what you'd like to see next. Takes 2 minutes.</p>
+            <a href="feedback.html"
+              className="inline-block text-white font-semibold px-8 py-3 rounded-md transition-all hover:opacity-90"
+              style={{background: '#fe2700', textDecoration: 'none'}}>
+              Take the 2-Minute Survey
+            </a>
+            <p style={{color: '#475569', fontSize: '12px', marginTop: '10px'}}>Anonymous. Your answers shape what we build next.</p>
           </div>
         </section>
-      );
-    };
+    );
 
     const App = () => (
       <div>
