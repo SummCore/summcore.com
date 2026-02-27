@@ -47,7 +47,7 @@
     '    <button class="scfw-close" aria-label="Close">&times;</button>',
     '  </div>',
     '  <div class="scfw-body" id="scfw-form">',
-    '    <p class="scfw-subtitle">Help us improve SummCore for your business!</p>',
+    '    <p class="scfw-subtitle">Your honest take helps us build something worth talking about.</p>',
     '',
     '    <div class="scfw-group">',
     '      <label class="scfw-label">How would you rate SummCore?<span class="scfw-req">*</span></label>',

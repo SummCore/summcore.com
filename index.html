@@ -791,30 +791,31 @@
     };
 
     const FeedbackCTA = () => (
-        <section className="py-14" style={{background: '#0f172a', borderTop: '1px solid rgba(255,255,255,0.06)'}}>
-          <div className="max-w-xl mx-auto px-6 text-center">
-            <p style={{color: '#94a3b8', fontSize: '13px', fontWeight: '600', letterSpacing: '0.08em', marginBottom: '8px'}}>HELP US IMPROVE</p>
-            <h2 className="text-2xl font-bold text-white mb-2">Help Us Build What You Need</h2>
-            <p style={{color: '#94a3b8', fontSize: '15px', marginBottom: '24px'}}>Quick feedback on your experience. Takes 30 seconds.</p>
+        <section className="py-16" style={{background: 'linear-gradient(135deg, #0f172a 0%, #1a1a2e 50%, #0f172a 100%)', borderTop: '1px solid rgba(255,255,255,0.06)'}}>
+          <div className="max-w-2xl mx-auto px-6 text-center">
+            <p style={{color: '#fe2700', fontSize: '14px', fontWeight: '700', letterSpacing: '0.1em', marginBottom: '12px'}}>YOU HAVE A VOICE. WE'RE LISTENING.</p>
+            <h2 className="text-3xl font-bold text-white mb-3">The Next Feature We Build Could Be Yours</h2>
+            <p style={{color: '#cbd5e1', fontSize: '16px', lineHeight: '1.6', marginBottom: '28px'}}>Every tool on SummCore started with someone like you saying <em>"I wish this existed."</em> Tell us what's missing, what's brilliant, and what would make you tell a friend. We read every single response.</p>
             <button
               onClick={() => window.openFeedbackWidget && window.openFeedbackWidget()}
-              className="inline-block text-white font-semibold px-8 py-3 rounded-md transition-all hover:opacity-90 border-0 cursor-pointer text-base"
-              style={{background: '#fe2700'}}>
-              Give Quick Feedback
+              className="inline-block text-white font-bold px-10 py-4 rounded-full transition-all hover:shadow-xl hover:-translate-y-1 border-0 cursor-pointer text-lg"
+              style={{background: '#fe2700', boxShadow: '0 4px 20px rgba(254,39,0,0.35)'}}>
+              Shape What We Build Next
             </button>
-            <p style={{color: '#475569', fontSize: '12px', marginTop: '10px'}}>Your answers shape what we build next.</p>
+            <p style={{color: '#64748b', fontSize: '13px', marginTop: '14px'}}>30 seconds. 3 questions. Real impact on what comes next.</p>
           </div>
         </section>
     );
 
     const ToolsFeedbackBanner = () => (
-        <div className="py-8 text-center" style={{background: '#1e293b', borderTop: '1px solid rgba(255,255,255,0.06)'}}>
-          <p className="text-gray-400 text-sm mb-3">Tried one of our tools?</p>
+        <div className="py-10 text-center" style={{background: '#1e293b', borderTop: '1px solid rgba(255,255,255,0.06)'}}>
+          <p className="text-white font-semibold text-lg mb-1">Just used a tool? We want to hear it.</p>
+          <p className="text-gray-400 text-sm mb-4">The good, the bad, and the "why doesn't it do <em>this</em>?"</p>
           <button
             onClick={() => window.openFeedbackWidget && window.openFeedbackWidget()}
-            className="text-white font-semibold px-6 py-2 rounded-md transition-all hover:opacity-90 border-0 cursor-pointer text-sm"
-            style={{background: '#fe2700'}}>
-            Tell Us What You Think
+            className="text-white font-bold px-8 py-3 rounded-full transition-all hover:shadow-lg hover:-translate-y-1 border-0 cursor-pointer text-base"
+            style={{background: '#fe2700', boxShadow: '0 4px 16px rgba(254,39,0,0.3)'}}>
+            Drop Us 30 Seconds of Honesty
           </button>
         </div>
     );
