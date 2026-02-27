@@ -15,7 +15,8 @@
     '.scfw-header h3{margin:0;font-size:18px;font-weight:700}',
     '.scfw-close{background:none;border:none;color:#fff;font-size:22px;cursor:pointer;padding:0 4px;line-height:1}',
     '.scfw-body{padding:20px}',
-    '.scfw-subtitle{color:#666;font-size:13px;margin:0 0 18px}',
+    '.scfw-subtitle{color:#333;font-size:15px;font-weight:600;margin:0 0 4px}',
+    '.scfw-subtitle2{color:#888;font-size:13px;margin:0 0 18px;font-style:italic}',
     '.scfw-label{font-size:14px;font-weight:600;color:#333;margin-bottom:8px;display:block}',
     '.scfw-group{margin-bottom:18px}',
     '.scfw-emojis{display:flex;gap:8px;margin-top:4px}',
@@ -33,9 +34,22 @@
     '.scfw-thanks{text-align:center;padding:40px 20px}',
     '.scfw-thanks h3{font-size:20px;color:#333;margin:0 0 8px}',
     '.scfw-thanks p{color:#666;font-size:14px;margin:0}',
-    '.scfw-req{color:#fe2700;margin-left:2px}'
+    '.scfw-req{color:#fe2700;margin-left:2px}',
+    '',
+    '/* Floating feedback button */',
+    '.scfw-float{position:fixed;bottom:24px;right:24px;z-index:99998;display:flex;align-items:center;gap:8px;background:#fe2700;color:#fff;border:none;padding:12px 22px 12px 16px;border-radius:50px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(254,39,0,0.4);transition:all .2s}',
+    '.scfw-float:hover{transform:scale(1.05);box-shadow:0 6px 28px rgba(254,39,0,0.5)}',
+    '.scfw-float svg{width:20px;height:20px;fill:#fff}',
+    '@media print{.scfw-float{display:none}}'
   ].join('\n');
   document.head.appendChild(style);
+
+  // Build floating button
+  var floatBtn = document.createElement('button');
+  floatBtn.className = 'scfw-float';
+  floatBtn.setAttribute('aria-label', 'Give feedback');
+  floatBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg> Feedback';
+  document.body.appendChild(floatBtn);
 
   // Build popup HTML
   var overlay = document.createElement('div');
@@ -47,7 +61,8 @@
     '    <button class="scfw-close" aria-label="Close">&times;</button>',
     '  </div>',
     '  <div class="scfw-body" id="scfw-form">',
-    '    <p class="scfw-subtitle">Your honest take helps us build something worth talking about.</p>',
+    '    <p class="scfw-subtitle">Just used a tool? We want to hear it.</p>',
+    '    <p class="scfw-subtitle2">The good, the bad, and the &ldquo;why doesn\'t it do <em>this</em>?&rdquo;</p>',
     '',
     '    <div class="scfw-group">',
     '      <label class="scfw-label">How would you rate SummCore?<span class="scfw-req">*</span></label>',
@@ -173,4 +188,9 @@
     }
     overlay.classList.add('open');
   };
+
+  // Floating button opens widget
+  floatBtn.addEventListener('click', function() {
+    window.openFeedbackWidget();
+  });
 })();
