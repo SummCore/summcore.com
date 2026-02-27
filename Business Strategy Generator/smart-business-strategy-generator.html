@@ -955,6 +955,13 @@
 
                             <div className="mt-8 text-center text-sm text-white">
                                 <p>🎉 Strategy generated successfully! Share this tool with other entrepreneurs.</p>
+                                <button
+                                    onClick={() => window.openFeedbackWidget && window.openFeedbackWidget()}
+                                    className="mt-3 px-4 py-2 text-white rounded-lg border-0 cursor-pointer text-sm"
+                                    style={{background:'#334155'}}
+                                >
+                                    Give Feedback
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -968,5 +975,6 @@
         const container = document.getElementById('root');
         ReactDOM.render(<App />, container);
     </script>
+    <script src="/feedback-widget.js"></script>
 </body>
 </html>

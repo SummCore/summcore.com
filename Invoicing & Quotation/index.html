@@ -150,6 +150,7 @@
                     <button onclick="if(typeof gtag!=='undefined')gtag('event','tool_used',{tool_name:'Invoicing Tool',action:'download_excel'});downloadExcel()" class="btn" style="background:#fe2700;color:#fff;" title="Download as Excel spreadsheet">Download Excel</button>
                     <button onclick="if(typeof gtag!=='undefined')gtag('event','tool_used',{tool_name:'Invoicing Tool',action:'save_print'});window.print()" class="btn" style="background:#6b7280;color:#fff;" title="Open Save or Print to choose your format">Save or Print</button>
                     <button onclick="if(typeof gtag!=='undefined')gtag('event','tool_used',{tool_name:'Invoicing Tool',action:'send_email'});sendEmail()" class="btn" style="background:#6b7280;color:#fff;" title="Send invoice/quote directly via email">Send Email</button>
+                    <button onclick="openFeedbackWidget()" class="btn" style="background:#334155;color:#fff;" title="Give us feedback">Give Feedback</button>
                 </div>
             </div>
 
@@ -164,5 +165,6 @@
     </div>
 
     <script src="/Invoicing%20%26%20Quotation/script.js"></script>
+    <script src="/feedback-widget.js"></script>
 </body>
 </html>
