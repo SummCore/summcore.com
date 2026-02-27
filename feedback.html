@@ -68,35 +68,23 @@
 
       <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 0%"></div></div>
 
-      <!-- Q1: How did you find us? -->
+      <!-- Q1: Which tools have you used? -->
       <div class="q-block">
-        <label class="q-label">1. How did you find SummCore?</label>
-        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-          <button class="option-btn" onclick="selectOption(this, 'q1')">Google search</button>
-          <button class="option-btn" onclick="selectOption(this, 'q1')">Social media</button>
-          <button class="option-btn" onclick="selectOption(this, 'q1')">Word of mouth</button>
-          <button class="option-btn" onclick="selectOption(this, 'q1')">Blog / article</button>
-          <button class="option-btn" onclick="selectOption(this, 'q1')">Other</button>
-        </div>
-      </div>
-
-      <!-- Q2: Which tools have you used? -->
-      <div class="q-block">
-        <label class="q-label">2. Which tools have you tried?</label>
+        <label class="q-label">1. Which tools have you tried?</label>
         <p class="q-sub">Select all that apply</p>
         <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-          <button class="option-btn" onclick="toggleMulti(this, 'q2')">Business Health Check</button>
-          <button class="option-btn" onclick="toggleMulti(this, 'q2')">Strategy Generator</button>
-          <button class="option-btn" onclick="toggleMulti(this, 'q2')">Financial Health Checker</button>
-          <button class="option-btn" onclick="toggleMulti(this, 'q2')">Revenue Calculator</button>
-          <button class="option-btn" onclick="toggleMulti(this, 'q2')">Invoicing & Quotation</button>
-          <button class="option-btn" onclick="toggleMulti(this, 'q2')">None yet</button>
+          <button class="option-btn" onclick="toggleMulti(this, 'q1')">Business Health Check</button>
+          <button class="option-btn" onclick="toggleMulti(this, 'q1')">Strategy Generator</button>
+          <button class="option-btn" onclick="toggleMulti(this, 'q1')">Financial Health Checker</button>
+          <button class="option-btn" onclick="toggleMulti(this, 'q1')">Revenue Calculator</button>
+          <button class="option-btn" onclick="toggleMulti(this, 'q1')">Invoicing & Quotation</button>
+          <button class="option-btn" onclick="toggleMulti(this, 'q1')">None yet</button>
         </div>
       </div>
 
-      <!-- Q3: Overall experience rating -->
+      <!-- Q2: Overall experience rating -->
       <div class="q-block">
-        <label class="q-label">3. How would you rate your overall experience?</label>
+        <label class="q-label">2. How would you rate your experience with SummCore so far?</label>
         <div id="stars" style="display: flex; gap: 6px; margin-top: 4px;">
           <span class="star" onclick="setRating(1)">&#9733;</span>
           <span class="star" onclick="setRating(2)">&#9733;</span>
@@ -104,6 +92,19 @@
           <span class="star" onclick="setRating(4)">&#9733;</span>
           <span class="star" onclick="setRating(5)">&#9733;</span>
           <span id="ratingLabel" style="color: #64748b; font-size: 13px; margin-left: 8px; align-self: center;"></span>
+        </div>
+      </div>
+
+      <!-- Q3: What would make you recommend SummCore? -->
+      <div class="q-block">
+        <label class="q-label">3. What would make you recommend SummCore to someone?</label>
+        <p class="q-sub">Select all that apply</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <button class="option-btn" onclick="toggleMulti(this, 'q3b')">Better tools / more features</button>
+          <button class="option-btn" onclick="toggleMulti(this, 'q3b')">Easier to use</button>
+          <button class="option-btn" onclick="toggleMulti(this, 'q3b')">More industry-specific content</button>
+          <button class="option-btn" onclick="toggleMulti(this, 'q3b')">Personalised advice</button>
+          <button class="option-btn" onclick="toggleMulti(this, 'q3b')">I already would!</button>
         </div>
       </div>
 
@@ -130,17 +131,17 @@
 
       <!-- Q6: Anything else? + optional email -->
       <div class="q-block">
-        <label class="q-label">6. Anything else you'd like us to know?</label>
-        <textarea id="q6" rows="2" placeholder="Suggestions, ideas, complaints — all welcome"></textarea>
+        <label class="q-label">6. How can SummCore improve to better serve your business?</label>
+        <textarea id="q6" rows="2" placeholder="What's missing? What would you change? What would make you come back?"></textarea>
       </div>
 
       <div class="q-block">
-        <label class="q-label" style="font-weight: 500;">Leave your email if you'd like us to follow up (optional)</label>
+        <label class="q-label" style="font-weight: 500;">Your email address</label>
         <input type="email" id="email" placeholder="you@company.com">
       </div>
 
       <div style="text-align: center; margin-top: 8px;">
-        <button class="submit-btn" onclick="submitSurvey()">Submit Feedback</button>
+        <button class="submit-btn" id="submitBtn" onclick="submitSurvey()" disabled>Submit Feedback</button>
         <p style="color: #475569; font-size: 12px; margin-top: 10px;">Your responses are confidential and help us improve.</p>
       </div>
     </div>
@@ -154,7 +155,7 @@
   </main>
 
   <script>
-    const answers = { q1: '', q2: [], q3: 0, q4: [], q5: '', q6: '', email: '' };
+    const answers = { q1: [], q2: 0, q3b: [], q4: [], q5: '', q6: '', email: '' };
     const ratingLabels = ['', 'Poor', 'Fair', 'Good', 'Very good', 'Excellent'];
 
     function selectOption(btn, key) {
@@ -173,7 +174,7 @@
     }
 
     function setRating(n) {
-      answers.q3 = n;
+      answers.q2 = n;
       document.querySelectorAll('#stars .star').forEach((s, i) => {
         s.classList.toggle('active', i < n);
       });
@@ -183,33 +184,61 @@
 
     function updateProgress() {
       let filled = 0;
-      if (answers.q1) filled++;
-      if (answers.q2.length) filled++;
-      if (answers.q3) filled++;
+      if (answers.q1.length) filled++;
+      if (answers.q2) filled++;
+      if (answers.q3b.length) filled++;
       if (answers.q4.length) filled++;
       if (document.getElementById('q5').value.trim()) filled++;
       if (document.getElementById('q6').value.trim()) filled++;
-      document.getElementById('progressFill').style.width = Math.round((filled / 6) * 100) + '%';
+      const emailVal = document.getElementById('email').value.trim();
+      if (emailVal) filled++;
+      document.getElementById('progressFill').style.width = Math.round((filled / 7) * 100) + '%';
+
+      // Only enable submit when ALL fields are filled and email is valid
+      const allFilled = filled === 7 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
+      document.getElementById('submitBtn').disabled = !allFilled;
     }
 
     document.getElementById('q5').addEventListener('input', updateProgress);
     document.getElementById('q6').addEventListener('input', updateProgress);
+    document.getElementById('email').addEventListener('input', updateProgress);
 
     function submitSurvey() {
       answers.q5 = document.getElementById('q5').value.trim();
       answers.q6 = document.getElementById('q6').value.trim();
       answers.email = document.getElementById('email').value.trim();
 
+      // All questions + email required
+      const missing = [];
+      if (!answers.q1.length) missing.push('1 (Tools tried)');
+      if (!answers.q2) missing.push('2 (Experience rating)');
+      if (!answers.q3b.length) missing.push('3 (Recommend)');
+      if (!answers.q4.length) missing.push('4 (What to offer next)');
+      if (!answers.q5) missing.push('5 (Biggest challenge)');
+      if (!answers.q6) missing.push('6 (How to improve)');
+      if (!answers.email) missing.push('Email address');
+
+      if (missing.length) {
+        alert('Please complete the following before submitting:\n\n' + missing.join('\n'));
+        return;
+      }
+
+      // Validate email format
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(answers.email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
       const summary = [
         'SUMMCORE FEEDBACK SURVEY',
         '========================',
         '',
-        '1. How did you find us: ' + (answers.q1 || 'Not answered'),
-        '2. Tools tried: ' + (answers.q2.length ? answers.q2.join(', ') : 'Not answered'),
-        '3. Overall rating: ' + (answers.q3 ? answers.q3 + '/5 (' + ratingLabels[answers.q3] + ')' : 'Not answered'),
+        '1. Tools tried: ' + (answers.q1.length ? answers.q1.join(', ') : 'Not answered'),
+        '2. Overall rating: ' + (answers.q2 ? answers.q2 + '/5 (' + ratingLabels[answers.q2] + ')' : 'Not answered'),
+        '3. Would recommend if: ' + (answers.q3b.length ? answers.q3b.join(', ') : 'Not answered'),
         '4. What to offer next: ' + (answers.q4.length ? answers.q4.join(', ') : 'Not answered'),
         '5. Biggest challenge: ' + (answers.q5 || 'Not answered'),
-        '6. Other feedback: ' + (answers.q6 || 'Not answered'),
+        '6. How to improve: ' + (answers.q6 || 'Not answered'),
         '',
         'Email: ' + (answers.email || 'Not provided'),
       ].join('\n');
@@ -223,7 +252,7 @@
       fetch('send.php', { method: 'POST', body }).catch(() => {});
 
       if (typeof gtag !== 'undefined') {
-        gtag('event', 'feedback_submitted', { rating: answers.q3, source: answers.q1 });
+        gtag('event', 'feedback_submitted', { rating: answers.q2 });
       }
 
       document.getElementById('survey').style.display = 'none';
