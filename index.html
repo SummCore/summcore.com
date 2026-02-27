@@ -2,10 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; connect-src 'self' https://api.emailjs.com; frame-src 'none'; object-src 'none'; base-uri 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; connect-src 'self' https://api.emailjs.com https://www.google-analytics.com https://analytics.google.com; frame-src 'none'; object-src 'none'; base-uri 'self';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QNET28HLLR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QNET28HLLR');
+  </script>
   <title>Innovation Consulting for SMEs and Startups | SummCore</title>
   <meta name="description" content="SummCore helps SMEs and startups grow with innovation consulting, free business tools, revenue forecasting, strategy generators, and one-to-one expert consultation. Start for free today.">
   <link rel="canonical" href="https://summcore.com/">
@@ -52,7 +60,7 @@
         "name": "Are the business tools free to use?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. All SummCore tools are completely free with no sign-up required. This includes the Business Health Check, Strategy Generator, Financial Health Checker, Revenue Forecasting Tool, Invoicing & Quotation App, and Business Plan Templates."
+          "text": "Most SummCore tools are completely free with no sign-up required, including the Strategy Generator, Financial Health Checker, Revenue Forecasting Tool, Invoicing and Quotation App, and Business Plan Templates. The Business Health Check offers a free limited assessment via SummCore Boost, with full scored reports available on a paid plan."
         }
       },
       {
@@ -65,10 +73,10 @@
       },
       {
         "@type": "Question",
-        "name": "How do I book a free consultation?",
+        "name": "How do I work with SummCore?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Scroll to the consultation section on our homepage and fill in your business name, contact details, and a brief description of your needs. A SummCore consultant will get back to you promptly."
+          "text": "Start with the free tools or take the Business Health Check on SummCore Boost. When you are ready to go further, use the contact form to get in touch and a SummCore consultant will follow up with you."
         }
       },
       {
@@ -394,9 +402,38 @@
               </div>
             </div>
           {/* Desktop nav */}
-          <div className="hidden md:flex space-x-4">
+          <div className="hidden md:flex space-x-4 items-center">
               <a href="#services" className="text-gray-700 hover:text-amber-600 transition-colors duration-300">Services</a>
               <a href="#tools" className="text-gray-700 hover:text-amber-600 transition-colors duration-300">Free Tools</a>
+              {/* Our Ecosystem dropdown */}
+              <div className="relative group">
+                <button className="text-gray-700 hover:text-amber-600 transition-colors duration-300 flex items-center gap-1 bg-transparent border-0 cursor-pointer text-base p-0 font-normal">
+                  Our Ecosystem <span className="text-xs ml-1">&#9660;</span>
+                </button>
+                <div className="absolute top-full right-0 mt-3 w-[500px] bg-white border border-gray-200 rounded-xl shadow-2xl p-3 flex flex-col gap-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <a href="index.html" className="flex gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors no-underline" style={{textDecoration:'none',color:'inherit'}}>
+                    <div className="w-36 shrink-0">
+                      <div className="text-gray-800 font-semibold text-sm">SummCore</div>
+                      <div className="text-xs text-gray-400 mt-0.5">summcore.com</div>
+                    </div>
+                    <div className="text-sm text-gray-500 leading-snug">Free business tools, consulting services, and the SummCore blog with growth strategies for SMEs and startups.</div>
+                  </a>
+                  <a href="https://boost.summcore.com" target="_blank" rel="noopener" className="flex gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors" style={{textDecoration:'none',color:'inherit'}}>
+                    <div className="w-36 shrink-0">
+                      <div className="text-gray-800 font-semibold text-sm">SummCore Boost</div>
+                      <div className="text-xs text-gray-400 mt-0.5">boost.summcore.com</div>
+                    </div>
+                    <div className="text-sm text-gray-500 leading-snug">AI-powered business health assessments across five pillars with scored reports and recommendations.</div>
+                  </a>
+                  <div className="flex gap-4 p-3 rounded-lg opacity-40 cursor-not-allowed select-none">
+                    <div className="w-36 shrink-0">
+                      <div className="text-gray-800 font-semibold text-sm">SummCore Pro</div>
+                      <div className="text-xs text-gray-400 mt-0.5">Coming soon</div>
+                    </div>
+                    <div className="text-sm text-gray-500 leading-snug">CAPM and PMP exam preparation platform with AI-generated practice questions and gamified progress tracking.</div>
+                  </div>
+                </div>
+              </div>
               {/* <a href="blog/index.html" className="text-gray-700 hover:text-amber-600 transition-colors duration-300">Blog</a> */}
               <a href="#consultation" className="text-gray-700 hover:text-amber-600 transition-colors duration-300">Consultation</a>
               <a href="#contact" className="text-gray-700 hover:text-amber-600 transition-colors duration-300">Contact</a>
@@ -419,7 +456,22 @@
             <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col space-y-2">
               <a href="#services" className="py-2 text-gray-700 hover:text-amber-600">Services</a>
               <a href="#tools" className="py-2 text-gray-700 hover:text-amber-600">Free Tools</a>
-              {/* <a href=\"blog/index.html\" className=\"py-2 text-gray-700 hover:text-amber-600\">Blog</a> */}
+              <div className="py-1 border-t border-gray-100">
+                <div className="text-xs text-gray-400 uppercase tracking-wide py-1">Our Ecosystem</div>
+                <a href="index.html" className="py-2 pl-3 text-gray-700 hover:text-amber-600 flex flex-col" style={{textDecoration:'none'}}>
+                  <span className="font-medium">SummCore</span>
+                  <span className="text-xs text-gray-400">summcore.com</span>
+                </a>
+                <a href="https://boost.summcore.com" target="_blank" rel="noopener" className="py-2 pl-3 text-gray-700 hover:text-amber-600 flex flex-col" style={{textDecoration:'none'}}>
+                  <span className="font-medium">SummCore Boost</span>
+                  <span className="text-xs text-gray-400">boost.summcore.com</span>
+                </a>
+                <div className="py-2 pl-3 flex flex-col opacity-40 cursor-not-allowed">
+                  <span className="font-medium text-gray-700">SummCore Pro</span>
+                  <span className="text-xs text-gray-400">Coming soon</span>
+                </div>
+              </div>
+              {/* <a href="blog/index.html" className="py-2 text-gray-700 hover:text-amber-600">Blog</a> */}
               <a href="#consultation" className="py-2 text-gray-700 hover:text-amber-600">Consultation</a>
               <a href="#contact" className="py-2 text-gray-700 hover:text-amber-600">Contact</a>
             </div>
@@ -498,7 +550,7 @@
                <div className="w-24 h-1 bg-amber-400 mx-auto rounded-full opacity-60"></div>
              </div>
           <p className="text-lg md:text-xl mb-8">SummCore helps SMEs and startups unlock new ideas to boost revenue and engagement.</p>
-             <a href="#consultation" className="text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-1" style={{background:'#fe2700'}}>Get a Free Consultation</a>
+             <a href="#consultation" className="text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-1" style={{background:'#fe2700'}}>Get in Touch</a>
         </div>
       </section>
     );
@@ -533,59 +585,51 @@
           <div className="absolute inset-0"></div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-amber-400">Turn Ideas Into Measurable Growth – Starting Today</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-amber-400">Turn Ideas Into Measurable Growth, Starting Today</h2>
               <div className="max-w-4xl mx-auto space-y-6 text-lg md:text-xl leading-relaxed">
-                <p>For years, we have been working behind the scenes, helping businesses grow and thrive, but always for someone else's bottom line. Now, it's time to put that expertise to work for you.</p>
-                <p>Our ideas deliver results. I've seen them increase profitability, streamline operations, and unlock opportunities others didn't even know existed. But to take our business to the next level, we need something every great business has: a portfolio of proven client success stories.</p>
-                <p className="text-amber-200 font-semibold">That's where you come in.</p>
+                <p>I have spent years working inside businesses, finding exactly where growth stalls and why. Not theory. Real decisions, real results, real problems solved.</p>
+                <p>SummCore is how I make that experience work directly for you. Start with the free tools. Take the Boost assessment when you want a real picture of where your business stands. Go further when you are ready.</p>
+                <p className="text-amber-200 font-semibold">The gap between where you are and where you could be is usually smaller than it looks. It just needs someone who knows where to look.</p>
               </div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-12 mb-12">
               <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-amber-500/20">
-                <h3 className="text-2xl font-bold mb-6 text-amber-400">The Opportunity</h3>
-                <p className="mb-6 text-lg">I'm offering <span className="text-amber-300 font-semibold">free innovation and growth consultancy</span> to the first five forward-thinking businesses who want to:</p>
-                <ul className="space-y-3 text-lg">
-                  <li className="flex items-start">
-                    <span className="text-amber-400 mr-3">•</span>
-                    Discover untapped revenue streams
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-amber-400 mr-3">•</span>
-                    Reduce waste and operational inefficiencies
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-amber-400 mr-3">•</span>
-                    Leverage creative, practical solutions to scale faster
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-amber-400 mr-3">•</span>
-                    Position themselves for long-term success
-                  </li>
-                </ul>
-                <p className="mt-6 text-lg">You'll get the same strategic insight and problem-solving expertise I've used to generate results in my career, <span className="text-amber-300 font-semibold">without paying a penny</span>. In return, I'll use your project as part of my portfolio to showcase what's possible when businesses embrace smart, innovative thinking.</p>
+                <h3 className="text-2xl font-bold mb-6 text-amber-400">How It Works</h3>
+                <p className="mb-4 text-lg">Start with the <span className="text-amber-300 font-semibold">free Boost assessment</span>. Twenty-six questions across five business pillars: Revenue, Marketing, Operations, Systems, and AI Readiness. Five minutes. You get a real health score that shows exactly where your business is performing and where it is losing ground.</p>
+                <p className="mb-4 text-lg">If you want the full picture, unlock the <span className="text-amber-300 font-semibold">premium report for $35</span>. Built entirely from your answers, it goes beyond scoring. It identifies the specific growth opportunities and ideas relevant to your business, things that are easy to miss when you are in the middle of running it.</p>
+                <p className="mb-4 text-lg">Every premium report includes a <span className="text-amber-300 font-semibold">personal 15-minute growth session</span> with me. We go through your results together, talk through the opportunities, and figure out your clearest next step.</p>
+                <p className="text-lg">For businesses that want to go further, whether that is a growth strategy, fixing operational drag, or finding new revenue angles.</p>
               </div>
 
               <div className="bg-slate-800/50 backdrop-blur-sm p-8 rounded-xl border border-amber-500/20">
-                <h3 className="text-2xl font-bold mb-6 text-amber-400">Why You Should Act Now</h3>
+                <h3 className="text-2xl font-bold mb-6 text-amber-400">What You Get</h3>
                 <ul className="space-y-4 text-lg">
                   <li className="flex items-start">
-                    <span className="text-amber-400 mr-3 text-xl">🔥</span>
-                    <span><span className="font-semibold text-amber-300">This offer is strictly limited to five businesses.</span></span>
+                    <span className="text-amber-400 mr-3">•</span>
+                    <span>A free health score across five pillars, no sign-up required to start</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-amber-400 mr-3 text-xl">🎯</span>
-                    <span>You'll get tailor-made strategies, not cookie-cutter advice.</span>
+                    <span className="text-amber-400 mr-3">•</span>
+                    <span>A <span className="text-amber-300 font-semibold">$35 premium report</span> with AI-powered analysis built from your specific answers, not a generic template</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-amber-400 mr-3 text-xl">📈</span>
-                    <span>My goal is to make you more profitable, more efficient, and more competitive.</span>
+                    <span className="text-amber-400 mr-3">•</span>
+                    <span>Growth opportunities and ideas surfaced from your data, not just what is wrong, but what is possible</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-amber-400 mr-3">•</span>
+                    <span>A <span className="text-amber-300 font-semibold">personal 15-minute session</span> included with every premium report</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-amber-400 mr-3">•</span>
+                    <span>Direct access to deeper consultancy if you want to move fast</span>
                   </li>
                 </ul>
                 <div className="mt-8 text-center">
-                  <p className="text-xl font-semibold mb-4 text-amber-200">Ready to be one of my five portfolio partners?</p>
-                  <a href="#consultation" className="inline-block text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 transform" style={{background:'#fe2700'}}>
-                    Start Transforming Your Business Today
+                  <p className="text-lg mb-4 text-gray-300">Most businesses know something is not working. Fewer know what to do about it. That is what this is for.</p>
+                  <a href="https://boost.summcore.com" className="inline-block text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 transform" style={{background:'#fe2700'}}>
+                    Start Your Free Assessment
                   </a>
                 </div>
               </div>
@@ -603,37 +647,38 @@
             <div className="bg-gradient-to-br from-slate-800 to-slate-700 p-6 rounded-lg border border-slate-600 hover:border-amber-500 transition-colors duration-300">
               <h3 className="text-xl font-semibold text-white mb-4">Business Health Check</h3>
               <p className="text-gray-300 mb-4">Comprehensive assessment tool to evaluate your business performance and identify growth opportunities.</p>
-              <a href="https://boost.summcore.com" className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-md font-semibold hover:from-amber-700 hover:to-amber-800 transition-all duration-300 shadow-md">Assessment</a>
+              <a href="https://boost.summcore.com" className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-md font-semibold hover:from-amber-700 hover:to-amber-800 transition-all duration-300 shadow-md">Start Free Check</a>
+              <p className="text-xs text-gray-500 mt-2">Free limited check available. Full reports on <a href="https://boost.summcore.com" className="text-amber-500 hover:underline">SummCore Boost</a>.</p>
             </div>
             {/* B */}
             <div className="bg-gradient-to-br from-slate-800 to-slate-700 p-6 rounded-lg border border-slate-600 hover:border-amber-500 transition-colors duration-300">
               <h3 className="text-xl font-semibold text-white mb-4">Business Plan Template</h3>
               <p className="text-gray-300 mb-4">Map customer touchpoints to improve experience and conversions.</p>
-              <a href="Customer Journey Mapper/index.html" className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-md font-semibold hover:from-amber-700 hover:to-amber-800 transition-all duration-300 shadow-md">Launch Tool</a>
+              <a href="Customer%20Journey%20Mapper/index.html" className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-md font-semibold hover:from-amber-700 hover:to-amber-800 transition-all duration-300 shadow-md">Launch Tool</a>
             </div>
             {/* C */}
             <div className="bg-gradient-to-br from-slate-800 to-slate-700 p-6 rounded-lg border border-slate-600 hover:border-amber-500 transition-colors duration-300">
               <h3 className="text-xl font-semibold text-white mb-4">Business Strategy Generator</h3>
               <p className="text-gray-300 mb-4">Generate smart strategies tailored to your business objectives.</p>
-              <a href="Business Strategy Generator/smart-business-strategy-generator.html" className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-md font-semibold hover:from-amber-700 hover:to-amber-800 transition-all duration-300 shadow-md">Launch Tool</a>
+              <a href="Business%20Strategy%20Generator/smart-business-strategy-generator.html" className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-md font-semibold hover:from-amber-700 hover:to-amber-800 transition-all duration-300 shadow-md">Launch Tool</a>
             </div>
             {/* D */}
             <div className="bg-gradient-to-br from-slate-800 to-slate-700 p-6 rounded-lg border border-slate-600 hover:border-amber-500 transition-colors duration-300">
               <h3 className="text-xl font-semibold text-white mb-4">Free Financial Health Checker</h3>
               <p className="text-gray-300 mb-4">Analyze your financial health and identify areas for improvement.</p>
-              <a href="Free Financial Health Checker/financial-calculator.html" className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-md font-semibold hover:from-amber-700 hover:to-amber-800 transition-all duration-300 shadow-md">Launch Tool</a>
+              <a href="Free%20Financial%20Health%20Checker/financial-calculator.html" className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-md font-semibold hover:from-amber-700 hover:to-amber-800 transition-all duration-300 shadow-md">Launch Tool</a>
             </div>
             {/* E */}
             <div className="bg-gradient-to-br from-slate-800 to-slate-700 p-6 rounded-lg border border-slate-600 hover:border-amber-500 transition-colors duration-300">
               <h3 className="text-xl font-semibold text-white mb-4">Invoicing & Quotation</h3>
               <p className="text-gray-300 mb-4">Create professional invoices and quotations quickly.</p>
-              <a href="Invoicing & Quotation/index.html" className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-md font-semibold hover:from-amber-700 hover:to-amber-800 transition-all duration-300 shadow-md">Launch Tool</a>
+              <a href="Invoicing%20%26%20Quotation/index.html" className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-md font-semibold hover:from-amber-700 hover:to-amber-800 transition-all duration-300 shadow-md">Launch Tool</a>
             </div>
             {/* F */}
             <div className="tool-card bg-gradient-to-br from-slate-800 to-slate-700 p-6 rounded-lg border border-slate-600 hover:border-amber-500 transition-colors duration-300">
               <h3 className="text-xl font-semibold text-white mb-4">Revenue Checker</h3>
               <p className="text-gray-300 mb-4">Estimate potential revenue from new initiatives with our easy-to-use tool.</p>
-              <a href="Revenue Calculator/index.html" className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-md font-semibold hover:from-amber-700 hover:to-amber-800 transition-all duration-300 shadow-md">Launch Tool</a>
+              <a href="Revenue%20Calculator/index.html" className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-6 py-2 rounded-md font-semibold hover:from-amber-700 hover:to-amber-800 transition-all duration-300 shadow-md">Launch Tool</a>
             </div>
           </div>
         </div>
@@ -664,8 +709,8 @@
             <div className="md:justify-self-end text-left">
               <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
               <p className="text-gray-400">Email:</p>
-              <p className="text-gray-400">info@summcore.com</p>
-              <p className="text-gray-400">support@summcore.com</p>
+              <p><a href="mailto:info@summcore.com" className="text-gray-400 footer-link">info@summcore.com</a></p>
+              <p><a href="mailto:support@summcore.com" className="text-gray-400 footer-link">support@summcore.com</a></p>
               <p className="text-gray-400">DM us through Social Media</p>
             </div>
             
@@ -701,11 +746,11 @@
           <div className="absolute top-16 left-1/3 w-6 h-6 bg-amber-400 cog opacity-80" style={{animation: 'cogRotateClockwise 10s linear infinite'}}></div>
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h2 className="text-3xl font-bold mb-4">Ready to Innovate?</h2>
-          <p className="text-lg mb-8">Book a free consultation with our experts to explore new opportunities for your business.</p>
+          <h2 className="text-3xl font-bold mb-4">Want to Go Further?</h2>
+          <p className="text-lg mb-8">Start with the free <a href="https://boost.summcore.com" className="text-amber-400 hover:underline font-semibold">Boost assessment</a>, or get in touch directly if you want to talk strategy, fix something specific, or move fast.</p>
           <form action="send.php" method="POST" className="max-w-md mx-auto space-y-3 text-left" onSubmit={normalizeWebsiteUrlHome}>
             <input type="text" id="home_business_name" name="business_name" placeholder="Business Name" required className="w-full p-3 rounded-md text-gray-800" />
-            <input type="url" id="home_website" name="website" placeholder="https://www.yourwebsite.com (Optional)" className="w-full p-3 rounded-md text-gray-800" />
+            <input type="text" id="home_website" name="website" placeholder="www.yourwebsite.com (Optional)" className="w-full p-3 rounded-md text-gray-800" />
             <input type="text" id="home_your_name" name="your_name" placeholder="Your Name" required className="w-full p-3 rounded-md text-gray-800" />
             <input type="tel" id="home_phone" name="phone" placeholder="Phone Number (Optional)" className="w-full p-3 rounded-md text-gray-800" />
             <input type="email" id="home_email" name="email" placeholder="Email" required className="w-full p-3 rounded-md text-gray-800" />
@@ -719,9 +764,9 @@
     const FAQ = () => {
       const faqs = [
         { q: "What is SummCore?", a: "SummCore is an innovation consulting firm that helps SMEs and startups grow through strategy frameworks, free business tools, and one-to-one expert consultation." },
-        { q: "Are the business tools free to use?", a: "Yes. All SummCore tools are completely free with no sign-up required. This includes the Business Health Check, Strategy Generator, Financial Health Checker, Revenue Forecasting Tool, Invoicing & Quotation App, and Business Plan Templates." },
+        { q: "Are the business tools free to use?", a: "Most SummCore tools are completely free with no sign-up required, including the Strategy Generator, Financial Health Checker, Revenue Forecasting Tool, Invoicing and Quotation App, and Business Plan Templates. The Business Health Check offers a free limited assessment via SummCore Boost, with full scored reports available on a paid plan." },
         { q: "Who is SummCore for?", a: "SummCore is designed for small and medium-sized enterprises (SMEs) and startups looking for practical growth strategies, business planning tools, and expert innovation consulting." },
-        { q: "How do I book a free consultation?", a: "Scroll to the consultation section on our homepage and fill in your business name, contact details, and a brief description of your needs. A SummCore consultant will get back to you promptly." },
+        { q: "How do I work with SummCore?", a: "Start with the free tools or take the Business Health Check on SummCore Boost. When you are ready to go further, use the contact form to get in touch and a SummCore consultant will follow up with you." },
         { q: "What services does SummCore offer?", a: "SummCore offers innovation consulting, growth strategy development, process improvement, product development guidance, and a suite of free business tools covering health checks, strategy generation, financial analysis, revenue forecasting, and invoicing." }
       ];
       const [open, setOpen] = React.useState(null);
@@ -737,7 +782,7 @@
                     className="w-full text-left px-6 py-4 flex justify-between items-center text-white font-semibold hover:text-amber-400 transition-colors"
                   >
                     <span>{item.q}</span>
-                    <span className="text-xl ml-4">{open === i ? '\u2212' : '+'}</span>
+                    <span className="text-xl ml-4" style={{transform: open === i ? 'rotate(45deg)' : 'none', transition: 'transform 0.2s'}}>+</span>
                   </button>
                   {open === i && (
                     <div className="px-6 pb-4 text-gray-300">{item.a}</div>

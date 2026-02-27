@@ -2,10 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; connect-src 'self' https://api.emailjs.com; frame-src 'none'; object-src 'none'; base-uri 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; connect-src 'self' https://api.emailjs.com https://www.google-analytics.com https://analytics.google.com; frame-src 'none'; object-src 'none'; base-uri 'self';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QNET28HLLR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QNET28HLLR');
+  </script>
   <title>About SummCore | Innovation Consulting for SMEs and Startups</title>
   <meta name="description" content="SummCore is an innovation consulting firm helping SMEs and startups grow through free business tools, strategic frameworks, and expert consultation. Learn about our mission, products, and approach.">
   <link rel="canonical" href="https://summcore.com/about.html">
@@ -55,6 +63,8 @@
     a { color: #2dd4bf; text-decoration: none; }
     a:hover { text-decoration: underline; }
     .accent { color: #fe2700; }
+    .eco-link { color: inherit !important; }
+    .eco-link:hover { text-decoration: none !important; }
   </style>
 </head>
 <body>
@@ -65,9 +75,38 @@
         <img src="Logo/SC25.png" alt="SummCore Logo" width="40" height="40" style="object-fit:contain;">
         <span class="text-white font-bold text-xl">SummCore</span>
       </a>
-      <div class="flex gap-6 text-sm">
+      <div class="flex gap-6 text-sm items-center">
         <a href="index.html" class="text-gray-400 hover:text-white transition-colors">Home</a>
         <a href="index.html#tools" class="text-gray-400 hover:text-white transition-colors">Tools</a>
+        <!-- Our Ecosystem dropdown -->
+        <div class="relative group">
+          <button class="text-gray-400 hover:text-white transition-colors flex items-center gap-1 bg-transparent border-0 cursor-pointer text-sm p-0 font-normal">
+            Our Ecosystem <span class="text-xs">&#9660;</span>
+          </button>
+          <div class="absolute top-full right-0 mt-3 w-[500px] bg-slate-800 border border-slate-700 rounded-xl shadow-2xl p-3 flex flex-col gap-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+            <a href="index.html" class="eco-link flex gap-4 p-3 rounded-lg hover:bg-slate-700 transition-colors">
+              <div class="w-36 shrink-0">
+                <div class="text-white font-semibold text-sm">SummCore</div>
+                <div class="text-xs text-gray-500 mt-0.5">summcore.com</div>
+              </div>
+              <div class="text-sm text-gray-400 leading-snug">Free business tools, consulting services, and the SummCore blog with growth strategies for SMEs and startups.</div>
+            </a>
+            <a href="https://boost.summcore.com" target="_blank" rel="noopener" class="eco-link flex gap-4 p-3 rounded-lg hover:bg-slate-700 transition-colors">
+              <div class="w-36 shrink-0">
+                <div class="text-white font-semibold text-sm">SummCore Boost</div>
+                <div class="text-xs text-gray-500 mt-0.5">boost.summcore.com</div>
+              </div>
+              <div class="text-sm text-gray-400 leading-snug">AI-powered business health assessments across five pillars with scored reports and recommendations.</div>
+            </a>
+            <div class="flex gap-4 p-3 rounded-lg opacity-40 cursor-not-allowed select-none">
+              <div class="w-36 shrink-0">
+                <div class="text-white font-semibold text-sm">SummCore Pro</div>
+                <div class="text-xs text-gray-500 mt-0.5">Coming soon</div>
+              </div>
+              <div class="text-sm text-gray-400 leading-snug">CAPM and PMP exam preparation platform with AI-generated practice questions and gamified progress tracking.</div>
+            </div>
+          </div>
+        </div>
         <a href="blog/index.html" class="text-gray-400 hover:text-white transition-colors">Blog</a>
         <a href="index.html#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a>
       </div>
@@ -138,26 +177,15 @@
           </div>
           <p class="text-gray-400 md:w-3/4">AI-powered business health assessments. 26 questions across five pillars (Revenue, Marketing, Operations, Systems, AI Readiness) with scored reports and recommendations.</p>
         </div>
-        <div class="bg-slate-800 rounded-lg p-6 border border-slate-700 flex flex-col md:flex-row md:items-center gap-4">
-          <div class="md:w-1/4">
+        <div class="bg-slate-800 rounded-lg p-6 border border-slate-700 flex flex-col md:flex-row md:items-center gap-4 relative overflow-hidden">
+          <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+            <div style="background:transparent;transform:rotate(-15deg);padding:0.4rem 3rem;font-size:1.4rem;font-weight:900;letter-spacing:0.18em;color:rgb(217,119,6);text-transform:uppercase;border:4px solid rgb(217,119,6);border-radius:0.5rem;">Coming Soon</div>
+          </div>
+          <div class="md:w-1/4 opacity-50">
             <span class="text-white font-semibold text-lg">SummCore Pro</span>
-            <p class="text-sm text-gray-500">scpro.app</p>
-          </div>
-          <p class="text-gray-400 md:w-3/4">CAPM and PMP exam preparation platform. Upload real project documents and learn from your own work with AI-generated practice questions, study modes, and gamified progress tracking.</p>
-        </div>
-        <div class="bg-slate-800 rounded-lg p-6 border border-slate-700 flex flex-col md:flex-row md:items-center gap-4">
-          <div class="md:w-1/4">
-            <span class="text-white font-semibold text-lg">SummCore Signal</span>
             <p class="text-sm text-gray-500">Coming soon</p>
           </div>
-          <p class="text-gray-400 md:w-3/4">Business intelligence and marketing audit tool. Diagnose marketing weaknesses and automatically generate professional marketing materials with AI.</p>
-        </div>
-        <div class="bg-slate-800 rounded-lg p-6 border border-slate-700 flex flex-col md:flex-row md:items-center gap-4">
-          <div class="md:w-1/4">
-            <span class="text-white font-semibold text-lg">SummCore Studio</span>
-            <p class="text-sm text-gray-500">Coming soon</p>
-          </div>
-          <p class="text-gray-400 md:w-3/4">Creative content platform for building marketing reels and short-form videos. Features a smart website scanner that turns any website into a ready-to-edit promotional video.</p>
+          <p class="text-gray-400 md:w-3/4 opacity-50">CAPM and PMP exam preparation platform. Upload real project documents and learn from your own work with AI-generated practice questions, study modes, and gamified progress tracking.</p>
         </div>
       </div>
     </div>
@@ -191,7 +219,7 @@
       <p class="text-gray-300 mb-6">Explore our free tools or book a consultation to get started.</p>
       <div class="flex flex-wrap justify-center gap-4">
         <a href="index.html#tools" class="inline-block text-white px-6 py-3 rounded-md font-semibold hover:opacity-90 transition-opacity" style="background:#fe2700;">Explore Free Tools</a>
-        <a href="index.html#consultation" class="inline-block bg-slate-700 text-white px-6 py-3 rounded-md font-semibold hover:bg-slate-600 transition-colors border border-slate-600">Book Free Consultation</a>
+        <a href="index.html#consultation" class="inline-block bg-slate-700 text-white px-6 py-3 rounded-md font-semibold hover:bg-slate-600 transition-colors border border-slate-600">Get in Touch</a>
       </div>
     </div>
   </section>
@@ -216,8 +244,8 @@
         </div>
         <div class="md:text-right">
           <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
-          <p class="text-gray-400">info@summcore.com</p>
-          <p class="text-gray-400">support@summcore.com</p>
+          <p><a href="mailto:info@summcore.com" class="text-gray-400 hover:text-white">info@summcore.com</a></p>
+          <p><a href="mailto:support@summcore.com" class="text-gray-400 hover:text-white">support@summcore.com</a></p>
           <div class="flex md:justify-end gap-4 mt-4">
             <a href="https://x.com/SummCoreIdeas" target="_blank" rel="noopener" aria-label="SummCore on X">
               <img src="Logo/Social Media/XAI.svg" alt="X" width="28" height="28" style="object-fit:contain;" loading="lazy">

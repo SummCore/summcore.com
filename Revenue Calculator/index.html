@@ -2,10 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; connect-src 'self' https://api.emailjs.com; frame-src 'none'; object-src 'none'; base-uri 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; connect-src 'self' https://api.emailjs.com https://www.google-analytics.com https://analytics.google.com; frame-src 'none'; object-src 'none'; base-uri 'self';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="DENY">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QNET28HLLR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QNET28HLLR');
+  </script>
     <title>Revenue Forecasting Tool | Multi-Sector Sales & Profit Projections</title>
     <meta name="description" content="Forecast revenue, costs, profit, and break-even across multiple business models and sectors. Free revenue forecasting tool by SummCore with export to PDF and scenario comparison.">
     <link rel="canonical" href="https://summcore.com/Revenue%20Calculator/index.html">
@@ -148,8 +156,8 @@
 </head>
 <body class="min-h-screen" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);">
     <a href="../index.html#tools" aria-label="Free Tools" style="position:fixed;top:16px;left:16px;z-index:1000;display:flex;flex-direction:column;align-items:center;text-decoration:none;line-height:1;gap:0;">
-      <img src="../Logo/SC25.png" alt="SummCore Free Tools home" loading="lazy" style="width:80px;height:80px;object-fit:contain;margin:0;filter:drop-shadow(0 0 6px rgba(255,255,255,0.9)) drop-shadow(0 0 12px rgba(255,255,255,0.6));" />
-      <div style="font-size:16px;margin-top:-12px;color:white;font-weight:700;line-height:1;">Free Tools</div>
+      <img src="../Logo/SC25_white.png" alt="SummCore Free Tools home" loading="lazy" style="width:80px;height:80px;object-fit:contain;margin:0;filter:drop-shadow(0 0 6px rgba(255,255,255,0.9)) drop-shadow(0 0 12px rgba(255,255,255,0.6));" />
+      <div style="font-size:16px;margin-top:-12px;color:white;font-weight:700;line-height:1;">Home</div>
     </a>
     <div class="container mx-auto px-4 py-8">
         
@@ -688,6 +696,7 @@
         }
 
         function calculateForecast() {
+            if (!window._rcUsed && typeof gtag !== 'undefined') { window._rcUsed = true; gtag('event', 'tool_used', { tool_name: 'Revenue Calculator', action: 'calculate' }); }
             const dropdownValue = document.getElementById('businessModel').value;
             const mappedKey = sectorKeyMap[dropdownValue];
             const months = parseInt(document.getElementById('months').value) || 12;
