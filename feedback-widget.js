@@ -17,11 +17,16 @@
     '.scfw-body{padding:20px}',
     '.scfw-subtitle{color:#333;font-size:15px;font-weight:600;margin:0 0 18px}',
     '.scfw-label{font-size:14px;font-weight:600;color:#333;margin-bottom:8px;display:block}',
+    '.scfw-opt{font-size:12px;color:#888;font-weight:400;margin-left:4px}',
     '.scfw-group{margin-bottom:18px}',
     '.scfw-emojis{display:flex;gap:8px;margin-top:4px}',
     '.scfw-emoji{font-size:32px;cursor:pointer;filter:grayscale(100%) opacity(0.4);transition:all .15s;border:none;background:none;padding:4px;border-radius:8px}',
     '.scfw-emoji:hover{filter:grayscale(0) opacity(0.8);transform:scale(1.15)}',
     '.scfw-emoji.active{filter:grayscale(0) opacity(1);transform:scale(1.2);background:rgba(254,39,0,0.08)}',
+    '.scfw-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}',
+    '.scfw-btn-opt{border:2px solid #ddd;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;background:#fff;color:#555;transition:all .15s}',
+    '.scfw-btn-opt:hover{border-color:#fe2700;color:#fe2700}',
+    '.scfw-btn-opt.active{border-color:#fe2700;background:#fe2700;color:#fff}',
     '.scfw-textarea{width:100%;min-height:70px;border:1px solid #ddd;border-radius:8px;padding:10px;font-size:14px;font-family:inherit;resize:vertical;box-sizing:border-box;outline:none}',
     '.scfw-textarea:focus{border-color:#fe2700}',
     '.scfw-input{width:100%;border:1px solid #ddd;border-radius:8px;padding:10px;font-size:14px;font-family:inherit;box-sizing:border-box;outline:none}',
@@ -51,7 +56,7 @@
   ].join('\n');
   document.head.appendChild(style);
 
-  // Build floating button with text above
+  // Build floating button
   var floatWrap = document.createElement('div');
   floatWrap.className = 'scfw-float-wrap';
   floatWrap.innerHTML = '<div class="scfw-float-top">We want to hear what <strong style="text-transform:uppercase;text-decoration:underline">you</strong> have to say</div><div class="scfw-hint">&#9650;</div><button class="scfw-float" aria-label="Give feedback"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg> Feedback</button><div class="scfw-float-bottom">What\'s working well &amp; what needs improvement</div>';
@@ -82,6 +87,15 @@
     '    </div>',
     '',
     '    <div class="scfw-group">',
+    '      <label class="scfw-label">Did you find what you were looking for?<span class="scfw-req">*</span></label>',
+    '      <div class="scfw-btns" id="scfw-found-btns">',
+    '        <button class="scfw-btn-opt" data-val="Yes">Yes</button>',
+    '        <button class="scfw-btn-opt" data-val="Partly">Partly</button>',
+    '        <button class="scfw-btn-opt" data-val="No">No</button>',
+    '      </div>',
+    '    </div>',
+    '',
+    '    <div class="scfw-group">',
     '      <label class="scfw-label">What\'s working well?<span class="scfw-req">*</span></label>',
     '      <textarea class="scfw-textarea" id="scfw-text-good" placeholder="Tell us what you like..."></textarea>',
     '    </div>',
@@ -92,7 +106,16 @@
     '    </div>',
     '',
     '    <div class="scfw-group">',
-    '      <label class="scfw-label">Your email<span class="scfw-req">*</span></label>',
+    '      <label class="scfw-label">Would you recommend SummCore?<span class="scfw-req">*</span></label>',
+    '      <div class="scfw-btns" id="scfw-recommend-btns">',
+    '        <button class="scfw-btn-opt" data-val="Yes">Yes</button>',
+    '        <button class="scfw-btn-opt" data-val="Maybe">Maybe</button>',
+    '        <button class="scfw-btn-opt" data-val="No">No</button>',
+    '      </div>',
+    '    </div>',
+    '',
+    '    <div class="scfw-group">',
+    '      <label class="scfw-label">Your email<span class="scfw-opt">(optional)</span></label>',
     '      <input type="email" class="scfw-input" id="scfw-email" placeholder="you@company.com">',
     '    </div>',
     '',
@@ -111,10 +134,14 @@
 
   // State
   var rating = 0;
+  var found = '';
+  var recommend = '';
 
   // Elements
   var closeBtn = overlay.querySelector('.scfw-close');
   var emojis = overlay.querySelectorAll('.scfw-emoji');
+  var foundBtns = overlay.querySelectorAll('#scfw-found-btns .scfw-btn-opt');
+  var recommendBtns = overlay.querySelectorAll('#scfw-recommend-btns .scfw-btn-opt');
   var textGoodEl = overlay.querySelector('#scfw-text-good');
   var textImproveEl = overlay.querySelector('#scfw-text-improve');
   var emailEl = overlay.querySelector('#scfw-email');
@@ -125,8 +152,10 @@
   function checkValid() {
     var goodOk = textGoodEl.value.trim().length > 0;
     var improveOk = textImproveEl.value.trim().length > 0;
-    var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim());
-    submitBtn.disabled = !(rating > 0 && goodOk && improveOk && emailOk);
+    // Email is optional — valid if empty OR properly formatted
+    var emailVal = emailEl.value.trim();
+    var emailOk = emailVal === '' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
+    submitBtn.disabled = !(rating > 0 && found && recommend && goodOk && improveOk && emailOk);
   }
 
   // Emoji clicks
@@ -134,6 +163,26 @@
     btn.addEventListener('click', function() {
       rating = parseInt(btn.getAttribute('data-val'));
       emojis.forEach(function(e) { e.classList.remove('active'); });
+      btn.classList.add('active');
+      checkValid();
+    });
+  });
+
+  // Found buttons
+  foundBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      found = btn.getAttribute('data-val');
+      foundBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      checkValid();
+    });
+  });
+
+  // Recommend buttons
+  recommendBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      recommend = btn.getAttribute('data-val');
+      recommendBtns.forEach(function(b) { b.classList.remove('active'); });
       btn.classList.add('active');
       checkValid();
     });
@@ -157,21 +206,24 @@
     if (submitBtn.disabled) return;
 
     var ratingLabels = ['', 'Poor', 'Fair', 'OK', 'Good', 'Excellent'];
+    var emailVal = emailEl.value.trim();
     var summary = [
       'SUMMCORE QUICK FEEDBACK',
       '=======================',
       '',
       'Rating: ' + rating + '/5 (' + ratingLabels[rating] + ')',
+      'Found what they needed: ' + found,
       'Working well: ' + textGoodEl.value.trim(),
       'Needs improvement: ' + textImproveEl.value.trim(),
-      'Email: ' + emailEl.value.trim(),
+      'Would recommend: ' + recommend,
+      'Email: ' + (emailVal || 'Not provided'),
       'Page: ' + window.location.pathname
     ].join('\n');
 
     var body = new FormData();
     body.append('business_name', 'Quick Feedback Widget');
-    body.append('your_name', emailEl.value.trim());
-    body.append('email', emailEl.value.trim());
+    body.append('your_name', emailVal || 'Anonymous');
+    body.append('email', emailVal || 'feedback@summcore.com');
     body.append('website', window.location.pathname);
     body.append('needs', summary);
 
@@ -181,7 +233,7 @@
     fetch('/send.php', { method: 'POST', body: body }).then(function(res) {
       if (!res.ok) throw new Error(res.status);
       if (typeof gtag !== 'undefined') {
-        gtag('event', 'quick_feedback', { rating: rating, page: window.location.pathname });
+        gtag('event', 'quick_feedback', { rating: rating, found: found, recommend: recommend, page: window.location.pathname });
       }
       formEl.style.display = 'none';
       thanksEl.style.display = 'block';
@@ -197,9 +249,12 @@
   // Public open function
   window.openFeedbackWidget = function() {
     if (submitted) {
-      // Reset for another submission
       rating = 0;
+      found = '';
+      recommend = '';
       emojis.forEach(function(e) { e.classList.remove('active'); });
+      foundBtns.forEach(function(b) { b.classList.remove('active'); });
+      recommendBtns.forEach(function(b) { b.classList.remove('active'); });
       textGoodEl.value = '';
       textImproveEl.value = '';
       emailEl.value = '';
