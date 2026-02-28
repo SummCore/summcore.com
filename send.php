@@ -51,12 +51,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Determine submission type from business_name field
     $isWidget = ($businessName === 'Quick Feedback Widget');
     $isSurvey = ($businessName === 'Feedback Survey');
-    $isFeedback = $isWidget || $isSurvey;
+    $isDiscovery = ($businessName === 'Customer Discovery Survey');
+    $isFeedback = $isWidget || $isSurvey || $isDiscovery;
 
     if ($isWidget) {
         $subject = "[SummCore] Quick Feedback - " . mb_substr($yourName, 0, 50);
     } elseif ($isSurvey) {
         $subject = "[SummCore] Feedback Survey - " . mb_substr($yourName, 0, 50);
+    } elseif ($isDiscovery) {
+        $subject = "[SummCore] Customer Discovery - " . mb_substr($yourName, 0, 50);
     } else {
         $subject = "[SummCore] New Consultation Request - " . mb_substr($yourName, 0, 50);
     }
