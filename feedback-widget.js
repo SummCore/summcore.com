@@ -127,6 +127,7 @@
     '    <div style="font-size:40px;margin-bottom:12px">&#10003;</div>',
     '    <h3>Thank you!</h3>',
     '    <p>Your feedback helps us build a better SummCore.</p>',
+    '    <p style="margin-top:14px;font-size:13px;color:#888">Got 3 more minutes? <a href="/discovery.html" style="color:#fe2700;font-weight:600;text-decoration:none;">Tell us what you really need &rarr;</a></p>',
     '  </div>',
     '</div>'
   ].join('\n');
