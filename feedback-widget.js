@@ -15,8 +15,7 @@
     '.scfw-header h3{margin:0;font-size:18px;font-weight:700}',
     '.scfw-close{background:none;border:none;color:#fff;font-size:22px;cursor:pointer;padding:0 4px;line-height:1}',
     '.scfw-body{padding:20px}',
-    '.scfw-subtitle{color:#333;font-size:15px;font-weight:600;margin:0 0 4px}',
-    '.scfw-subtitle2{color:#888;font-size:13px;margin:0 0 18px;font-style:italic}',
+    '.scfw-subtitle{color:#333;font-size:15px;font-weight:600;margin:0 0 18px}',
     '.scfw-label{font-size:14px;font-weight:600;color:#333;margin-bottom:8px;display:block}',
     '.scfw-group{margin-bottom:18px}',
     '.scfw-emojis{display:flex;gap:8px;margin-top:4px}',
@@ -55,7 +54,7 @@
   // Build floating button with text above
   var floatWrap = document.createElement('div');
   floatWrap.className = 'scfw-float-wrap';
-  floatWrap.innerHTML = '<div class="scfw-float-top">Just used a tool? We want to hear it.</div><div class="scfw-hint">&#9650;</div><button class="scfw-float" aria-label="Give feedback"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg> Feedback</button><div class="scfw-float-bottom">The good, the bad, and the &ldquo;why doesn\'t it do this?&rdquo;</div>';
+  floatWrap.innerHTML = '<div class="scfw-float-top">We want to hear what &#x1F449; you have to say</div><div class="scfw-hint">&#9650;</div><button class="scfw-float" aria-label="Give feedback"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg> Feedback</button><div class="scfw-float-bottom">What\'s working well &amp; what needs improvement</div>';
   document.body.appendChild(floatWrap);
   var floatBtn = floatWrap.querySelector('.scfw-float');
 
@@ -69,8 +68,7 @@
     '    <button class="scfw-close" aria-label="Close">&times;</button>',
     '  </div>',
     '  <div class="scfw-body" id="scfw-form">',
-    '    <p class="scfw-subtitle">Just used a tool? We want to hear it.</p>',
-    '    <p class="scfw-subtitle2">The good, the bad, and the &ldquo;why doesn\'t it do <em>this</em>?&rdquo;</p>',
+    '    <p class="scfw-subtitle">We want to hear what &#x1F449; you have to say</p>',
     '',
     '    <div class="scfw-group">',
     '      <label class="scfw-label">How would you rate SummCore?<span class="scfw-req">*</span></label>',
@@ -84,8 +82,13 @@
     '    </div>',
     '',
     '    <div class="scfw-group">',
-    '      <label class="scfw-label">What\'s working well? What needs improvement?<span class="scfw-req">*</span></label>',
-    '      <textarea class="scfw-textarea" id="scfw-text" placeholder="Tell us what you think..."></textarea>',
+    '      <label class="scfw-label">What\'s working well?<span class="scfw-req">*</span></label>',
+    '      <textarea class="scfw-textarea" id="scfw-text-good" placeholder="Tell us what you like..."></textarea>',
+    '    </div>',
+    '',
+    '    <div class="scfw-group">',
+    '      <label class="scfw-label">What needs improvement?<span class="scfw-req">*</span></label>',
+    '      <textarea class="scfw-textarea" id="scfw-text-improve" placeholder="Tell us what could be better..."></textarea>',
     '    </div>',
     '',
     '    <div class="scfw-group">',
@@ -112,16 +115,18 @@
   // Elements
   var closeBtn = overlay.querySelector('.scfw-close');
   var emojis = overlay.querySelectorAll('.scfw-emoji');
-  var textEl = overlay.querySelector('#scfw-text');
+  var textGoodEl = overlay.querySelector('#scfw-text-good');
+  var textImproveEl = overlay.querySelector('#scfw-text-improve');
   var emailEl = overlay.querySelector('#scfw-email');
   var submitBtn = overlay.querySelector('#scfw-btn');
   var formEl = overlay.querySelector('#scfw-form');
   var thanksEl = overlay.querySelector('#scfw-thanks');
 
   function checkValid() {
-    var textOk = textEl.value.trim().length > 0;
+    var goodOk = textGoodEl.value.trim().length > 0;
+    var improveOk = textImproveEl.value.trim().length > 0;
     var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim());
-    submitBtn.disabled = !(rating > 0 && textOk && emailOk);
+    submitBtn.disabled = !(rating > 0 && goodOk && improveOk && emailOk);
   }
 
   // Emoji clicks
@@ -134,7 +139,8 @@
     });
   });
 
-  textEl.addEventListener('input', checkValid);
+  textGoodEl.addEventListener('input', checkValid);
+  textImproveEl.addEventListener('input', checkValid);
   emailEl.addEventListener('input', checkValid);
 
   // Close
@@ -156,7 +162,8 @@
       '=======================',
       '',
       'Rating: ' + rating + '/5 (' + ratingLabels[rating] + ')',
-      'Feedback: ' + textEl.value.trim(),
+      'Working well: ' + textGoodEl.value.trim(),
+      'Needs improvement: ' + textImproveEl.value.trim(),
       'Email: ' + emailEl.value.trim(),
       'Page: ' + window.location.pathname
     ].join('\n');
@@ -187,7 +194,8 @@
       // Reset for another submission
       rating = 0;
       emojis.forEach(function(e) { e.classList.remove('active'); });
-      textEl.value = '';
+      textGoodEl.value = '';
+      textImproveEl.value = '';
       emailEl.value = '';
       submitBtn.disabled = true;
       formEl.style.display = 'block';
