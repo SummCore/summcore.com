@@ -249,14 +249,20 @@
       body.append('email', answers.email || 'feedback@summcore.com');
       body.append('website', '');
       body.append('needs', summary);
-      fetch('send.php', { method: 'POST', body }).catch(() => {});
+      const submitBtn = document.querySelector('button[onclick="submitSurvey()"]');
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
 
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'feedback_submitted', { rating: answers.q2 });
-      }
-
-      document.getElementById('survey').style.display = 'none';
-      document.getElementById('thankYou').style.display = 'block';
+      fetch('send.php', { method: 'POST', body }).then(res => {
+        if (!res.ok) throw new Error(res.status);
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'feedback_submitted', { rating: answers.q2 });
+        }
+        document.getElementById('survey').style.display = 'none';
+        document.getElementById('thankYou').style.display = 'block';
+      }).catch(() => {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Submit Feedback'; }
+        alert('Something went wrong. Please try again or email info@summcore.com');
+      });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>

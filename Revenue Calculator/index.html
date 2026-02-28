@@ -466,6 +466,11 @@
         catch (e) { console.warn('Corrupted scenario data, resetting'); savedScenarios = {}; }
         let currentSensitivity = { price: 100, volume: 100 };
 
+        function getCurrencySymbol() {
+            const symbols = { USD: '$', EUR: '€', GBP: '£', JPY: '¥', AUD: '$' };
+            return symbols[document.getElementById('currencySelect').value] || '£';
+        }
+
         // Business Sector Configurations — Part 1 of 2
         const sectorConfig = {
           "Agency / Consulting": {
@@ -769,7 +774,7 @@
             else { statusText = '🔴 At Risk'; statusColor = '#fef2f2'; }
 
             // Update Health UI
-            document.getElementById('healthCashFlow').textContent = '£' + Math.round(cashFlow).toLocaleString();
+            document.getElementById('healthCashFlow').textContent = getCurrencySymbol() + Math.round(cashFlow).toLocaleString();
             document.getElementById('healthBreakEven').textContent = breakEvenUnits != null ? `${breakEvenUnits} units/month` : 'N/A';
             document.getElementById('healthProfitMargin').textContent = `${profitMarginPct.toFixed(1)}%`;
             document.getElementById('healthRunway').textContent = runwayMonths != null ? `${runwayMonths} months` : 'N/A';
@@ -818,11 +823,11 @@
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
                     <div class="bg-blue-50 p-4 rounded-lg ${cssClass}">
                         <h3 class="text-sm text-blue-700 font-medium">Total Revenue</h3>
-                        <p class="text-2xl font-bold text-blue-900">£${totalRevenue.toFixed(2).toLocaleString()}</p>
+                        <p class="text-2xl font-bold text-blue-900">${sym}${totalRevenue.toFixed(2).toLocaleString()}</p>
                     </div>
                     <div class="bg-${totalProfit >= 0 ? 'green' : 'red'}-50 p-4 rounded-lg ${cssClass}">
                         <h3 class="text-sm text-${totalProfit >= 0 ? 'green' : 'red'}-700 font-medium">Total Profit</h3>
-                        <p class="text-2xl font-bold text-${totalProfit >= 0 ? 'green' : 'red'}-900">£${totalProfit.toFixed(2).toLocaleString()}</p>
+                        <p class="text-2xl font-bold text-${totalProfit >= 0 ? 'green' : 'red'}-900">${sym}${totalProfit.toFixed(2).toLocaleString()}</p>
                     </div>
                     <div class="bg-orange-50 p-4 rounded-lg ${cssClass}">
                         <h3 class="text-sm text-orange-700 font-medium">Break-even</h3>
@@ -857,8 +862,8 @@
                         responsive: true,
                         maintainAspectRatio: false,
                         interaction: { intersect: false, mode: 'index' },
-                        scales: { y: { beginAtZero: true, ticks: { callback: (v) => '£' + v.toLocaleString() }, grid: { color: (ctx) => ctx.tick.value === 0 ? '#374151' : '#e5e7eb' } } },
-                        plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: (c) => c.dataset.label + ': £' + c.parsed.y.toLocaleString() } } }
+                        scales: { y: { beginAtZero: true, ticks: { callback: (v) => getCurrencySymbol() + v.toLocaleString() }, grid: { color: (ctx) => ctx.tick.value === 0 ? '#374151' : '#e5e7eb' } } },
+                        plugins: { legend: { position: 'top' }, tooltip: { callbacks: { label: (c) => c.dataset.label + ': ' + getCurrencySymbol() + c.parsed.y.toLocaleString() } } }
                     }
                 });
             }
@@ -872,11 +877,11 @@
                     <tr class="hover:bg-gray-50">
                         <td class="px-4 py-3 border border-gray-200 font-medium">Month ${d.month}</td>
                         <td class="px-4 py-3 border border-gray-200">${(d.units || 0).toLocaleString()}</td>
-                        <td class="px-4 py-3 border border-gray-200">£${d.revenue.toFixed(0).toLocaleString()}</td>
-                        <td class="px-4 py-3 border border-gray-200">£${(d.variableCost || 0).toFixed(0).toLocaleString()}</td>
-                        <td class="px-4 py-3 border border-gray-200">£${(d.fixedCost || 0).toFixed(0).toLocaleString()}</td>
-                        <td class="px-4 py-3 border border-gray-200">£${(d.totalCost || 0).toFixed(0).toLocaleString()}</td>
-                        <td class="px-4 py-3 border border-gray-200 ${profitClass}">£${d.profit.toFixed(0).toLocaleString()}</td>
+                        <td class="px-4 py-3 border border-gray-200">${sym}${d.revenue.toFixed(0).toLocaleString()}</td>
+                        <td class="px-4 py-3 border border-gray-200">${sym}${(d.variableCost || 0).toFixed(0).toLocaleString()}</td>
+                        <td class="px-4 py-3 border border-gray-200">${sym}${(d.fixedCost || 0).toFixed(0).toLocaleString()}</td>
+                        <td class="px-4 py-3 border border-gray-200">${sym}${(d.totalCost || 0).toFixed(0).toLocaleString()}</td>
+                        <td class="px-4 py-3 border border-gray-200 ${profitClass}">${sym}${d.profit.toFixed(0).toLocaleString()}</td>
                         <td class="px-4 py-3 border border-gray-200 ${marginClass}">${(d.margin || 0).toFixed(1)}%</td>
                     </tr>
                 `;
@@ -910,7 +915,6 @@
         function loadBusinessModel() {
             const selectedModel = document.getElementById('businessModel').value;
             
-            console.log('Business model selected:', selectedModel, '- Resetting values to zero');
             
             // Always reset values to 0 when selecting any business model
             document.getElementById('price').value = 0;
@@ -927,7 +931,6 @@
             document.getElementById('priceMultiplier').textContent = '100%';
             document.getElementById('volumeMultiplier').textContent = '100%';
             
-            console.log('Values reset to zero for business model:', selectedModel);
             // Render sector-specific inputs (and toggle legacy inputs)
             renderInputs(selectedModel);
         }
@@ -1044,9 +1047,9 @@ Visit: ${window.location.origin}`;
                 summary += `You won't break even within the ${months}-month forecast period - consider adjusting your pricing or reducing costs. `;
             }
             
-            summary += `Over ${months} months, you're projected to generate £${totalRevenue.toLocaleString()} in total revenue with £${totalProfit.toLocaleString()} profit (${profitMargin}% margin). `;
+            summary += `Over ${months} months, you're projected to generate ${sym}${totalRevenue.toLocaleString()} in total revenue with ${sym}${totalProfit.toLocaleString()} profit (${profitMargin}% margin). `;
             
-            summary += `Your average monthly revenue will be £${monthlyAvgRevenue.toLocaleString()}. `;
+            summary += `Your average monthly revenue will be ${sym}${monthlyAvgRevenue.toLocaleString()}. `;
             
             if (profitMargin > 20) {
                 summary += `Your profit margin is excellent - this looks like a very healthy business model!`;
@@ -1062,8 +1065,8 @@ Visit: ${window.location.origin}`;
         }
 
         function calculate() {
-            console.log('Calculate function called');
-            
+            const sym = getCurrencySymbol();
+
             const basePrice = parseFloat(document.getElementById('price').value) || 0;
             const baseUnits = parseFloat(document.getElementById('units').value) || 0;
             const cost = parseFloat(document.getElementById('cost').value) || 0;
@@ -1071,7 +1074,6 @@ Visit: ${window.location.origin}`;
             const growth = parseFloat(document.getElementById('growth').value) / 100 || 0;
             const months = parseInt(document.getElementById('months').value) || 12;
             
-            console.log('Input values:', { basePrice, baseUnits, cost, fixed, growth, months });
 
             // Apply sensitivity adjustments
             const price = basePrice * (currentSensitivity.price / 100);
@@ -1121,11 +1123,11 @@ Visit: ${window.location.origin}`;
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
                     <div class="bg-blue-50 p-4 rounded-lg ${cssClass}">
                         <h3 class="text-sm text-blue-700 font-medium">Total Revenue</h3>
-                        <p class="text-2xl font-bold text-blue-900">£${totalRevenue.toFixed(2).toLocaleString()}</p>
+                        <p class="text-2xl font-bold text-blue-900">${sym}${totalRevenue.toFixed(2).toLocaleString()}</p>
                     </div>
                     <div class="bg-${totalProfit >= 0 ? 'green' : 'red'}-50 p-4 rounded-lg ${cssClass}">
                         <h3 class="text-sm text-${totalProfit >= 0 ? 'green' : 'red'}-700 font-medium">Total Profit</h3>
-                        <p class="text-2xl font-bold text-${totalProfit >= 0 ? 'green' : 'red'}-900">£${totalProfit.toFixed(2).toLocaleString()}</p>
+                        <p class="text-2xl font-bold text-${totalProfit >= 0 ? 'green' : 'red'}-900">${sym}${totalProfit.toFixed(2).toLocaleString()}</p>
                     </div>
                     <div class="bg-orange-50 p-4 rounded-lg ${cssClass}">
                         <h3 class="text-sm text-orange-700 font-medium">Break-even</h3>
@@ -1139,28 +1141,23 @@ Visit: ${window.location.origin}`;
             document.getElementById('aiSummary').textContent = aiSummary;
 
             // Render chart
-            console.log('Rendering chart with data:', { labels, revenueData, costData, profitData });
             
             // Safely destroy existing chart
             if (window.revenueChart && typeof window.revenueChart.destroy === 'function') {
-                console.log('Destroying existing chart');
                 window.revenueChart.destroy();
             }
             
             const ctx = document.getElementById('revenueChart');
             if (!ctx) {
-                console.error('Chart canvas not found!');
                 return;
             }
             
             // Check if Chart.js is available
             if (typeof Chart === 'undefined') {
-                console.error('Chart.js not loaded!');
                 document.getElementById('revenueChart').innerHTML = '<p class="text-red-500 p-4">Chart.js failed to load. Please refresh the page.</p>';
                 return;
             }
             
-            console.log('Creating new chart');
             try {
                 window.revenueChart = new Chart(ctx.getContext('2d'), {
                 type: 'line',
@@ -1205,7 +1202,7 @@ Visit: ${window.location.origin}`;
                             beginAtZero: true,
                             ticks: {
                                 callback: function(value) {
-                                    return '£' + value.toLocaleString();
+                                    return getCurrencySymbol() + value.toLocaleString();
                                 }
                             },
                             grid: {
@@ -1232,10 +1229,8 @@ Visit: ${window.location.origin}`;
                     }
                 }
             });
-            console.log('Chart created successfully');
             
             } catch (error) {
-                console.error('Error creating chart:', error);
                 ctx.style.display = 'none';
                 const errorMsg = document.createElement('div');
                 errorMsg.innerHTML = '<p class="text-red-500 p-4">Unable to display chart. Please refresh the page.</p>';
@@ -1243,15 +1238,12 @@ Visit: ${window.location.origin}`;
             }
 
             // Populate monthly breakdown table
-            console.log('Populating table with monthly data:', monthlyData);
             
             const tableBody = document.getElementById('monthlyTableBody');
             if (!tableBody) {
-                console.error('Table body not found!');
                 return;
             }
             
-            console.log('Table body found, populating...');
             tableBody.innerHTML = monthlyData.map(data => {
                 const profitClass = data.profit >= 0 ? 'text-green-600 font-semibold' : 'text-red-600 font-semibold';
                 const marginClass = data.margin >= 0 ? 'text-green-600' : 'text-red-600';
@@ -1260,11 +1252,11 @@ Visit: ${window.location.origin}`;
                     <tr class="hover:bg-gray-50">
                         <td class="px-4 py-3 border border-gray-200 font-medium">Month ${data.month}</td>
                         <td class="px-4 py-3 border border-gray-200">${data.units.toLocaleString()}</td>
-                        <td class="px-4 py-3 border border-gray-200">£${data.revenue.toFixed(0).toLocaleString()}</td>
-                        <td class="px-4 py-3 border border-gray-200">£${data.variableCost.toFixed(0).toLocaleString()}</td>
-                        <td class="px-4 py-3 border border-gray-200">£${data.fixedCost.toFixed(0).toLocaleString()}</td>
-                        <td class="px-4 py-3 border border-gray-200">£${data.totalCost.toFixed(0).toLocaleString()}</td>
-                        <td class="px-4 py-3 border border-gray-200 ${profitClass}">£${data.profit.toFixed(0).toLocaleString()}</td>
+                        <td class="px-4 py-3 border border-gray-200">${sym}${data.revenue.toFixed(0).toLocaleString()}</td>
+                        <td class="px-4 py-3 border border-gray-200">${sym}${data.variableCost.toFixed(0).toLocaleString()}</td>
+                        <td class="px-4 py-3 border border-gray-200">${sym}${data.fixedCost.toFixed(0).toLocaleString()}</td>
+                        <td class="px-4 py-3 border border-gray-200">${sym}${data.totalCost.toFixed(0).toLocaleString()}</td>
+                        <td class="px-4 py-3 border border-gray-200 ${profitClass}">${sym}${data.profit.toFixed(0).toLocaleString()}</td>
                         <td class="px-4 py-3 border border-gray-200 ${marginClass}">${data.margin.toFixed(1)}%</td>
                     </tr>
                 `;
@@ -1272,11 +1264,9 @@ Visit: ${window.location.origin}`;
         }
 
         // Initialize
-        console.log('Initializing Revenue Calculator');
         updateScenarioSelect();
         // Render inputs for the default selected sector (and toggle legacy group)
         renderInputs(document.getElementById('businessModel').value);
-        console.log('Initialization complete - Ready for user input');
     </script>
     <script src="/feedback-widget.js?v=9"></script>
 </body>

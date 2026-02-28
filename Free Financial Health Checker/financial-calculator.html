@@ -702,7 +702,7 @@
             const selectedCurrency = document.getElementById('currency').value;
             
             // Special handling for JPY (no decimal places)
-            const decimals = selectedCurrency === 'JPY' ? 0 : 0;
+            const decimals = selectedCurrency === 'JPY' ? 0 : 2;
             
             return new Intl.NumberFormat('en-US', {
                 style: 'currency',

@@ -48,10 +48,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Email settings
     $to = "info@summcore.com";
-    $subject = "[SummCore] New Business Consultation Request - " . mb_substr($yourName, 0, 50);
-    $body = "SUMMCORE CONSULTATION REQUEST\n";
-    $body .= "================================\n\n";
-    $body .= "A new consultation request has been submitted through your website.\n\n";
+    // Determine submission type from business_name field
+    $isWidget = ($businessName === 'Quick Feedback Widget');
+    $isSurvey = ($businessName === 'Feedback Survey');
+    $isFeedback = $isWidget || $isSurvey;
+
+    if ($isWidget) {
+        $subject = "[SummCore] Quick Feedback - " . mb_substr($yourName, 0, 50);
+    } elseif ($isSurvey) {
+        $subject = "[SummCore] Feedback Survey - " . mb_substr($yourName, 0, 50);
+    } else {
+        $subject = "[SummCore] New Consultation Request - " . mb_substr($yourName, 0, 50);
+    }
+
+    if ($isFeedback) {
+        $body = "SUMMCORE FEEDBACK\n";
+        $body .= "================================\n\n";
+    } else {
+        $body = "SUMMCORE CONSULTATION REQUEST\n";
+        $body .= "================================\n\n";
+        $body .= "A new consultation request has been submitted through your website.\n\n";
+    }
     $body .= "CLIENT DETAILS:\n";
     $body .= "Business Name: $businessName\n";
     $body .= "Website: " . ($website ? $website : 'Not provided') . "\n";

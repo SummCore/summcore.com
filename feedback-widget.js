@@ -175,17 +175,23 @@
     body.append('website', window.location.pathname);
     body.append('needs', summary);
 
-    fetch('/send.php', { method: 'POST', body: body }).catch(function() {});
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
 
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'quick_feedback', { rating: rating, page: window.location.pathname });
-    }
-
-    formEl.style.display = 'none';
-    thanksEl.style.display = 'block';
-    submitted = true;
-
-    setTimeout(closeWidget, 2500);
+    fetch('/send.php', { method: 'POST', body: body }).then(function(res) {
+      if (!res.ok) throw new Error(res.status);
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'quick_feedback', { rating: rating, page: window.location.pathname });
+      }
+      formEl.style.display = 'none';
+      thanksEl.style.display = 'block';
+      submitted = true;
+      setTimeout(closeWidget, 2500);
+    }).catch(function() {
+      submitBtn.textContent = 'Submit Feedback';
+      checkValid();
+      alert('Something went wrong. Please try again or email info@summcore.com');
+    });
   });
 
   // Public open function
