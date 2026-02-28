@@ -54,7 +54,7 @@
   // Build floating button with text above
   var floatWrap = document.createElement('div');
   floatWrap.className = 'scfw-float-wrap';
-  floatWrap.innerHTML = '<div class="scfw-float-top">We want to hear what &#x1FAF5; you have to say</div><div class="scfw-hint">&#9650;</div><button class="scfw-float" aria-label="Give feedback"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg> Feedback</button><div class="scfw-float-bottom">What\'s working well &amp; what needs improvement</div>';
+  floatWrap.innerHTML = '<div class="scfw-float-top">We want to hear what <strong style="text-transform:uppercase;text-decoration:underline">you</strong> have to say</div><div class="scfw-hint">&#9650;</div><button class="scfw-float" aria-label="Give feedback"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg> Feedback</button><div class="scfw-float-bottom">What\'s working well &amp; what needs improvement</div>';
   document.body.appendChild(floatWrap);
   var floatBtn = floatWrap.querySelector('.scfw-float');
 
@@ -68,7 +68,7 @@
     '    <button class="scfw-close" aria-label="Close">&times;</button>',
     '  </div>',
     '  <div class="scfw-body" id="scfw-form">',
-    '    <p class="scfw-subtitle">We want to hear what &#x1FAF5; you have to say</p>',
+    '    <p class="scfw-subtitle">We want to hear what <strong style="text-transform:uppercase;text-decoration:underline">YOU</strong> have to say</p>',
     '',
     '    <div class="scfw-group">',
     '      <label class="scfw-label">How would you rate SummCore?<span class="scfw-req">*</span></label>',
