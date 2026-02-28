@@ -42,6 +42,9 @@
     '.scfw-float-top{color:#fff;font-size:13px;font-weight:700}',
     '.scfw-float-bottom{color:#94a3b8;font-size:12px;font-style:italic}',
     '.scfw-float-wrap:hover .scfw-float-top,.scfw-float-wrap:hover .scfw-float-bottom{opacity:1;transform:translateY(0)}',
+    '.scfw-hint{color:rgba(255,255,255,0.4);font-size:10px;pointer-events:none;animation:scfw-bob 2s ease-in-out infinite}',
+    '@keyframes scfw-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}',
+    '.scfw-float-wrap:hover .scfw-hint{opacity:0}',
     '.scfw-float{display:flex;align-items:center;gap:8px;background:#fe2700;color:#fff;border:none;padding:12px 22px 12px 16px;border-radius:50px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(254,39,0,0.4);transition:all .2s}',
     '.scfw-float:hover{transform:scale(1.05);box-shadow:0 6px 28px rgba(254,39,0,0.5)}',
     '.scfw-float svg{width:20px;height:20px;fill:#fff}',
@@ -52,7 +55,7 @@
   // Build floating button with text above
   var floatWrap = document.createElement('div');
   floatWrap.className = 'scfw-float-wrap';
-  floatWrap.innerHTML = '<div class="scfw-float-top">Just used a tool? We want to hear it.</div><button class="scfw-float" aria-label="Give feedback"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg> Feedback</button><div class="scfw-float-bottom">The good, the bad, and the &ldquo;why doesn\'t it do this?&rdquo;</div>';
+  floatWrap.innerHTML = '<div class="scfw-float-top">Just used a tool? We want to hear it.</div><div class="scfw-hint">&#9650;</div><button class="scfw-float" aria-label="Give feedback"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg> Feedback</button><div class="scfw-float-bottom">The good, the bad, and the &ldquo;why doesn\'t it do this?&rdquo;</div>';
   document.body.appendChild(floatWrap);
   var floatBtn = floatWrap.querySelector('.scfw-float');
 
