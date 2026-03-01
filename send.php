@@ -208,7 +208,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // ─────────────────────────────────────────────────────────────────────────
 
     if ($mail_sent) {
-        header("Location: thank-you.html");
+        header("Location: thank-you.html?email=" . urlencode($email));
         exit();
     } else {
         echo "Error: Email could not be sent. Please try again or contact us directly at info@summcore.com";
