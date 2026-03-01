@@ -138,6 +138,7 @@
     '    <div style="font-size:40px;margin-bottom:12px">&#10003;</div>',
     '    <h3>Thank you!</h3>',
     '    <p>Your feedback helps us build a better SummCore.</p>',
+    '    <p id="scfw-email-sent" style="font-size:13px;color:#888;margin-top:6px"></p>',
     '  </div>',
     '</div>'
   ].join('\n');
@@ -269,8 +270,12 @@
       }
       formEl.style.display = 'none';
       thanksEl.style.display = 'block';
+      var emailSentEl = overlay.querySelector('#scfw-email-sent');
+      if (emailSentEl && emailVal) {
+        emailSentEl.textContent = 'A confirmation email has been sent to ' + emailVal;
+      }
       submitted = true;
-      setTimeout(closeWidget, 3000);
+      setTimeout(closeWidget, 5000);
     }).catch(function() {
       submitBtn.textContent = 'Submit Feedback';
       checkValid();
