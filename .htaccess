@@ -1,0 +1,28 @@
+# SummCore Security Headers
+
+# Prevent clickjacking - set as HTTP header (meta tag does not work)
+Header always set X-Frame-Options "SAMEORIGIN"
+
+# Prevent MIME type sniffing
+Header always set X-Content-Type-Options "nosniff"
+
+# Enable XSS protection in older browsers
+Header always set X-XSS-Protection "1; mode=block"
+
+# Referrer policy
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+# Cache static assets
+<FilesMatch "\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2)$">
+  Header set Cache-Control "public, max-age=31536000"
+</FilesMatch>
+
+# No cache for HTML pages
+<FilesMatch "\.html$">
+  Header set Cache-Control "no-cache, must-revalidate"
+</FilesMatch>
+
+# PHP files - no direct caching
+<FilesMatch "\.php$">
+  Header set Cache-Control "no-store, no-cache"
+</FilesMatch>
