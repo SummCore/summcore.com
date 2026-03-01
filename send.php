@@ -15,6 +15,19 @@ if (count($_SESSION[$rate_key]) >= 5) {
     exit();
 }
 
+// ── Local submission log ──────────────────────────────────────────────────────
+// Appends each submission as a JSON line to data/submissions.json.
+// Readable via /admin/index.php (password-protected).
+define('DATA_FILE', __DIR__ . '/data/submissions.json');
+
+function log_submission(string $type, array $fields): void {
+    $dir = dirname(DATA_FILE);
+    if (!is_dir($dir)) mkdir($dir, 0755, true);
+    $entry = array_merge(['id' => uniqid('sc_', true), 'timestamp' => date('Y-m-d H:i:s'), 'type' => $type], $fields);
+    file_put_contents(DATA_FILE, json_encode($entry, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND | LOCK_EX);
+}
+// ─────────────────────────────────────────────────────────────────────────────
+
 // ── Boost dashboard integration ──────────────────────────────────────────────
 // Posts data to the Boost admin dashboard (server-to-server, no CORS issues).
 // Failures are silent — email delivery is the primary notification path.
@@ -71,13 +84,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Record this submission for rate limiting
     $_SESSION[$rate_key][] = time();
 
+    // Determine submission type from business_name field
+    $isWidget    = ($businessName === 'Quick Feedback Widget');
+    $isSurvey    = ($businessName === 'Feedback Survey');
+    $isDiscovery = ($businessName === 'Customer Discovery Survey');
+    $isFeedback  = $isWidget || $isSurvey || $isDiscovery;
+    $subType     = $isWidget ? 'widget' : ($isSurvey ? 'survey' : ($isDiscovery ? 'discovery' : 'consultation'));
+
+    // Log to local dashboard
+    log_submission($subType, [
+        'name'    => $yourName,
+        'email'   => $email,
+        'company' => ($businessName && !$isFeedback) ? $businessName : null,
+        'website' => $website ?: null,
+        'phone'   => ($phone !== 'Not provided') ? $phone : null,
+        'message' => mb_substr($needs, 0, 5000),
+    ]);
+
     // Email settings
     $to = "info@summcore.com";
-    // Determine submission type from business_name field
-    $isWidget = ($businessName === 'Quick Feedback Widget');
-    $isSurvey = ($businessName === 'Feedback Survey');
-    $isDiscovery = ($businessName === 'Customer Discovery Survey');
-    $isFeedback = $isWidget || $isSurvey || $isDiscovery;
 
     if ($isWidget) {
         $subject = "[SummCore] Quick Feedback - " . mb_substr($yourName, 0, 50);
