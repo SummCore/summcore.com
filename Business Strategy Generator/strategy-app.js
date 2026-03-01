@@ -59,8 +59,9 @@ const App = () => {
     maturityLevel: 'startup',
     problemSolved: ''
   });
-  const [strategyType, setStrategyType] = useState('');
+  const [strategyTypes, setStrategyTypes] = useState([]);
   const [output, setOutput] = useState(null);
+  const toggleType = t => setStrategyTypes(prev => prev.includes(t) ? prev.filter(x => x !== t) : [...prev, t]);
   const [isGenerating, setIsGenerating] = useState(false);
 
   // Handle form input changes
@@ -92,25 +93,15 @@ const App = () => {
 
   // Generate strategy
   const generateStrategy = async () => {
-    if (!strategyType) return;
+    if (strategyTypes.length === 0) return;
     setIsGenerating(true);
 
     // Simulate AI processing time
     await new Promise(resolve => setTimeout(resolve, 2000));
-    let result;
-    switch (strategyType) {
-      case 'SWOT':
-        result = generateSWOT(formData);
-        break;
-      case 'BMC':
-        result = generateBMC(formData);
-        break;
-      case '90Day':
-        result = generate90DayPlan(formData);
-        break;
-      default:
-        result = null;
-    }
+    const result = {};
+    if (strategyTypes.includes('SWOT')) result.SWOT = generateSWOT(formData);
+    if (strategyTypes.includes('BMC')) result.BMC = generateBMC(formData);
+    if (strategyTypes.includes('90Day')) result['90Day'] = generate90DayPlan(formData);
     setOutput(result);
     setIsGenerating(false);
     setCurrentStep('output');
@@ -119,19 +110,17 @@ const App = () => {
   // Copy to clipboard
   const copyToClipboard = () => {
     if (!output) return;
-    let text = '';
-    switch (strategyType) {
-      case 'SWOT':
-        text = `SWOT Analysis for ${formData.businessName}\n\n` + `Strengths:\n${output.strengths.map(s => `• ${s}`).join('\n')}\n\n` + `Weaknesses:\n${output.weaknesses.map(w => `• ${w}`).join('\n')}\n\n` + `Opportunities:\n${output.opportunities.map(o => `• ${o}`).join('\n')}\n\n` + `Threats:\n${output.threats.map(t => `• ${t}`).join('\n')}`;
-        break;
-      case 'BMC':
-        text = `Business Model Canvas for ${formData.businessName}\n\n` + Object.entries(output).map(([key, values]) => `${key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}:\n${values.map(v => `• ${v}`).join('\n')}`).join('\n\n');
-        break;
-      case '90Day':
-        text = `90-Day Roadmap for ${formData.businessName}\n\n` + Object.entries(output).map(([month, data]) => `${month.toUpperCase()}\nFocus: ${data.focus}\nPriorities:\n${data.priorities.map(p => `• ${p}`).join('\n')}\nMetrics:\n${data.metrics.map(m => `• ${m}`).join('\n')}`).join('\n\n');
-        break;
+    const sections = [];
+    if (output.SWOT) {
+      sections.push(`SWOT Analysis for ${formData.businessName}\n\n` + `Strengths:\n${output.SWOT.strengths.map(s => `• ${s}`).join('\n')}\n\n` + `Weaknesses:\n${output.SWOT.weaknesses.map(w => `• ${w}`).join('\n')}\n\n` + `Opportunities:\n${output.SWOT.opportunities.map(o => `• ${o}`).join('\n')}\n\n` + `Threats:\n${output.SWOT.threats.map(t => `• ${t}`).join('\n')}`);
     }
-    navigator.clipboard.writeText(text).then(() => {
+    if (output.BMC) {
+      sections.push(`Business Model Canvas for ${formData.businessName}\n\n` + Object.entries(output.BMC).map(([key, values]) => `${key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}:\n${values.map(v => `• ${v}`).join('\n')}`).join('\n\n'));
+    }
+    if (output['90Day']) {
+      sections.push(`90-Day Roadmap for ${formData.businessName}\n\n` + Object.entries(output['90Day']).map(([month, data]) => `${month.toUpperCase()}\nFocus: ${data.focus}\nPriorities:\n${data.priorities.map(p => `• ${p}`).join('\n')}\nMetrics:\n${data.metrics.map(m => `• ${m}`).join('\n')}`).join('\n\n'));
+    }
+    navigator.clipboard.writeText(sections.join('\n\n---\n\n')).then(() => {
       alert('Copied to clipboard!');
     });
   };
@@ -144,69 +133,77 @@ const App = () => {
     } = window.jspdf;
     const doc = new jsPDF();
     doc.setFontSize(18);
-    doc.text(`${strategyType === 'SWOT' ? 'SWOT Analysis' : strategyType === 'BMC' ? 'Business Model Canvas' : '90-Day Roadmap'} for ${formData.businessName}`, 10, 20);
+    doc.text(`Business Strategy Report — ${formData.businessName}`, 10, 20);
     let y = 35;
-    doc.setFontSize(12);
-    switch (strategyType) {
-      case 'SWOT':
-        ['strengths', 'weaknesses', 'opportunities', 'threats'].forEach(category => {
-          doc.setFontSize(14);
-          doc.text(category.charAt(0).toUpperCase() + category.slice(1), 10, y);
-          y += 10;
-          doc.setFontSize(10);
-          output[category].forEach(item => {
-            const lines = doc.splitTextToSize(`• ${item}`, 180);
-            doc.text(lines, 15, y);
-            y += lines.length * 5;
-          });
-          y += 5;
+    if (output.SWOT) {
+      doc.setFontSize(16);
+      doc.text('SWOT Analysis', 10, y);
+      y += 12;
+      ['strengths', 'weaknesses', 'opportunities', 'threats'].forEach(category => {
+        doc.setFontSize(14);
+        doc.text(category.charAt(0).toUpperCase() + category.slice(1), 10, y);
+        y += 10;
+        doc.setFontSize(10);
+        output.SWOT[category].forEach(item => {
+          const lines = doc.splitTextToSize(`• ${item}`, 180);
+          doc.text(lines, 15, y);
+          y += lines.length * 5;
         });
-        break;
-      case 'BMC':
-        Object.entries(output).forEach(([key, values]) => {
-          doc.setFontSize(14);
-          doc.text(key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()), 10, y);
-          y += 10;
-          doc.setFontSize(10);
-          values.forEach(item => {
-            const lines = doc.splitTextToSize(`• ${item}`, 180);
-            doc.text(lines, 15, y);
-            y += lines.length * 5;
-          });
-          y += 5;
-        });
-        break;
-      case '90Day':
-        Object.entries(output).forEach(([month, data]) => {
-          doc.setFontSize(14);
-          doc.text(month.toUpperCase(), 10, y);
-          y += 10;
-          doc.setFontSize(12);
-          doc.text(`Focus: ${data.focus}`, 15, y);
-          y += 10;
-          doc.text('Priorities:', 15, y);
-          y += 8;
-          doc.setFontSize(10);
-          data.priorities.forEach(priority => {
-            const lines = doc.splitTextToSize(`• ${priority}`, 170);
-            doc.text(lines, 20, y);
-            y += lines.length * 5;
-          });
-          y += 5;
-          doc.setFontSize(12);
-          doc.text('Metrics:', 15, y);
-          y += 8;
-          doc.setFontSize(10);
-          data.metrics.forEach(metric => {
-            const lines = doc.splitTextToSize(`• ${metric}`, 170);
-            doc.text(lines, 20, y);
-            y += lines.length * 5;
-          });
-          y += 10;
-        });
-        break;
+        y += 5;
+      });
+      y += 8;
     }
-    doc.save(`${formData.businessName}_${strategyType}_Strategy.pdf`);
+    if (output.BMC) {
+      doc.setFontSize(16);
+      doc.text('Business Model Canvas', 10, y);
+      y += 12;
+      Object.entries(output.BMC).forEach(([key, values]) => {
+        doc.setFontSize(14);
+        doc.text(key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()), 10, y);
+        y += 10;
+        doc.setFontSize(10);
+        values.forEach(item => {
+          const lines = doc.splitTextToSize(`• ${item}`, 180);
+          doc.text(lines, 15, y);
+          y += lines.length * 5;
+        });
+        y += 5;
+      });
+      y += 8;
+    }
+    if (output['90Day']) {
+      doc.setFontSize(16);
+      doc.text('90-Day Roadmap', 10, y);
+      y += 12;
+      Object.entries(output['90Day']).forEach(([month, data]) => {
+        doc.setFontSize(14);
+        doc.text(month.toUpperCase(), 10, y);
+        y += 10;
+        doc.setFontSize(12);
+        doc.text(`Focus: ${data.focus}`, 15, y);
+        y += 10;
+        doc.text('Priorities:', 15, y);
+        y += 8;
+        doc.setFontSize(10);
+        data.priorities.forEach(priority => {
+          const lines = doc.splitTextToSize(`• ${priority}`, 170);
+          doc.text(lines, 20, y);
+          y += lines.length * 5;
+        });
+        y += 5;
+        doc.setFontSize(12);
+        doc.text('Metrics:', 15, y);
+        y += 8;
+        doc.setFontSize(10);
+        data.metrics.forEach(metric => {
+          const lines = doc.splitTextToSize(`• ${metric}`, 170);
+          doc.text(lines, 20, y);
+          y += lines.length * 5;
+        });
+        y += 10;
+      });
+    }
+    doc.save(`${formData.businessName}_${strategyTypes.join('_')}_Strategy.pdf`);
   };
 
   // Download as JSON
@@ -214,7 +211,7 @@ const App = () => {
     if (!output) return;
     const data = {
       businessInfo: formData,
-      strategyType,
+      strategyTypes,
       generatedStrategy: output,
       createdAt: new Date().toISOString()
     };
@@ -224,7 +221,7 @@ const App = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${formData.businessName}_${strategyType}_Strategy.json`;
+    a.download = `${formData.businessName}_${strategyTypes.join('_')}_Strategy.json`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -394,16 +391,17 @@ const App = () => {
       className: "container mx-auto max-w-2xl"
     }, /*#__PURE__*/React.createElement("h2", {
       className: "text-2xl font-bold mb-6 text-white"
-    }, "\uD83C\uDFAF Choose Your Strategy Tool"), /*#__PURE__*/React.createElement("div", {
+    }, "\uD83C\uDFAF Choose Your Strategy Tool"), /*#__PURE__*/React.createElement("p", {
+      className: "text-gray-400 mb-4 text-sm"
+    }, "Select one or more frameworks to generate together."), /*#__PURE__*/React.createElement("div", {
       className: "space-y-4"
     }, /*#__PURE__*/React.createElement("label", {
-      className: `block p-4 border-2 rounded-lg cursor-pointer transition-all ${strategyType === 'SWOT' ? 'border-blue-500 bg-blue-900/30' : 'border-gray-500 bg-slate-800/50 hover:border-blue-400'}`
+      className: `block p-4 border-2 rounded-lg cursor-pointer transition-all ${strategyTypes.includes('SWOT') ? 'border-blue-500 bg-blue-900/30' : 'border-gray-500 bg-slate-800/50 hover:border-blue-400'}`
     }, /*#__PURE__*/React.createElement("input", {
-      type: "radio",
-      name: "strategyType",
+      type: "checkbox",
       value: "SWOT",
-      checked: strategyType === 'SWOT',
-      onChange: e => setStrategyType(e.target.value),
+      checked: strategyTypes.includes('SWOT'),
+      onChange: () => toggleType('SWOT'),
       className: "sr-only"
     }), /*#__PURE__*/React.createElement("div", {
       className: "flex justify-between items-start"
@@ -411,14 +409,17 @@ const App = () => {
       className: "text-lg font-semibold text-white"
     }, "\uD83C\uDFAF SWOT Analysis"), /*#__PURE__*/React.createElement("p", {
       className: "text-gray-300 mt-1"
-    }, "Analyze your internal strengths & weaknesses plus external opportunities & threats")))), /*#__PURE__*/React.createElement("label", {
-      className: `block p-4 border-2 rounded-lg cursor-pointer transition-all ${strategyType === 'BMC' ? 'border-blue-500 bg-blue-900/30' : 'border-gray-500 bg-slate-800/50 hover:border-blue-400'}`
+    }, "Analyze your internal strengths & weaknesses plus external opportunities & threats")), /*#__PURE__*/React.createElement("div", {
+      className: `w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 mt-1 ${strategyTypes.includes('SWOT') ? 'border-blue-500 bg-blue-500' : 'border-gray-400'}`
+    }, strategyTypes.includes('SWOT') && /*#__PURE__*/React.createElement("span", {
+      className: "text-white text-xs font-bold"
+    }, "\u2713")))), /*#__PURE__*/React.createElement("label", {
+      className: `block p-4 border-2 rounded-lg cursor-pointer transition-all ${strategyTypes.includes('BMC') ? 'border-blue-500 bg-blue-900/30' : 'border-gray-500 bg-slate-800/50 hover:border-blue-400'}`
     }, /*#__PURE__*/React.createElement("input", {
-      type: "radio",
-      name: "strategyType",
+      type: "checkbox",
       value: "BMC",
-      checked: strategyType === 'BMC',
-      onChange: e => setStrategyType(e.target.value),
+      checked: strategyTypes.includes('BMC'),
+      onChange: () => toggleType('BMC'),
       className: "sr-only"
     }), /*#__PURE__*/React.createElement("div", {
       className: "flex justify-between items-start"
@@ -426,14 +427,17 @@ const App = () => {
       className: "text-lg font-semibold text-white"
     }, "\uD83D\uDCCA Business Model Canvas"), /*#__PURE__*/React.createElement("p", {
       className: "text-gray-300 mt-1"
-    }, "Map out your complete business model across 9 key building blocks")))), /*#__PURE__*/React.createElement("label", {
-      className: `block p-4 border-2 rounded-lg cursor-pointer transition-all ${strategyType === '90Day' ? 'border-blue-500 bg-blue-900/30' : 'border-gray-500 bg-slate-800/50 hover:border-blue-400'}`
+    }, "Map out your complete business model across 9 key building blocks")), /*#__PURE__*/React.createElement("div", {
+      className: `w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 mt-1 ${strategyTypes.includes('BMC') ? 'border-blue-500 bg-blue-500' : 'border-gray-400'}`
+    }, strategyTypes.includes('BMC') && /*#__PURE__*/React.createElement("span", {
+      className: "text-white text-xs font-bold"
+    }, "\u2713")))), /*#__PURE__*/React.createElement("label", {
+      className: `block p-4 border-2 rounded-lg cursor-pointer transition-all ${strategyTypes.includes('90Day') ? 'border-blue-500 bg-blue-900/30' : 'border-gray-500 bg-slate-800/50 hover:border-blue-400'}`
     }, /*#__PURE__*/React.createElement("input", {
-      type: "radio",
-      name: "strategyType",
+      type: "checkbox",
       value: "90Day",
-      checked: strategyType === '90Day',
-      onChange: e => setStrategyType(e.target.value),
+      checked: strategyTypes.includes('90Day'),
+      onChange: () => toggleType('90Day'),
       className: "sr-only"
     }), /*#__PURE__*/React.createElement("div", {
       className: "flex justify-between items-start"
@@ -441,16 +445,20 @@ const App = () => {
       className: "text-lg font-semibold text-white"
     }, "\uD83D\uDCC5 90-Day Roadmap"), /*#__PURE__*/React.createElement("p", {
       className: "text-gray-300 mt-1"
-    }, "Create a detailed 3-month action plan with priorities and metrics"))))), /*#__PURE__*/React.createElement("div", {
+    }, "Create a detailed 3-month action plan with priorities and metrics")), /*#__PURE__*/React.createElement("div", {
+      className: `w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 mt-1 ${strategyTypes.includes('90Day') ? 'border-blue-500 bg-blue-500' : 'border-gray-400'}`
+    }, strategyTypes.includes('90Day') && /*#__PURE__*/React.createElement("span", {
+      className: "text-white text-xs font-bold"
+    }, "\u2713"))))), /*#__PURE__*/React.createElement("div", {
       className: "flex justify-between mt-8"
     }, /*#__PURE__*/React.createElement("button", {
       onClick: () => setCurrentStep('input'),
       className: "px-6 py-2 text-white border border-gray-300 rounded-lg hover:bg-gray-700"
     }, "\u2190 Back"), /*#__PURE__*/React.createElement("button", {
       onClick: generateStrategy,
-      disabled: !strategyType,
-      className: `px-6 py-2 rounded-lg font-semibold ${strategyType ? 'text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`,
-      style: strategyType ? {
+      disabled: strategyTypes.length === 0,
+      className: `px-6 py-2 rounded-lg font-semibold ${strategyTypes.length > 0 ? 'text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`,
+      style: strategyTypes.length > 0 ? {
         background: '#fe2700'
       } : {}
     }, "Generate Strategy \u2192"))));
@@ -483,7 +491,7 @@ const App = () => {
       }
     }, /*#__PURE__*/React.createElement("div", {
       className: "container mx-auto max-w-4xl"
-    }, strategyType === 'SWOT' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
+    }, output.SWOT && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
       className: "text-xl font-semibold mb-4 text-white"
     }, "\uD83C\uDFAF SWOT Analysis for ", formData.businessName), /*#__PURE__*/React.createElement("div", {
       className: "strategy-grid mb-8"
@@ -493,7 +501,7 @@ const App = () => {
       className: "font-bold text-green-800 mb-3"
     }, "\uD83D\uDCAA Strengths"), /*#__PURE__*/React.createElement("ul", {
       className: "space-y-2"
-    }, output.strengths.map((item, i) => /*#__PURE__*/React.createElement("li", {
+    }, output.SWOT.strengths.map((item, i) => /*#__PURE__*/React.createElement("li", {
       key: i,
       className: "text-green-700 text-sm"
     }, "\u2022 ", item)))), /*#__PURE__*/React.createElement("div", {
@@ -502,7 +510,7 @@ const App = () => {
       className: "font-bold text-red-800 mb-3"
     }, "\u26A0\uFE0F Weaknesses"), /*#__PURE__*/React.createElement("ul", {
       className: "space-y-2"
-    }, output.weaknesses.map((item, i) => /*#__PURE__*/React.createElement("li", {
+    }, output.SWOT.weaknesses.map((item, i) => /*#__PURE__*/React.createElement("li", {
       key: i,
       className: "text-red-700 text-sm"
     }, "\u2022 ", item)))), /*#__PURE__*/React.createElement("div", {
@@ -511,7 +519,7 @@ const App = () => {
       className: "font-bold text-blue-800 mb-3"
     }, "\uD83D\uDE80 Opportunities"), /*#__PURE__*/React.createElement("ul", {
       className: "space-y-2"
-    }, output.opportunities.map((item, i) => /*#__PURE__*/React.createElement("li", {
+    }, output.SWOT.opportunities.map((item, i) => /*#__PURE__*/React.createElement("li", {
       key: i,
       className: "text-blue-700 text-sm"
     }, "\u2022 ", item)))), /*#__PURE__*/React.createElement("div", {
@@ -520,10 +528,10 @@ const App = () => {
       className: "font-bold text-orange-800 mb-3"
     }, "\u26A1 Threats"), /*#__PURE__*/React.createElement("ul", {
       className: "space-y-2"
-    }, output.threats.map((item, i) => /*#__PURE__*/React.createElement("li", {
+    }, output.SWOT.threats.map((item, i) => /*#__PURE__*/React.createElement("li", {
       key: i,
       className: "text-orange-700 text-sm"
-    }, "\u2022 ", item)))))), strategyType === 'BMC' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
+    }, "\u2022 ", item)))))), output.BMC && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
       className: "text-xl font-semibold mb-4 text-white"
     }, "\uD83D\uDCCA Business Model Canvas for ", formData.businessName), /*#__PURE__*/React.createElement("div", {
       className: "space-y-4 mb-8"
@@ -535,7 +543,7 @@ const App = () => {
       className: "font-bold text-white mb-2"
     }, "Key Partnerships"), /*#__PURE__*/React.createElement("ul", {
       className: "space-y-1"
-    }, output.keyPartnerships.map((item, i) => /*#__PURE__*/React.createElement("li", {
+    }, output.BMC.keyPartnerships.map((item, i) => /*#__PURE__*/React.createElement("li", {
       key: i,
       className: "text-sm text-white"
     }, "\u2022 ", item)))), /*#__PURE__*/React.createElement("div", {
@@ -544,7 +552,7 @@ const App = () => {
       className: "font-bold text-white mb-2"
     }, "Key Activities"), /*#__PURE__*/React.createElement("ul", {
       className: "space-y-1"
-    }, output.keyActivities.map((item, i) => /*#__PURE__*/React.createElement("li", {
+    }, output.BMC.keyActivities.map((item, i) => /*#__PURE__*/React.createElement("li", {
       key: i,
       className: "text-sm text-white"
     }, "\u2022 ", item)))), /*#__PURE__*/React.createElement("div", {
@@ -553,7 +561,7 @@ const App = () => {
       className: "font-bold text-white mb-2"
     }, "Value Propositions"), /*#__PURE__*/React.createElement("ul", {
       className: "space-y-1"
-    }, output.valuePropositions.map((item, i) => /*#__PURE__*/React.createElement("li", {
+    }, output.BMC.valuePropositions.map((item, i) => /*#__PURE__*/React.createElement("li", {
       key: i,
       className: "text-sm text-white"
     }, "\u2022 ", item)))), /*#__PURE__*/React.createElement("div", {
@@ -562,7 +570,7 @@ const App = () => {
       className: "font-bold text-white mb-2"
     }, "Customer Relationships"), /*#__PURE__*/React.createElement("ul", {
       className: "space-y-1"
-    }, output.customerRelationships.map((item, i) => /*#__PURE__*/React.createElement("li", {
+    }, output.BMC.customerRelationships.map((item, i) => /*#__PURE__*/React.createElement("li", {
       key: i,
       className: "text-sm text-white"
     }, "\u2022 ", item)))), /*#__PURE__*/React.createElement("div", {
@@ -571,7 +579,7 @@ const App = () => {
       className: "font-bold text-white mb-2"
     }, "Customer Segments"), /*#__PURE__*/React.createElement("ul", {
       className: "space-y-1"
-    }, output.customerSegments.map((item, i) => /*#__PURE__*/React.createElement("li", {
+    }, output.BMC.customerSegments.map((item, i) => /*#__PURE__*/React.createElement("li", {
       key: i,
       className: "text-sm text-white"
     }, "\u2022 ", item))))), /*#__PURE__*/React.createElement("div", {
@@ -582,7 +590,7 @@ const App = () => {
       className: "font-bold text-white mb-2"
     }, "Key Resources"), /*#__PURE__*/React.createElement("ul", {
       className: "space-y-1"
-    }, output.keyResources.map((item, i) => /*#__PURE__*/React.createElement("li", {
+    }, output.BMC.keyResources.map((item, i) => /*#__PURE__*/React.createElement("li", {
       key: i,
       className: "text-sm text-white"
     }, "\u2022 ", item)))), /*#__PURE__*/React.createElement("div", {
@@ -591,7 +599,7 @@ const App = () => {
       className: "font-bold text-white mb-2"
     }, "Channels"), /*#__PURE__*/React.createElement("ul", {
       className: "space-y-1"
-    }, output.channels.map((item, i) => /*#__PURE__*/React.createElement("li", {
+    }, output.BMC.channels.map((item, i) => /*#__PURE__*/React.createElement("li", {
       key: i,
       className: "text-sm text-white"
     }, "\u2022 ", item))))), /*#__PURE__*/React.createElement("div", {
@@ -602,7 +610,7 @@ const App = () => {
       className: "font-bold text-white mb-2"
     }, "Cost Structure"), /*#__PURE__*/React.createElement("ul", {
       className: "space-y-1"
-    }, output.costStructure.map((item, i) => /*#__PURE__*/React.createElement("li", {
+    }, output.BMC.costStructure.map((item, i) => /*#__PURE__*/React.createElement("li", {
       key: i,
       className: "text-sm text-white"
     }, "\u2022 ", item)))), /*#__PURE__*/React.createElement("div", {
@@ -611,14 +619,14 @@ const App = () => {
       className: "font-bold text-white mb-2"
     }, "Revenue Streams"), /*#__PURE__*/React.createElement("ul", {
       className: "space-y-1"
-    }, output.revenueStreams.map((item, i) => /*#__PURE__*/React.createElement("li", {
+    }, output.BMC.revenueStreams.map((item, i) => /*#__PURE__*/React.createElement("li", {
       key: i,
       className: "text-sm text-white"
-    }, "\u2022 ", item))))))), strategyType === '90Day' && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
+    }, "\u2022 ", item))))))), output['90Day'] && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
       className: "text-xl font-semibold mb-4 text-white"
     }, "\uD83D\uDCC5 90-Day Roadmap for ", formData.businessName), /*#__PURE__*/React.createElement("div", {
       className: "mb-8"
-    }, Object.entries(output).map(([month, data]) => /*#__PURE__*/React.createElement("div", {
+    }, Object.entries(output['90Day']).map(([month, data]) => /*#__PURE__*/React.createElement("div", {
       key: month,
       className: "roadmap-phase"
     }, /*#__PURE__*/React.createElement("h4", {
