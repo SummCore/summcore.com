@@ -535,7 +535,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     className: "mt-8 flex flex-col items-start"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center gap-4 text-gray-400"
-  }, /*#__PURE__*/React.createElement("span", null, "Follow us on:"), /*#__PURE__*/React.createElement("a", {
+  }, /*#__PURE__*/React.createElement("span", null, "Follow us:"), /*#__PURE__*/React.createElement("a", {
     href: "https://x.com/SummCoreIdeas",
     target: "_blank",
     rel: "noopener",
