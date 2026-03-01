@@ -144,7 +144,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Enhanced headers to avoid spam filters
     $headers = "From: SummCore Contact Form <info@summcore.com>\r\n";
-    $headers .= "Reply-To: " . $yourName . " <" . $email . ">\r\n";
+    if ($email) {
+        $headers .= "Reply-To: " . $yourName . " <" . $email . ">\r\n";
+    }
     $headers .= "Return-Path: info@summcore.com\r\n";
     $headers .= "X-Mailer: SummCore Website\r\n";
     $headers .= "MIME-Version: 1.0\r\n";
