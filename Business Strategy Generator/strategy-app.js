@@ -380,6 +380,24 @@ const App = () => {
     }, "Continue \u2192"))));
   }
 
+  // Render Loading State (checked before strategy so spinner shows when Generate is clicked)
+  if (isGenerating) {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "min-h-screen py-8 px-4 flex items-center justify-center",
+      style: {
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "text-center"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"
+    }), /*#__PURE__*/React.createElement("h2", {
+      className: "text-2xl font-bold text-white mb-2"
+    }, "\uD83E\uDD16 Generating Your Strategy..."), /*#__PURE__*/React.createElement("p", {
+      className: "text-white"
+    }, "Analyzing your business data and creating personalized insights")));
+  }
+
   // Render Strategy Selector
   if (currentStep === 'strategy') {
     return /*#__PURE__*/React.createElement("div", {
@@ -462,24 +480,6 @@ const App = () => {
         background: '#fe2700'
       } : {}
     }, "Generate Strategy \u2192"))));
-  }
-
-  // Render Loading State
-  if (isGenerating) {
-    return /*#__PURE__*/React.createElement("div", {
-      className: "min-h-screen py-8 px-4 flex items-center justify-center",
-      style: {
-        background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)'
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "text-center"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"
-    }), /*#__PURE__*/React.createElement("h2", {
-      className: "text-2xl font-bold text-white mb-2"
-    }, "\uD83E\uDD16 Generating Your Strategy..."), /*#__PURE__*/React.createElement("p", {
-      className: "text-white"
-    }, "Analyzing your business data and creating personalized insights")));
   }
 
   // Render Output
