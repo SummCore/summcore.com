@@ -90,8 +90,8 @@
     ]
   }
   </script>
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -300,17 +300,14 @@
   <script src="feedback-widget.js?v=12"></script>
   <script type="text/babel">
     // Debug logging
-    console.log('Script starting...');
-    console.log('React:', typeof React, React);
-    console.log('ReactDOM:', typeof ReactDOM, ReactDOM);
-    console.log('Babel:', typeof Babel);
+
+
+
     
     // Check if React and ReactDOM are loaded
     if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
-      console.error('React libraries not loaded!');
       document.getElementById('root').innerHTML = '<div style="padding: 20px; text-align: center; color: red;">Error: React libraries failed to load. Please check your internet connection and refresh the page.</div>';
     } else {
-      console.log('React libraries loaded successfully!');
     // Ensure website URL has scheme before submit (homepage consultation form)
     const normalizeWebsiteUrlHome = (e) => {
       try {
@@ -804,22 +801,16 @@
     );
 
       // Use React 18 createRoot API if available, otherwise fallback to legacy render
-      console.log('About to render app...');
-      console.log('ReactDOM.createRoot available:', typeof ReactDOM.createRoot);
+
       
       try {
         if (ReactDOM.createRoot) {
-          console.log('Using React 18 createRoot API');
           const root = ReactDOM.createRoot(document.getElementById('root'));
           root.render(<App />);
-          console.log('App rendered successfully with createRoot');
         } else {
-          console.log('Using legacy ReactDOM.render');
     ReactDOM.render(<App />, document.getElementById('root'));
-          console.log('App rendered successfully with legacy render');
         }
       } catch (error) {
-        console.error('Rendering error:', error);
         document.getElementById('root').innerHTML = '<div style="padding: 20px; text-align: center; color: red;">Something went wrong. Please refresh the page.</div>';
       }
     }
