@@ -59,7 +59,7 @@ const App = () => {
     maturityLevel: 'startup',
     problemSolved: ''
   });
-  const [strategyTypes, setStrategyTypes] = useState([]);
+  const [strategyTypes, setStrategyTypes] = useState(['SWOT', 'BMC', '90Day']);
   const [output, setOutput] = useState(null);
   const toggleType = t => setStrategyTypes(prev => prev.includes(t) ? prev.filter(x => x !== t) : [...prev, t]);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -241,39 +241,85 @@ const App = () => {
       className: "text-4xl font-bold text-white mb-4"
     }, "\uD83D\uDCBC Business Strategy Generator"), /*#__PURE__*/React.createElement("p", {
       className: "text-xl text-white max-w-2xl mx-auto"
-    }, "Generate professional SWOT analyses, Business Model Canvases, and 90-day roadmaps in minutes. Ideal for entrepreneurs and small business owners.")), /*#__PURE__*/React.createElement("div", {
+    }, "Generate professional SWOT analyses, Business Model Canvases, and 90-day roadmaps in minutes. Ideal for entrepreneurs and small business owners.")), /*#__PURE__*/React.createElement("p", {
+      className: "text-gray-300 mb-4 text-sm"
+    }, "Select the frameworks you want to generate \u2014 all are chosen by default."), /*#__PURE__*/React.createElement("div", {
       className: "grid md:grid-cols-3 gap-6 mb-8"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: `p-6 rounded-lg cursor-pointer border-2 transition-all ${strategyTypes.includes('SWOT') ? 'border-blue-400 bg-blue-900/40' : 'border-transparent bg-blue-50 opacity-60'}`
+    }, /*#__PURE__*/React.createElement("input", {
+      type: "checkbox",
+      value: "SWOT",
+      checked: strategyTypes.includes('SWOT'),
+      onChange: () => toggleType('SWOT'),
+      className: "sr-only"
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between items-start"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "bg-blue-50 p-6 rounded-lg"
+      className: "text-left"
     }, /*#__PURE__*/React.createElement("h3", {
-      className: "text-lg font-semibold text-blue-800 mb-2"
+      className: `text-lg font-semibold mb-2 ${strategyTypes.includes('SWOT') ? 'text-blue-300' : 'text-blue-800'}`
     }, "\uD83C\uDFAF SWOT Analysis"), /*#__PURE__*/React.createElement("p", {
-      className: "text-blue-600"
+      className: strategyTypes.includes('SWOT') ? 'text-blue-200' : 'text-blue-600'
     }, "Identify your strengths, weaknesses, opportunities, and threats")), /*#__PURE__*/React.createElement("div", {
-      className: "bg-green-50 p-6 rounded-lg"
+      className: `w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 mt-1 ml-2 ${strategyTypes.includes('SWOT') ? 'border-blue-400 bg-blue-500' : 'border-blue-400 bg-white'}`
+    }, strategyTypes.includes('SWOT') && /*#__PURE__*/React.createElement("span", {
+      className: "text-white text-xs font-bold"
+    }, "\u2713")))), /*#__PURE__*/React.createElement("label", {
+      className: `p-6 rounded-lg cursor-pointer border-2 transition-all ${strategyTypes.includes('BMC') ? 'border-green-400 bg-green-900/40' : 'border-transparent bg-green-50 opacity-60'}`
+    }, /*#__PURE__*/React.createElement("input", {
+      type: "checkbox",
+      value: "BMC",
+      checked: strategyTypes.includes('BMC'),
+      onChange: () => toggleType('BMC'),
+      className: "sr-only"
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between items-start"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "text-left"
     }, /*#__PURE__*/React.createElement("h3", {
-      className: "text-lg font-semibold text-green-800 mb-2"
+      className: `text-lg font-semibold mb-2 ${strategyTypes.includes('BMC') ? 'text-green-300' : 'text-green-800'}`
     }, "\uD83D\uDCCA Business Model Canvas"), /*#__PURE__*/React.createElement("p", {
-      className: "text-green-600"
+      className: strategyTypes.includes('BMC') ? 'text-green-200' : 'text-green-600'
     }, "Map out your complete business model on one page")), /*#__PURE__*/React.createElement("div", {
-      className: "bg-purple-50 p-6 rounded-lg"
+      className: `w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 mt-1 ml-2 ${strategyTypes.includes('BMC') ? 'border-green-400 bg-green-500' : 'border-green-400 bg-white'}`
+    }, strategyTypes.includes('BMC') && /*#__PURE__*/React.createElement("span", {
+      className: "text-white text-xs font-bold"
+    }, "\u2713")))), /*#__PURE__*/React.createElement("label", {
+      className: `p-6 rounded-lg cursor-pointer border-2 transition-all ${strategyTypes.includes('90Day') ? 'border-purple-400 bg-purple-900/40' : 'border-transparent bg-purple-50 opacity-60'}`
+    }, /*#__PURE__*/React.createElement("input", {
+      type: "checkbox",
+      value: "90Day",
+      checked: strategyTypes.includes('90Day'),
+      onChange: () => toggleType('90Day'),
+      className: "sr-only"
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "flex justify-between items-start"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "text-left"
     }, /*#__PURE__*/React.createElement("h3", {
-      className: "text-lg font-semibold text-purple-800 mb-2"
+      className: `text-lg font-semibold mb-2 ${strategyTypes.includes('90Day') ? 'text-purple-300' : 'text-purple-800'}`
     }, "\uD83D\uDCC5 90-Day Roadmap"), /*#__PURE__*/React.createElement("p", {
-      className: "text-purple-600"
-    }, "Create actionable plans for your next quarter"))), /*#__PURE__*/React.createElement("button", {
+      className: strategyTypes.includes('90Day') ? 'text-purple-200' : 'text-purple-600'
+    }, "Create actionable plans for your next quarter")), /*#__PURE__*/React.createElement("div", {
+      className: `w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 mt-1 ml-2 ${strategyTypes.includes('90Day') ? 'border-purple-400 bg-purple-500' : 'border-purple-400 bg-white'}`
+    }, strategyTypes.includes('90Day') && /*#__PURE__*/React.createElement("span", {
+      className: "text-white text-xs font-bold"
+    }, "\u2713"))))), /*#__PURE__*/React.createElement("button", {
       onClick: () => {
+        if (strategyTypes.length === 0) return;
         setCurrentStep('input');
         if (typeof gtag !== 'undefined') gtag('event', 'tool_used', {
           tool_name: 'Business Strategy Generator',
           action: 'start'
         });
       },
-      className: "text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors",
-      style: {
+      disabled: strategyTypes.length === 0,
+      className: `px-8 py-3 rounded-lg text-lg font-semibold transition-colors ${strategyTypes.length > 0 ? 'text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`,
+      style: strategyTypes.length > 0 ? {
         background: '#fe2700'
-      }
-    }, "Start Strategy Generator \u2192"), /*#__PURE__*/React.createElement("div", {
+      } : {}
+    }, strategyTypes.length === 0 ? 'Select at least one framework' : `Generate ${strategyTypes.length === 3 ? 'All 3' : strategyTypes.length} Framework${strategyTypes.length > 1 ? 's' : ''} →`), /*#__PURE__*/React.createElement("div", {
       className: "mt-8 text-sm text-gray-500"
     }, /*#__PURE__*/React.createElement("p", null, "\u2705 No signup required \u2022 \u2705 Works offline \u2022 \u2705 Export to PDF/JSON"))));
   }
@@ -371,7 +417,7 @@ const App = () => {
       onClick: () => setCurrentStep('home'),
       className: "px-6 py-2 text-white border border-gray-300 rounded-lg hover:bg-gray-700"
     }, "\u2190 Back"), /*#__PURE__*/React.createElement("button", {
-      onClick: () => setCurrentStep('strategy'),
+      onClick: generateStrategy,
       disabled: !isFormValid(),
       className: `px-6 py-2 rounded-lg font-semibold ${isFormValid() ? 'text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`,
       style: isFormValid() ? {
@@ -396,90 +442,6 @@ const App = () => {
     }, "\uD83E\uDD16 Generating Your Strategy..."), /*#__PURE__*/React.createElement("p", {
       className: "text-white"
     }, "Analyzing your business data and creating personalized insights")));
-  }
-
-  // Render Strategy Selector
-  if (currentStep === 'strategy') {
-    return /*#__PURE__*/React.createElement("div", {
-      className: "min-h-screen py-8 px-4",
-      style: {
-        background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)'
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "container mx-auto max-w-2xl"
-    }, /*#__PURE__*/React.createElement("h2", {
-      className: "text-2xl font-bold mb-6 text-white"
-    }, "\uD83C\uDFAF Choose Your Strategy Tool"), /*#__PURE__*/React.createElement("p", {
-      className: "text-gray-400 mb-4 text-sm"
-    }, "Select one or more frameworks to generate together."), /*#__PURE__*/React.createElement("div", {
-      className: "space-y-4"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: `block p-4 border-2 rounded-lg cursor-pointer transition-all ${strategyTypes.includes('SWOT') ? 'border-blue-500 bg-blue-900/30' : 'border-gray-500 bg-slate-800/50 hover:border-blue-400'}`
-    }, /*#__PURE__*/React.createElement("input", {
-      type: "checkbox",
-      value: "SWOT",
-      checked: strategyTypes.includes('SWOT'),
-      onChange: () => toggleType('SWOT'),
-      className: "sr-only"
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "flex justify-between items-start"
-    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
-      className: "text-lg font-semibold text-white"
-    }, "\uD83C\uDFAF SWOT Analysis"), /*#__PURE__*/React.createElement("p", {
-      className: "text-gray-300 mt-1"
-    }, "Analyze your internal strengths & weaknesses plus external opportunities & threats")), /*#__PURE__*/React.createElement("div", {
-      className: `w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 mt-1 ${strategyTypes.includes('SWOT') ? 'border-blue-500 bg-blue-500' : 'border-gray-400'}`
-    }, strategyTypes.includes('SWOT') && /*#__PURE__*/React.createElement("span", {
-      className: "text-white text-xs font-bold"
-    }, "\u2713")))), /*#__PURE__*/React.createElement("label", {
-      className: `block p-4 border-2 rounded-lg cursor-pointer transition-all ${strategyTypes.includes('BMC') ? 'border-blue-500 bg-blue-900/30' : 'border-gray-500 bg-slate-800/50 hover:border-blue-400'}`
-    }, /*#__PURE__*/React.createElement("input", {
-      type: "checkbox",
-      value: "BMC",
-      checked: strategyTypes.includes('BMC'),
-      onChange: () => toggleType('BMC'),
-      className: "sr-only"
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "flex justify-between items-start"
-    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
-      className: "text-lg font-semibold text-white"
-    }, "\uD83D\uDCCA Business Model Canvas"), /*#__PURE__*/React.createElement("p", {
-      className: "text-gray-300 mt-1"
-    }, "Map out your complete business model across 9 key building blocks")), /*#__PURE__*/React.createElement("div", {
-      className: `w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 mt-1 ${strategyTypes.includes('BMC') ? 'border-blue-500 bg-blue-500' : 'border-gray-400'}`
-    }, strategyTypes.includes('BMC') && /*#__PURE__*/React.createElement("span", {
-      className: "text-white text-xs font-bold"
-    }, "\u2713")))), /*#__PURE__*/React.createElement("label", {
-      className: `block p-4 border-2 rounded-lg cursor-pointer transition-all ${strategyTypes.includes('90Day') ? 'border-blue-500 bg-blue-900/30' : 'border-gray-500 bg-slate-800/50 hover:border-blue-400'}`
-    }, /*#__PURE__*/React.createElement("input", {
-      type: "checkbox",
-      value: "90Day",
-      checked: strategyTypes.includes('90Day'),
-      onChange: () => toggleType('90Day'),
-      className: "sr-only"
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "flex justify-between items-start"
-    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
-      className: "text-lg font-semibold text-white"
-    }, "\uD83D\uDCC5 90-Day Roadmap"), /*#__PURE__*/React.createElement("p", {
-      className: "text-gray-300 mt-1"
-    }, "Create a detailed 3-month action plan with priorities and metrics")), /*#__PURE__*/React.createElement("div", {
-      className: `w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 mt-1 ${strategyTypes.includes('90Day') ? 'border-blue-500 bg-blue-500' : 'border-gray-400'}`
-    }, strategyTypes.includes('90Day') && /*#__PURE__*/React.createElement("span", {
-      className: "text-white text-xs font-bold"
-    }, "\u2713"))))), /*#__PURE__*/React.createElement("div", {
-      className: "flex justify-between mt-8"
-    }, /*#__PURE__*/React.createElement("button", {
-      onClick: () => setCurrentStep('input'),
-      className: "px-6 py-2 text-white border border-gray-300 rounded-lg hover:bg-gray-700"
-    }, "\u2190 Back"), /*#__PURE__*/React.createElement("button", {
-      onClick: generateStrategy,
-      disabled: strategyTypes.length === 0,
-      className: `px-6 py-2 rounded-lg font-semibold ${strategyTypes.length > 0 ? 'text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`,
-      style: strategyTypes.length > 0 ? {
-        background: '#fe2700'
-      } : {}
-    }, "Generate Strategy \u2192"))));
   }
 
   // Render Output
@@ -650,7 +612,10 @@ const App = () => {
     }, "\u2022 ", metric))))))))), /*#__PURE__*/React.createElement("div", {
       className: "flex flex-wrap gap-4 justify-center border-t pt-6"
     }, /*#__PURE__*/React.createElement("button", {
-      onClick: () => setCurrentStep('strategy'),
+      onClick: () => {
+        setCurrentStep('home');
+        setOutput(null);
+      },
       className: "px-4 py-2 text-white border border-gray-300 rounded-lg hover:bg-gray-700"
     }, "\u2190 Generate Another"), /*#__PURE__*/React.createElement("button", {
       onClick: copyToClipboard,
