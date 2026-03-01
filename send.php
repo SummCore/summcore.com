@@ -64,18 +64,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Optional field
     $phone = isset($_POST['phone']) ? htmlspecialchars(trim($_POST['phone'])) : 'Not provided';
 
+    // Email is optional for feedback submissions
+    $isFeedbackEarly = in_array(trim($_POST['business_name'] ?? ''), [
+        'Quick Feedback Widget', 'Feedback Survey', 'Customer Discovery Survey',
+    ]);
+
     // Check required fields are not empty
-    if (empty($businessName) || empty($yourName) || empty($email) || empty($needs)) {
+    if (empty($businessName) || empty($yourName) || (!$isFeedbackEarly && empty($email)) || empty($needs)) {
         echo "Error: Please fill in all required fields.";
         exit();
     }
 
-    // Validate email format
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    // Validate email format (only if provided)
+    if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo "Error: Please provide a valid email address.";
         exit();
     }
-    $email = htmlspecialchars($email);
+    if (!empty($email)) {
+        $email = htmlspecialchars($email);
+    }
 
     // Sanitise inputs for email header injection (strip newlines)
     $yourName = str_replace(["\r", "\n", "\t"], '', $yourName);

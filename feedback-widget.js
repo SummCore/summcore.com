@@ -256,7 +256,7 @@
     var body = new FormData();
     body.append('business_name', 'Quick Feedback Widget');
     body.append('your_name', emailVal || 'Anonymous');
-    body.append('email', emailVal || 'feedback@summcore.com');
+    body.append('email', emailVal || '');
     body.append('website', window.location.pathname);
     body.append('needs', summary);
 
