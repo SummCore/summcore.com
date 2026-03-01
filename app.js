@@ -547,7 +547,8 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     width: "36",
     height: "36",
     style: {
-      objectFit: 'contain'
+      objectFit: 'contain',
+      filter: 'brightness(0) invert(1)'
     },
     loading: "lazy"
   })), /*#__PURE__*/React.createElement("a", {
