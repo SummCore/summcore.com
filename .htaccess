@@ -1,7 +1,7 @@
 # SummCore Security Headers
 
 # Prevent clickjacking - set as HTTP header (meta tag does not work)
-Header always set X-Frame-Options "SAMEORIGIN"
+Header always set X-Frame-Options "DENY"
 
 # Prevent MIME type sniffing
 Header always set X-Content-Type-Options "nosniff"

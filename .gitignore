@@ -8,6 +8,12 @@ SummCore.zip
 *.tmp
 *.bak
 
+# Build sources (compiled output is app.js / strategy-app.js)
+app.jsx
+Business Strategy Generator/strategy-app.jsx
+compile.mjs
+fix-html.mjs
+
 # OS files
 .DS_Store
 Thumbs.db
