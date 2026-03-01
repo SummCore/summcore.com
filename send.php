@@ -144,7 +144,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
     $headers .= "Content-Transfer-Encoding: 8bit\r\n";
 
-    // Try to send email
+    // ── Thank-you email to the submitter ─────────────────────────────────────
+    $reply_sent = false;
+    $cleanEmail = filter_var($email, FILTER_VALIDATE_EMAIL) ? $email : '';
+    if ($cleanEmail) {
+        if ($isFeedback) {
+            $reply_subject = "Thank you for your feedback — SummCore";
+            $reply_body    = "Hi $yourName,\n\n";
+            $reply_body   .= "Thank you for taking the time to share your feedback with us.\n\n";
+            $reply_body   .= "We read every response and use it to improve SummCore for businesses like yours.\n\n";
+            $reply_body   .= "If you'd like to chat or have any questions, feel free to reply to this email.\n\n";
+            $reply_body   .= "Best regards,\n";
+            $reply_body   .= "The SummCore Team\n";
+            $reply_body   .= "info@summcore.com\n";
+            $reply_body   .= "https://summcore.com";
+        } else {
+            $reply_subject = "We've received your request — SummCore";
+            $reply_body    = "Hi $yourName,\n\n";
+            $reply_body   .= "Thank you for reaching out to SummCore!\n\n";
+            $reply_body   .= "We've received your consultation request and will be in touch with you shortly to discuss how we can help your business.\n\n";
+            $reply_body   .= "In the meantime, if you have any questions, just reply to this email.\n\n";
+            $reply_body   .= "Best regards,\n";
+            $reply_body   .= "The SummCore Team\n";
+            $reply_body   .= "info@summcore.com\n";
+            $reply_body   .= "https://summcore.com";
+        }
+        $reply_headers  = "From: SummCore <info@summcore.com>\r\n";
+        $reply_headers .= "Reply-To: SummCore <info@summcore.com>\r\n";
+        $reply_headers .= "Return-Path: info@summcore.com\r\n";
+        $reply_headers .= "X-Mailer: SummCore Website\r\n";
+        $reply_headers .= "MIME-Version: 1.0\r\n";
+        $reply_headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+        $reply_headers .= "Content-Transfer-Encoding: 8bit\r\n";
+        $reply_sent = mail($cleanEmail, $reply_subject, $reply_body, $reply_headers);
+    }
+
+    // Note thank-you status in notification email
+    $body .= "\nThank-you email: " . ($reply_sent ? "Sent to $email" : ($cleanEmail ? "Failed to send to $email" : "Not sent (no valid email)"));
+
+    // Try to send notification email to SummCore
     $mail_sent = mail($to, $subject, $body, $headers);
 
     // ── Post to Boost dashboard (fire-and-forget, non-blocking) ──────────────
