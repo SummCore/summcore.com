@@ -15,6 +15,31 @@ if (count($_SESSION[$rate_key]) >= 5) {
     exit();
 }
 
+// ── Boost dashboard integration ──────────────────────────────────────────────
+// Posts data to the Boost admin dashboard (server-to-server, no CORS issues).
+// Failures are silent — email delivery is the primary notification path.
+define('BOOST_API_BASE', 'https://boost.summcore.com/api/boost');
+define('BOOST_API_KEY',  getenv('WEBSITE_API_KEY') ?: '');
+
+function boost_post(string $endpoint, array $data): void {
+    $ch = curl_init(BOOST_API_BASE . $endpoint);
+    curl_setopt_array($ch, [
+        CURLOPT_POST           => true,
+        CURLOPT_POSTFIELDS     => json_encode($data),
+        CURLOPT_HTTPHEADER     => [
+            'Content-Type: application/json',
+            'Accept: application/json',
+            'X-Api-Key: ' . BOOST_API_KEY,
+        ],
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT        => 5,
+        CURLOPT_SSL_VERIFYPEER => true,
+    ]);
+    curl_exec($ch);
+    curl_close($ch);
+}
+// ─────────────────────────────────────────────────────────────────────────────
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Required fields
     $businessName = htmlspecialchars(trim($_POST['business_name'] ?? ''));
@@ -96,6 +121,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Try to send email
     $mail_sent = mail($to, $subject, $body, $headers);
+
+    // ── Post to Boost dashboard (fire-and-forget, non-blocking) ──────────────
+    if ($isWidget) {
+        // Feedback widget → Landing Page Feedback section in dashboard
+        boost_post('/landing-survey', [
+            'rating'               => isset($_POST['rating']) ? (int)$_POST['rating'] : null,
+            'improvement_feedback' => mb_substr($needs, 0, 2000),
+            'email'                => filter_var($email, FILTER_VALIDATE_EMAIL) ? $email : null,
+        ]);
+    } elseif (!$isFeedback) {
+        // Consultation form → Website Enquiries section in dashboard
+        boost_post('/website-enquiry', [
+            'name'    => $yourName,
+            'email'   => $email,
+            'company' => $businessName !== 'Quick Feedback Widget' ? $businessName : null,
+            'website' => $website ?: null,
+            'phone'   => $phone !== 'Not provided' ? $phone : null,
+            'message' => mb_substr($needs, 0, 5000),
+            'source'  => 'consultation',
+        ]);
+    }
+    // ─────────────────────────────────────────────────────────────────────────
 
     if ($mail_sent) {
         header("Location: thank-you.html");
