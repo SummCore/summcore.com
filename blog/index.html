@@ -29,33 +29,46 @@
   <meta name="twitter:image" content="https://summcore.com/Logo/SC25.png">
   <style>
     body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 0; background: #0f172a; color: #e5e7eb; }
-    .container { max-width: 980px; margin: 0 auto; padding: 24px; }
+    .container { max-width: 980px; margin: 0 auto; padding: 32px 24px; }
     a { color: #2dd4bf; text-decoration: none; }
-    .card { background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
-    h1, h2 { color: #2dd4bf; }
+    a:hover { text-decoration: underline; }
+    h1 { color: #2dd4bf; font-size: 2rem; margin-bottom: 0.5rem; }
+    .subtitle { color: #9ca3af; margin-bottom: 2rem; }
+    .card { background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 24px; margin-bottom: 20px; transition: border-color 0.2s; }
+    .card:hover { border-color: #2dd4bf; }
+    .card h2 { color: #2dd4bf; font-size: 1.3rem; margin: 0 0 8px 0; }
+    .card h2 a { color: #2dd4bf; }
+    .card .meta { color: #6b7280; font-size: 0.8rem; margin-bottom: 10px; }
+    .card p { color: #d1d5db; line-height: 1.6; margin: 0; }
+    .tag { display: inline-block; background: #1e293b; color: #2dd4bf; font-size: 0.75rem; padding: 2px 10px; border-radius: 9999px; margin-right: 6px; }
   </style>
 </head>
 <body>
   <div class="container">
-    <a href="../index.html" aria-label="Back to home">← Back to SummCore</a>
-    <h1>SummCore Blog: Innovation, Growth Strategy, and SME Marketing</h1>
+    <a href="../index.html">&larr; Back to SummCore</a>
+    <h1>SummCore Blog</h1>
+    <p class="subtitle">Actionable insights on growth strategy, marketing, and operations for SMEs and startups.</p>
+
     <div class="card">
       <h2><a href="seo-checklist-for-smes.html">SEO Checklist for SMEs: 2025 Edition</a></h2>
-      <p>Step-by-step SEO playbook for small businesses: on-page, technical, and content tips for 2025.</p>
+      <div class="meta">January 2025 &middot; 6 min read</div>
+      <p>A step-by-step SEO playbook for small businesses covering on-page basics, technical SEO, Core Web Vitals, schema markup, content strategy, and local SEO. Includes a prioritised 4-week action plan.</p>
+      <div style="margin-top:12px"><span class="tag">SEO</span><span class="tag">Marketing</span></div>
     </div>
+
     <div class="card">
       <h2><a href="product-led-growth-for-service-businesses.html">Product-Led Growth for Service Businesses</a></h2>
-      <p>How service firms can borrow PLG tactics to scale acquisition and retention.</p>
+      <div class="meta">January 2025 &middot; 7 min read</div>
+      <p>How consultancies, agencies, and professional services can borrow product-led growth tactics to lower acquisition costs, build trust at first contact, and create scalable retention loops.</p>
+      <div style="margin-top:12px"><span class="tag">Growth</span><span class="tag">Strategy</span></div>
     </div>
+
     <div class="card">
       <h2><a href="revenue-forecasting-best-practices.html">Revenue Forecasting Best Practices</a></h2>
-      <p>Forecast with confidence: models, assumptions, and pitfalls to avoid.</p>
+      <div class="meta">January 2025 &middot; 7 min read</div>
+      <p>Choose the right forecasting model (top-down, bottom-up, or cohort-based), make assumptions explicit, plan for scenarios, and track actuals vs plan to build credible financial projections.</p>
+      <div style="margin-top:12px"><span class="tag">Finance</span><span class="tag">Planning</span></div>
     </div>
   </div>
 </body>
 </html>
-
-
-
-
-

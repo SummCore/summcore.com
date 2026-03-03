@@ -135,6 +135,9 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     }, "Coming soon")), /*#__PURE__*/React.createElement("div", {
       className: "text-sm text-gray-500 leading-snug"
     }, "CAPM and PMP exam preparation platform with AI-generated practice questions and gamified progress tracking.")))), /*#__PURE__*/React.createElement("a", {
+      href: "blog/index.html",
+      className: "text-gray-700 hover:text-amber-600 transition-colors duration-300"
+    }, "Blog"), /*#__PURE__*/React.createElement("a", {
       href: "#consultation",
       className: "text-gray-700 hover:text-amber-600 transition-colors duration-300"
     }, "Consultation"), /*#__PURE__*/React.createElement("a", {
@@ -199,6 +202,9 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     }, "SummCore Pro"), /*#__PURE__*/React.createElement("span", {
       className: "text-xs text-gray-400"
     }, "Coming soon"))), /*#__PURE__*/React.createElement("a", {
+      href: "blog/index.html",
+      className: "py-2 text-gray-700 hover:text-amber-600"
+    }, "Blog"), /*#__PURE__*/React.createElement("a", {
       href: "#consultation",
       className: "py-2 text-gray-700 hover:text-amber-600"
     }, "Consultation"), /*#__PURE__*/React.createElement("a", {
@@ -506,6 +512,9 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     href: "#tools",
     className: "text-gray-400 footer-link"
   }, "Free Tools")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
+    href: "blog/index.html",
+    className: "text-gray-400 footer-link"
+  }, "Blog")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
     href: "#consultation",
     className: "text-gray-400 footer-link"
   }, "Consultation")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
