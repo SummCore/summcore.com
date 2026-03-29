@@ -24,7 +24,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     }, /*#__PURE__*/React.createElement("div", {
       className: "relative"
     }, /*#__PURE__*/React.createElement("img", {
-      src: "Logo/SC23.png",
+      src: "Logo/SC23.png?v=2",
       alt: "SummCore company logo",
       className: "h-20 filter drop-shadow-2xl hover:drop-shadow-3xl transition-all duration-300 transform hover:-translate-y-1",
       style: {
