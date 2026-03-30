@@ -495,7 +495,16 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     className: "grid grid-cols-1 md:grid-cols-3 gap-8 items-start"
   }, /*#__PURE__*/React.createElement("div", {
     className: "md:justify-self-start"
-  }, /*#__PURE__*/React.createElement("h3", {
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "Logo/SC31.png",
+    alt: "SummCore",
+    width: "60",
+    height: "60",
+    style: {
+      objectFit: 'contain'
+    },
+    loading: "lazy"
+  }), /*#__PURE__*/React.createElement("h3", {
     className: "text-lg font-semibold mb-4"
   }, "SummCore"), /*#__PURE__*/React.createElement("p", {
     className: "text-gray-400"
