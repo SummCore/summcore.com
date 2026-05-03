@@ -605,7 +605,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     "aria-label": "SummCore on YouTube"
   }, /*#__PURE__*/React.createElement("img", {
     className: "social-icon",
-    src: "Logo/Social Media/Youtube.png",
+    src: "Logo/Social Media/yt_logo_fullcolor_white_digital.png",
     alt: "SummCore on YouTube",
     width: "36",
     height: "36",
