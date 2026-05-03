@@ -13,6 +13,16 @@ app.jsx
 Business Strategy Generator/strategy-app.jsx
 compile.mjs
 fix-html.mjs
+fix-logo.mjs
+
+# Dependencies
+node_modules/
+
+# Editor / tooling
+.claude/
+
+# Personal notes
+Tonight To Do List.txt
 
 # OS files
 .DS_Store
