@@ -598,6 +598,21 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       objectFit: 'contain'
     },
     loading: "lazy"
+  })), /*#__PURE__*/React.createElement("a", {
+    href: "https://www.youtube.com/@SummCore",
+    target: "_blank",
+    rel: "noopener",
+    "aria-label": "SummCore on YouTube"
+  }, /*#__PURE__*/React.createElement("img", {
+    className: "social-icon",
+    src: "Logo/Social Media/Youtube.png",
+    alt: "SummCore on YouTube",
+    width: "36",
+    height: "36",
+    style: {
+      objectFit: 'contain'
+    },
+    loading: "lazy"
   })))), /*#__PURE__*/React.createElement("div", {
     className: "mt-6 text-center text-gray-400"
   }, "\xA9 2026 SummCore. All rights reserved.")));
