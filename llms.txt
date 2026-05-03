@@ -1,0 +1,41 @@
+# SummCore
+
+> SummCore helps SMEs and startups grow through innovation consulting, free business tools, and one-to-one expert consultation. We turn strategy into measurable revenue, retention, and operational efficiency.
+
+SummCore is an innovation consultancy and product studio for small-to-medium businesses. We combine paid advisory services with a suite of free, browser-based tools that help business owners diagnose problems, plan strategy, and forecast revenue without needing technical skills.
+
+## Core Services
+
+- [Services overview](https://summcore.com/#services): Innovation consulting, growth strategy, product development, and ongoing advisory for SMEs and startups.
+- [Book a consultation](https://summcore.com/#consultation): One-to-one expert sessions to diagnose growth blockers and build a tailored action plan.
+- [About SummCore](https://summcore.com/about.html): Mission, methodology, and the team behind the consultancy.
+
+## Free Tools
+
+- [Business Health Check & Audit Tool](https://summcore.com/Business%20Health%20Check%20&%20Audit%20Tool/businesshealthcheck.html): Free interactive audit that scores a business across financial, operational, marketing, and growth dimensions, then returns a tailored report.
+- [Smart Business Strategy Generator](https://summcore.com/Business%20Strategy%20Generator/smart-business-strategy-generator.html): AI-assisted tool that generates a custom business strategy from a few inputs about the user's business and goals.
+- [Free Financial Health Checker](https://summcore.com/Free%20Financial%20Health%20Checker/financial-calculator.html): Calculator that surfaces financial weak spots and recommends improvements.
+- [Revenue Calculator](https://summcore.com/Revenue%20Calculator/index.html): Models revenue scenarios for service and product businesses to support pricing and forecasting decisions.
+- [Invoicing & Quotation Tool](https://summcore.com/Invoicing%20&%20Quotation/index.html): Free invoice and quote generator for small businesses.
+
+## Ecosystem
+
+- [SummCore Boost](https://boost.summcore.com/): Sister product within the SummCore ecosystem focused on accelerated growth programmes.
+
+## Blog
+
+- [Blog index](https://summcore.com/blog/index.html): Articles on growth, strategy, SEO, and product-led approaches for service businesses.
+- [SEO Checklist for SMEs](https://summcore.com/blog/seo-checklist-for-smes.html)
+- [Product-Led Growth for Service Businesses](https://summcore.com/blog/product-led-growth-for-service-businesses.html)
+- [Revenue Forecasting Best Practices](https://summcore.com/blog/revenue-forecasting-best-practices.html)
+
+## Contact
+
+- Homepage consultation form: https://summcore.com/#consultation
+- Email: hello@summcore.com
+
+## Optional
+
+- [Privacy Policy](https://summcore.com/privacy.html)
+- [Terms of Service](https://summcore.com/terms.html)
+- [Sitemap](https://summcore.com/sitemap.xml)
