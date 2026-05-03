@@ -6,6 +6,11 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://boost.summcore.com/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://summcore.com/Business%20Health%20Check%20&amp;%20Audit%20Tool/businesshealthcheck.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
