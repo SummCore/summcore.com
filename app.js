@@ -521,6 +521,9 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     href: "#tools",
     className: "text-gray-400 footer-link"
   }, "Free Tools")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
+    href: "https://boost.summcore.com",
+    className: "text-gray-400 footer-link"
+  }, "Business Health Check")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
     href: "blog/index.html",
     className: "text-gray-400 footer-link"
   }, "Blog")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
@@ -614,6 +617,16 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
   }, /*#__PURE__*/React.createElement("path", {
     d: "M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
   }))))), /*#__PURE__*/React.createElement("div", {
+    className: "mt-8 pt-6 border-t border-white/10 text-center"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "text-sm text-gray-400 mb-2"
+  }, "Free assessment"), /*#__PURE__*/React.createElement("a", {
+    href: "https://boost.summcore.com",
+    className: "inline-block text-lg font-semibold text-white footer-link",
+    title: "Free Business Health Check — SummCore Boost"
+  }, "Get your free Business Health Check \u2192"), /*#__PURE__*/React.createElement("p", {
+    className: "text-sm text-gray-400 mt-2"
+  }, "Score your business across 5 pillars in 5 minutes. Free, instant, AI-powered.")), /*#__PURE__*/React.createElement("div", {
     className: "mt-6 text-center text-gray-400"
   }, "\xA9 2026 SummCore. All rights reserved.")));
   const Consultation = () => /*#__PURE__*/React.createElement("section", {
