@@ -305,34 +305,94 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       background: '#fe2700'
     }
   }, "Get in Touch")));
-  const Services = () => /*#__PURE__*/React.createElement("section", {
-    id: "services",
-    className: "py-16 bg-slate-800"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-  }, /*#__PURE__*/React.createElement("h2", {
-    className: "text-3xl font-bold text-white text-center mb-12"
-  }, "What services does SummCore offer?"), /*#__PURE__*/React.createElement("div", {
-    className: "pt-16 grid grid-cols-1 md:grid-cols-3 gap-8"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "bg-slate-700 p-6 rounded-lg shadow-md border border-slate-600 hover:border-amber-500 transition-colors duration-300"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "text-xl font-semibold text-white mb-4"
-  }, "Idea Generation"), /*#__PURE__*/React.createElement("p", {
-    className: "text-gray-300"
-  }, "Creative solutions tailored to your business needs and challenges.")), /*#__PURE__*/React.createElement("div", {
-    className: "bg-slate-700 p-6 rounded-lg shadow-md border border-slate-600 hover:border-amber-500 transition-colors duration-300"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "text-xl font-semibold text-white mb-4"
-  }, "Revenue Strategy"), /*#__PURE__*/React.createElement("p", {
-    className: "text-gray-300"
-  }, "Custom strategies to optimize revenue streams and attract new customers.")), /*#__PURE__*/React.createElement("div", {
-    className: "bg-slate-700 p-6 rounded-lg shadow-md border border-slate-600 hover:border-amber-500 transition-colors duration-300"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "text-xl font-semibold text-white mb-4"
-  }, "Ongoing Support"), /*#__PURE__*/React.createElement("p", {
-    className: "text-gray-300"
-  }, "Continuous engagement to refine and implement innovative ideas for growth.")))));
+  const Services = () => {
+    const services = [{
+      icon: "💬",
+      color: "#f59e0b",
+      title: "Quote Follow-Up",
+      desc: "You already did the hard part quoting. We chase the quotes you sent with friendly, automatic nudges, so the quiet ones turn into booked work."
+    }, {
+      icon: "💷",
+      color: "#10b981",
+      title: "Invoice Chasing",
+      desc: "Stop spending your evenings chasing money. We follow up overdue invoices politely and persistently, in your name, so you get paid without the awkward calls."
+    }, {
+      icon: "🎨",
+      color: "#8b5cf6",
+      title: "Web Design & App Development",
+      desc: "Need a site that actually sells, or an app built from scratch? We design, build and ship it. Clean, fast and properly yours."
+    }, {
+      icon: "🚀",
+      color: "#0ea5e9",
+      title: "Growth Strategy & Consulting",
+      desc: "Years spent finding where growth stalls inside real businesses. We pinpoint what is holding you back and map the clearest way forward."
+    }, {
+      icon: "🔧",
+      color: "#ec4899",
+      title: "Whatever You Need Built",
+      desc: "Something else on your mind? Automations, integrations, a one-off tool. Tell us the problem and we will work out how to solve it."
+    }];
+    return /*#__PURE__*/React.createElement("section", {
+      id: "services",
+      className: "py-16 bg-slate-800"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+    }, /*#__PURE__*/React.createElement("h2", {
+      className: "text-3xl md:text-4xl font-bold text-white text-center mb-3"
+    }, "What services does SummCore offer?"), /*#__PURE__*/React.createElement("p", {
+      className: "text-gray-400 text-center max-w-2xl mx-auto mb-10"
+    }, "From AI that answers your phone to the website that wins the customer, here is what we build and run for you. No job too small, no idea too odd."), /*#__PURE__*/React.createElement("div", {
+      className: "relative mb-8 rounded-2xl p-8 md:p-10 overflow-hidden",
+      style: {
+        background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
+        border: '1px solid rgba(254,39,0,0.4)'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "inline-block text-xs font-bold tracking-wide uppercase px-3 py-1 rounded-full mb-4",
+      style: {
+        background: '#fe2700',
+        color: '#fff'
+      }
+    }, "Flagship Service"), /*#__PURE__*/React.createElement("div", {
+      className: "flex flex-col md:flex-row md:items-center gap-6"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "flex items-center justify-center rounded-2xl shrink-0",
+      style: {
+        width: '72px',
+        height: '72px',
+        background: 'rgba(254,39,0,0.15)',
+        fontSize: '36px'
+      }
+    }, "📞"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
+      className: "text-2xl font-bold text-white mb-2"
+    }, "AI Receptionist & Missed-Call Recovery"), /*#__PURE__*/React.createElement("p", {
+      className: "text-gray-300 text-lg"
+    }, "Never lose another lead to a ringing phone. We set up instant text-back and an AI receptionist that answers, books the job and texts you the summary, day or night. Most local businesses miss nearly half their calls. We make sure yours get answered.")))), /*#__PURE__*/React.createElement("div", {
+      className: "grid grid-cols-1 md:grid-cols-3 gap-6"
+    }, services.map((s, i) => /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: "group bg-slate-700 rounded-2xl border border-slate-600 hover:border-amber-500 hover:-translate-y-1 transition-all duration-300 overflow-hidden shadow-md hover:shadow-xl"
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        height: '4px',
+        background: s.color
+      }
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "p-6"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "flex items-center justify-center rounded-xl mb-4",
+      style: {
+        width: '52px',
+        height: '52px',
+        background: s.color + '26',
+        fontSize: '26px'
+      }
+    }, s.icon), /*#__PURE__*/React.createElement("h3", {
+      className: "text-xl font-semibold text-white mb-3"
+    }, s.title), /*#__PURE__*/React.createElement("p", {
+      className: "text-gray-300"
+    }, s.desc)))))));
+  };
   const Pitch = () => /*#__PURE__*/React.createElement("section", {
     className: "py-16 text-white relative overflow-hidden",
     style: {
@@ -364,7 +424,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     className: "mb-4 text-lg"
   }, "If you want the full picture, unlock the ", /*#__PURE__*/React.createElement("span", {
     className: "text-amber-300 font-semibold"
-  }, "premium report for $35"), ". Built entirely from your answers, it goes beyond scoring. It identifies the specific growth opportunities and ideas relevant to your business, things that are easy to miss when you are in the middle of running it."), /*#__PURE__*/React.createElement("p", {
+  }, "premium report for £29"), ". Built entirely from your answers, it goes beyond scoring. It identifies the specific growth opportunities and ideas relevant to your business, things that are easy to miss when you are in the middle of running it."), /*#__PURE__*/React.createElement("p", {
     className: "mb-4 text-lg"
   }, "Every premium report includes a ", /*#__PURE__*/React.createElement("span", {
     className: "text-amber-300 font-semibold"
@@ -386,7 +446,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     className: "text-amber-400 mr-3"
   }, "\u2022"), /*#__PURE__*/React.createElement("span", null, "A ", /*#__PURE__*/React.createElement("span", {
     className: "text-amber-300 font-semibold"
-  }, "$35 premium report"), " with AI-powered analysis built from your specific answers, not a generic template")), /*#__PURE__*/React.createElement("li", {
+  }, "£29 premium report"), " with AI-powered analysis built from your specific answers, not a generic template")), /*#__PURE__*/React.createElement("li", {
     className: "flex items-start"
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-amber-400 mr-3"
