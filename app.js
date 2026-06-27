@@ -806,7 +806,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       className: "px-6 pb-4 text-gray-300"
     }, item.a))))));
   };
-  const App = () => /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(NavBar, null), /*#__PURE__*/React.createElement(Hero, null), /*#__PURE__*/React.createElement(Services, null), /*#__PURE__*/React.createElement(Pitch, null), /*#__PURE__*/React.createElement(Tools, null), /*#__PURE__*/React.createElement(FAQ, null), /*#__PURE__*/React.createElement(Consultation, null), /*#__PURE__*/React.createElement(Footer, null));
+  const App = () => /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(NavBar, null), /*#__PURE__*/React.createElement(Hero, null), /*#__PURE__*/React.createElement(Pitch, null), /*#__PURE__*/React.createElement(Services, null), /*#__PURE__*/React.createElement(Tools, null), /*#__PURE__*/React.createElement(FAQ, null), /*#__PURE__*/React.createElement(Consultation, null), /*#__PURE__*/React.createElement(Footer, null));
 
   // Use React 18 createRoot API if available, otherwise fallback to legacy render
 
