@@ -210,29 +210,6 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       className: "py-2 text-gray-700 hover:text-amber-600"
     }, "Contact"))));
   };
-
-  // Rotating hero phrases — pairs switch together (wordRotate1/2/3 keyframes in index.html)
-  const HERO_ROTATE_A = ['on the job', 'on site', 'with a customer'];
-  const HERO_ROTATE_B = ['answering', 'booking', 'following up'];
-  const RotatingWords = ({
-    words,
-    minWidth
-  }) => /*#__PURE__*/React.createElement("span", {
-    className: "relative inline-block align-baseline",
-    style: {
-      minWidth,
-      height: '1.2em'
-    }
-  }, words.map((w, i) => /*#__PURE__*/React.createElement("span", {
-    key: i,
-    className: "absolute inset-0 bg-gradient-to-r from-amber-300 via-yellow-300 to-orange-400 bg-clip-text text-transparent font-semibold",
-    style: {
-      animation: `wordRotate${i + 1} 12s infinite ease-in-out`,
-      fontStyle: 'italic',
-      fontFamily: 'Georgia, "Times New Roman", serif',
-      letterSpacing: '0.02em'
-    }
-  }, w)));
   const Hero = () => /*#__PURE__*/React.createElement("section", {
     className: "text-white py-20 relative overflow-hidden",
     style: {
@@ -256,18 +233,17 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     style: {
       fontStyle: 'italic'
     }
-  }, "While you're "), /*#__PURE__*/React.createElement(RotatingWords, {
-    words: HERO_ROTATE_A,
-    minWidth: "240px"
-  }), /*#__PURE__*/React.createElement("span", {
+  }, "While you're out on a job, "), /*#__PURE__*/React.createElement("span", {
+    className: "bg-gradient-to-r from-amber-300 via-yellow-300 to-orange-400 bg-clip-text text-transparent font-semibold",
+    style: {
+      fontStyle: 'italic'
+    }
+  }, "Sage, our AI receptionist,"), /*#__PURE__*/React.createElement("span", {
     className: "text-amber-100",
     style: {
       fontStyle: 'italic'
     }
-  }, " \u2026 Sage is "), /*#__PURE__*/React.createElement(RotatingWords, {
-    words: HERO_ROTATE_B,
-    minWidth: "200px"
-  })), /*#__PURE__*/React.createElement("div", {
+  }, " answers the call and books it in.")), /*#__PURE__*/React.createElement("div", {
     className: "w-24 h-1 bg-amber-400 mx-auto rounded-full opacity-60"
   })), /*#__PURE__*/React.createElement("p", {
     className: "text-lg md:text-xl mb-8 max-w-3xl mx-auto"
