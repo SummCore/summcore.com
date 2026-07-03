@@ -13,6 +13,14 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       }
     } catch (err) {}
   };
+
+  // Sage demo line + booking link — single source of truth.
+  // Fill these in and recompile (node compile.mjs); the demo strip and
+  // "Talk to Sage" tel: links stay hidden until SAGE_NUMBER is set.
+  const SAGE_NUMBER = ''; // e.g. '+442920000000' — Sage's Cardiff demo line (Vapi)
+  const SAGE_NUMBER_DISPLAY = ''; // e.g. '029 2000 0000'
+  const CAL_LINK = ''; // e.g. 'summcore/15min' — Cal.com booking link (username/event)
+
   const NavBar = () => {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     return /*#__PURE__*/React.createElement("nav", {
@@ -124,17 +132,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       className: "text-xs text-gray-400 mt-0.5"
     }, "boost.summcore.com")), /*#__PURE__*/React.createElement("div", {
       className: "text-sm text-gray-500 leading-snug"
-    }, "AI-powered business health assessments across five pillars with scored reports and recommendations.")), /*#__PURE__*/React.createElement("div", {
-      className: "flex gap-4 p-3 rounded-lg opacity-40 cursor-not-allowed select-none"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "w-36 shrink-0"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "text-gray-800 font-semibold text-sm"
-    }, "SummCore Pro"), /*#__PURE__*/React.createElement("div", {
-      className: "text-xs text-gray-400 mt-0.5"
-    }, "Coming soon")), /*#__PURE__*/React.createElement("div", {
-      className: "text-sm text-gray-500 leading-snug"
-    }, "CAPM and PMP exam preparation platform with AI-generated practice questions and gamified progress tracking.")))), /*#__PURE__*/React.createElement("a", {
+    }, "AI-powered business health assessments across five pillars with scored reports and recommendations.")))), /*#__PURE__*/React.createElement("a", {
       href: "blog/index.html",
       className: "text-gray-700 hover:text-amber-600 transition-colors duration-300"
     }, "Blog"), /*#__PURE__*/React.createElement("a", {
@@ -195,13 +193,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       className: "font-medium"
     }, "SummCore Boost"), /*#__PURE__*/React.createElement("span", {
       className: "text-xs text-gray-400"
-    }, "boost.summcore.com")), /*#__PURE__*/React.createElement("div", {
-      className: "py-2 pl-3 flex flex-col opacity-40 cursor-not-allowed"
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "font-medium text-gray-700"
-    }, "SummCore Pro"), /*#__PURE__*/React.createElement("span", {
-      className: "text-xs text-gray-400"
-    }, "Coming soon"))), /*#__PURE__*/React.createElement("a", {
+    }, "boost.summcore.com"))), /*#__PURE__*/React.createElement("a", {
       href: "blog/index.html",
       className: "py-2 text-gray-700 hover:text-amber-600"
     }, "Blog"), /*#__PURE__*/React.createElement("a", {
@@ -212,6 +204,29 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       className: "py-2 text-gray-700 hover:text-amber-600"
     }, "Contact"))));
   };
+
+  // Rotating hero phrases — pairs switch together (wordRotate1/2/3 keyframes in index.html)
+  const HERO_ROTATE_A = ['on the job', 'on site', 'with a customer'];
+  const HERO_ROTATE_B = ['answering', 'booking', 'following up'];
+  const RotatingWords = ({
+    words,
+    minWidth
+  }) => /*#__PURE__*/React.createElement("span", {
+    className: "relative inline-block align-baseline",
+    style: {
+      minWidth,
+      height: '1.2em'
+    }
+  }, words.map((w, i) => /*#__PURE__*/React.createElement("span", {
+    key: i,
+    className: "absolute inset-0 bg-gradient-to-r from-amber-300 via-yellow-300 to-orange-400 bg-clip-text text-transparent font-semibold",
+    style: {
+      animation: `wordRotate${i + 1} 12s infinite ease-in-out`,
+      fontStyle: 'italic',
+      fontFamily: 'Georgia, "Times New Roman", serif',
+      letterSpacing: '0.02em'
+    }
+  }, w)));
   const Hero = () => /*#__PURE__*/React.createElement("section", {
     className: "text-white py-20 relative overflow-hidden",
     style: {
@@ -221,7 +236,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
   }, /*#__PURE__*/React.createElement("h1", {
     className: "text-4xl md:text-5xl font-bold mb-4"
-  }, "Innovation Consulting and Growth Strategies for SMEs"), /*#__PURE__*/React.createElement("div", {
+  }, "Never lose another job to a missed call."), /*#__PURE__*/React.createElement("div", {
     className: "mb-6"
   }, /*#__PURE__*/React.createElement("div", {
     className: "text-2xl md:text-3xl font-light text-amber-200 mb-2 relative",
@@ -235,76 +250,84 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     style: {
       fontStyle: 'italic'
     }
-  }, "\"Where "), /*#__PURE__*/React.createElement("span", {
-    className: "relative inline-block",
-    style: {
-      minWidth: '220px',
-      height: '1.2em'
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "absolute inset-0 bg-gradient-to-r from-amber-300 via-yellow-300 to-amber-400 bg-clip-text text-transparent font-semibold",
-    style: {
-      animation: 'wordSwitch1 10s infinite ease-in-out',
-      fontStyle: 'italic',
-      fontFamily: 'Georgia, "Times New Roman", serif',
-      letterSpacing: '0.02em'
-    }
-  }, "imagination"), /*#__PURE__*/React.createElement("span", {
-    className: "absolute inset-0 bg-gradient-to-r from-yellow-300 via-amber-300 to-orange-400 bg-clip-text text-transparent font-semibold",
-    style: {
-      animation: 'wordSwitch2 10s infinite ease-in-out',
-      fontStyle: 'italic',
-      fontFamily: 'Georgia, "Times New Roman", serif',
-      letterSpacing: '0.02em'
-    }
-  }, "possibility")), /*#__PURE__*/React.createElement("span", {
-    className: "text-amber-200 mx-2",
-    style: {
-      fontSize: '1.2em'
-    }
-  }, "\u2728"), /*#__PURE__*/React.createElement("span", {
+  }, "While you're "), /*#__PURE__*/React.createElement(RotatingWords, {
+    words: HERO_ROTATE_A,
+    minWidth: "240px"
+  }), /*#__PURE__*/React.createElement("span", {
     className: "text-amber-100",
     style: {
       fontStyle: 'italic'
     }
-  }, "meets "), /*#__PURE__*/React.createElement("span", {
-    className: "relative inline-block",
-    style: {
-      minWidth: '220px',
-      height: '1.2em'
-    }
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "absolute inset-0 bg-gradient-to-r from-yellow-300 via-amber-300 to-orange-400 bg-clip-text text-transparent font-semibold",
-    style: {
-      animation: 'wordSwitch1 10s infinite ease-in-out',
-      fontStyle: 'italic',
-      fontFamily: 'Georgia, "Times New Roman", serif',
-      letterSpacing: '0.02em'
-    }
-  }, "possibility"), /*#__PURE__*/React.createElement("span", {
-    className: "absolute inset-0 bg-gradient-to-r from-amber-300 via-yellow-300 to-amber-400 bg-clip-text text-transparent font-semibold",
-    style: {
-      animation: 'wordSwitch2 10s infinite ease-in-out',
-      fontStyle: 'italic',
-      fontFamily: 'Georgia, "Times New Roman", serif',
-      letterSpacing: '0.02em'
-    }
-  }, "imagination")), /*#__PURE__*/React.createElement("span", {
-    className: "text-amber-100",
-    style: {
-      fontStyle: 'italic'
-    }
-  }, "\"")), /*#__PURE__*/React.createElement("div", {
+  }, " \u2026 Sage is "), /*#__PURE__*/React.createElement(RotatingWords, {
+    words: HERO_ROTATE_B,
+    minWidth: "200px"
+  })), /*#__PURE__*/React.createElement("div", {
     className: "w-24 h-1 bg-amber-400 mx-auto rounded-full opacity-60"
   })), /*#__PURE__*/React.createElement("p", {
-    className: "text-lg md:text-xl mb-8"
-  }, "SummCore helps SMEs and startups unlock new ideas to boost revenue and engagement."), /*#__PURE__*/React.createElement("a", {
-    href: "#consultation",
-    className: "text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-1",
+    className: "text-lg md:text-xl mb-8 max-w-3xl mx-auto"
+  }, "SummCore builds AI systems that answer, book, chase and follow up for local businesses \u2014 starting from \xA3199/month. Hear it live before you spend a penny."), /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-col sm:flex-row gap-4 justify-center items-center"
+  }, SAGE_NUMBER ? /*#__PURE__*/React.createElement("a", {
+    href: `tel:${SAGE_NUMBER}`,
+    className: "text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-1",
     style: {
       background: '#fe2700'
     }
-  }, "Get in Touch")));
+  }, "\uD83C\uDF99 Talk to Sage \u2014 hear it live") : /*#__PURE__*/React.createElement("a", {
+    href: "#consultation",
+    className: "text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-1",
+    style: {
+      background: '#fe2700'
+    }
+  }, "Book a free 15-min call"), /*#__PURE__*/React.createElement("a", {
+    href: "https://boost.summcore.com",
+    className: "px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-2 border-amber-400 text-amber-300 hover:bg-amber-400 hover:text-slate-900"
+  }, "Start the \xA329 Boost")), SAGE_NUMBER && /*#__PURE__*/React.createElement("p", {
+    className: "mt-4 text-gray-300"
+  }, "Or ring Sage directly: ", /*#__PURE__*/React.createElement("a", {
+    href: `tel:${SAGE_NUMBER}`,
+    className: "text-amber-300 font-semibold hover:underline"
+  }, SAGE_NUMBER_DISPLAY || SAGE_NUMBER))));
+
+  // Live demo strip — hidden until SAGE_NUMBER is set
+  const DemoStrip = () => {
+    const [copied, setCopied] = React.useState(false);
+    if (!SAGE_NUMBER) return null;
+    const copyNumber = () => {
+      try {
+        navigator.clipboard.writeText(SAGE_NUMBER_DISPLAY || SAGE_NUMBER).then(() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        });
+      } catch (err) {}
+    };
+    return /*#__PURE__*/React.createElement("section", {
+      id: "demo",
+      className: "py-10 text-white",
+      style: {
+        background: '#0b1220',
+        borderTop: '1px solid rgba(254,39,0,0.4)',
+        borderBottom: '1px solid rgba(254,39,0,0.4)'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+    }, /*#__PURE__*/React.createElement("p", {
+      className: "text-xl md:text-2xl font-semibold mb-2"
+    }, "Don't take our word for it. Call Sage right now."), /*#__PURE__*/React.createElement("p", {
+      className: "text-gray-400 mb-6"
+    }, "If you'd have known it was AI, tell us."), /*#__PURE__*/React.createElement("div", {
+      className: "flex flex-col sm:flex-row gap-4 justify-center items-center"
+    }, /*#__PURE__*/React.createElement("a", {
+      href: `tel:${SAGE_NUMBER}`,
+      className: "text-white px-8 py-4 rounded-full font-bold text-xl transition-all duration-300 hover:shadow-xl hover:-translate-y-1",
+      style: {
+        background: '#fe2700'
+      }
+    }, "\uD83D\uDCDE ", SAGE_NUMBER_DISPLAY || SAGE_NUMBER), /*#__PURE__*/React.createElement("button", {
+      onClick: copyNumber,
+      className: "px-6 py-3 rounded-full font-semibold border border-gray-500 text-gray-300 hover:border-amber-400 hover:text-amber-300 transition-colors duration-300 bg-transparent cursor-pointer"
+    }, copied ? 'Copied ✓' : 'Copy number'))));
+  };
   const Services = () => {
     const services = [{
       icon: "💬",
@@ -363,7 +386,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
         background: 'rgba(254,39,0,0.15)',
         fontSize: '36px'
       }
-    }, "📞"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
+    }, "\uD83D\uDCDE"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
       className: "text-2xl font-bold text-white mb-2"
     }, "AI Receptionist & Missed-Call Recovery"), /*#__PURE__*/React.createElement("p", {
       className: "text-gray-300 text-lg"
@@ -424,7 +447,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     className: "mb-4 text-lg"
   }, "If you want the full picture, unlock the ", /*#__PURE__*/React.createElement("span", {
     className: "text-amber-300 font-semibold"
-  }, "premium report for £29"), ". Built entirely from your answers, it goes beyond scoring. It identifies the specific growth opportunities and ideas relevant to your business, things that are easy to miss when you are in the middle of running it."), /*#__PURE__*/React.createElement("p", {
+  }, "premium report for \xA329"), ". Built entirely from your answers, it goes beyond scoring. It identifies the specific growth opportunities and ideas relevant to your business, things that are easy to miss when you are in the middle of running it."), /*#__PURE__*/React.createElement("p", {
     className: "mb-4 text-lg"
   }, "Every premium report includes a ", /*#__PURE__*/React.createElement("span", {
     className: "text-amber-300 font-semibold"
@@ -446,7 +469,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     className: "text-amber-400 mr-3"
   }, "\u2022"), /*#__PURE__*/React.createElement("span", null, "A ", /*#__PURE__*/React.createElement("span", {
     className: "text-amber-300 font-semibold"
-  }, "£29 premium report"), " with AI-powered analysis built from your specific answers, not a generic template")), /*#__PURE__*/React.createElement("li", {
+  }, "\xA329 premium report"), " with AI-powered analysis built from your specific answers, not a generic template")), /*#__PURE__*/React.createElement("li", {
     className: "flex items-start"
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-amber-400 mr-3"
@@ -683,12 +706,68 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
   }, "Free assessment"), /*#__PURE__*/React.createElement("a", {
     href: "https://boost.summcore.com",
     className: "inline-block text-lg font-semibold text-white footer-link",
-    title: "Free Business Health Check — SummCore Boost"
+    title: "Free Business Health Check \u2014 SummCore Boost"
   }, "Get your free Business Health Check \u2192"), /*#__PURE__*/React.createElement("p", {
     className: "text-sm text-gray-400 mt-2"
   }, "Score your business across 5 pillars in 5 minutes. Free, instant, AI-powered.")), /*#__PURE__*/React.createElement("div", {
     className: "mt-6 text-center text-gray-400"
   }, "\xA9 2026 SummCore. All rights reserved.")));
+
+  // Cal.com inline embed — official loader, renders into #cal-inline
+  const CalEmbed = () => {
+    React.useEffect(() => {
+      (function (C, A, L) {
+        let p = function (a, ar) {
+          a.q.push(ar);
+        };
+        let d = C.document;
+        C.Cal = C.Cal || function () {
+          let cal = C.Cal;
+          let ar = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            d.head.appendChild(d.createElement("script")).src = A;
+            cal.loaded = true;
+          }
+          if (ar[0] === L) {
+            const api = function () {
+              p(api, arguments);
+            };
+            const namespace = ar[1];
+            api.q = api.q || [];
+            if (typeof namespace === "string") {
+              cal.ns[namespace] = cal.ns[namespace] || api;
+              p(cal.ns[namespace], ar);
+              p(cal, ["initNamespace", namespace]);
+            } else p(cal, ar);
+            return;
+          }
+          p(cal, ar);
+        };
+      })(window, "https://app.cal.com/embed/embed.js", "init");
+      window.Cal("init", {
+        origin: "https://cal.com"
+      });
+      window.Cal("inline", {
+        elementOrSelector: "#cal-inline",
+        calLink: CAL_LINK,
+        layout: "month_view"
+      });
+      window.Cal("ui", {
+        theme: "dark",
+        hideEventTypeDetails: false
+      });
+    }, []);
+    return /*#__PURE__*/React.createElement("div", {
+      id: "cal-inline",
+      className: "max-w-4xl mx-auto rounded-xl overflow-hidden",
+      style: {
+        minHeight: '620px',
+        width: '100%'
+      }
+    });
+  };
   const Consultation = () => /*#__PURE__*/React.createElement("section", {
     id: "consultation",
     className: "py-16 text-white relative overflow-hidden",
@@ -708,10 +787,10 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     className: "text-3xl font-bold mb-4"
   }, "Want to Go Further?"), /*#__PURE__*/React.createElement("p", {
     className: "text-lg mb-8"
-  }, "Start with the free ", /*#__PURE__*/React.createElement("a", {
+  }, "Start with the ", /*#__PURE__*/React.createElement("a", {
     href: "https://boost.summcore.com",
     className: "text-amber-400 hover:underline font-semibold"
-  }, "Boost assessment"), ", or get in touch directly if you want to talk strategy, fix something specific, or move fast."), /*#__PURE__*/React.createElement("form", {
+  }, "\xA329 Boost assessment"), ", or book a free 15-minute call to talk strategy, fix something specific, or move fast."), CAL_LINK ? /*#__PURE__*/React.createElement(CalEmbed, null) : /*#__PURE__*/React.createElement("form", {
     action: "send.php",
     method: "POST",
     className: "max-w-md mx-auto space-y-3 text-left",
@@ -806,7 +885,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       className: "px-6 pb-4 text-gray-300"
     }, item.a))))));
   };
-  const App = () => /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(NavBar, null), /*#__PURE__*/React.createElement(Hero, null), /*#__PURE__*/React.createElement(Pitch, null), /*#__PURE__*/React.createElement(Services, null), /*#__PURE__*/React.createElement(Tools, null), /*#__PURE__*/React.createElement(FAQ, null), /*#__PURE__*/React.createElement(Consultation, null), /*#__PURE__*/React.createElement(Footer, null));
+  const App = () => /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(NavBar, null), /*#__PURE__*/React.createElement(Hero, null), /*#__PURE__*/React.createElement(DemoStrip, null), /*#__PURE__*/React.createElement(Pitch, null), /*#__PURE__*/React.createElement(Services, null), /*#__PURE__*/React.createElement(Tools, null), /*#__PURE__*/React.createElement(FAQ, null), /*#__PURE__*/React.createElement(Consultation, null), /*#__PURE__*/React.createElement(Footer, null));
 
   // Use React 18 createRoot API if available, otherwise fallback to legacy render
 
