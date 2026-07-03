@@ -17,8 +17,8 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
   // Sage demo line + booking link — single source of truth.
   // Fill these in and recompile (node compile.mjs); the demo strip and
   // "Talk to Sage" tel: links stay hidden until SAGE_NUMBER is set.
-  const SAGE_NUMBER = ''; // e.g. '+442920000000' — Sage's Cardiff demo line (Vapi)
-  const SAGE_NUMBER_DISPLAY = ''; // e.g. '029 2000 0000'
+  const SAGE_NUMBER = '+442922715325'; // Sage's Cardiff demo line (Vapi)
+  const SAGE_NUMBER_DISPLAY = '029 2271 5325';
   const CAL_LINK = ''; // e.g. 'summcore/15min' — Cal.com booking link (username/event)
 
   const NavBar = () => {
@@ -90,6 +90,9 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       href: "#services",
       className: "text-gray-700 hover:text-amber-600 transition-colors duration-300"
     }, "Services"), /*#__PURE__*/React.createElement("a", {
+      href: "#pricing",
+      className: "text-gray-700 hover:text-amber-600 transition-colors duration-300"
+    }, "Pricing"), /*#__PURE__*/React.createElement("a", {
       href: "#tools",
       className: "text-gray-700 hover:text-amber-600 transition-colors duration-300"
     }, "Free Tools"), /*#__PURE__*/React.createElement("div", {
@@ -165,6 +168,9 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       href: "#services",
       className: "py-2 text-gray-700 hover:text-amber-600"
     }, "Services"), /*#__PURE__*/React.createElement("a", {
+      href: "#pricing",
+      className: "py-2 text-gray-700 hover:text-amber-600"
+    }, "Pricing"), /*#__PURE__*/React.createElement("a", {
       href: "#tools",
       className: "py-2 text-gray-700 hover:text-amber-600"
     }, "Free Tools"), /*#__PURE__*/React.createElement("div", {
@@ -269,6 +275,10 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     className: "flex flex-col sm:flex-row gap-4 justify-center items-center"
   }, SAGE_NUMBER ? /*#__PURE__*/React.createElement("a", {
     href: `tel:${SAGE_NUMBER}`,
+    onClick: () => window.gtag && window.gtag('event', 'call_sage_click', {
+      event_category: 'demo',
+      event_label: 'hero'
+    }),
     className: "text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-1",
     style: {
       background: '#fe2700'
@@ -319,6 +329,10 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       className: "flex flex-col sm:flex-row gap-4 justify-center items-center"
     }, /*#__PURE__*/React.createElement("a", {
       href: `tel:${SAGE_NUMBER}`,
+      onClick: () => window.gtag && window.gtag('event', 'call_sage_click', {
+        event_category: 'demo',
+        event_label: 'demo_strip'
+      }),
       className: "text-white px-8 py-4 rounded-full font-bold text-xl transition-all duration-300 hover:shadow-xl hover:-translate-y-1",
       style: {
         background: '#fe2700'
@@ -489,6 +503,104 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       background: '#fe2700'
     }
   }, "Start Your Free Assessment"))))));
+  const Pricing = () => {
+    const tiers = [{
+      name: "Rescue",
+      price: "£199",
+      color: "#f59e0b",
+      tagline: "Stop the leak",
+      features: ["Sage AI receptionist + missed-call text-back"],
+      highlight: false
+    }, {
+      name: "Grow",
+      price: "£349",
+      color: "#fe2700",
+      tagline: "Answer, chase, win",
+      features: ["Sage AI receptionist + missed-call text-back", "Automated Google review requests", "Quote follow-up automation"],
+      highlight: true
+    }, {
+      name: "Dominate",
+      price: "£499",
+      color: "#0ea5e9",
+      tagline: "Run the whole front desk",
+      features: ["Sage AI receptionist + missed-call text-back", "Automated Google review requests", "Quote follow-up automation", "AI website chat widget", "Monthly performance report", "Reactivation campaign (1 per quarter)"],
+      highlight: false
+    }];
+    return /*#__PURE__*/React.createElement("section", {
+      id: "pricing",
+      className: "py-16 bg-slate-900"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+    }, /*#__PURE__*/React.createElement("h2", {
+      className: "text-3xl md:text-4xl font-bold text-white text-center mb-3"
+    }, "Simple monthly pricing"), /*#__PURE__*/React.createElement("p", {
+      className: "text-amber-300 text-center text-lg font-semibold mb-2"
+    }, "One missed \xA3800 job pays for six months."), /*#__PURE__*/React.createElement("p", {
+      className: "text-gray-400 text-center max-w-2xl mx-auto mb-10"
+    }, "Every plan includes setup (\xA3299\u2013\xA3499 one-off), UK support, and no long contract. Hear Sage live before you spend a penny."), /*#__PURE__*/React.createElement("div", {
+      className: "grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto items-stretch"
+    }, tiers.map((t, i) => /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: `relative flex flex-col rounded-2xl p-8 border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${t.highlight ? 'bg-slate-800 border-2' : 'bg-slate-800/60 border-slate-600'}`,
+      style: t.highlight ? {
+        borderColor: '#fe2700'
+      } : {}
+    }, t.highlight && /*#__PURE__*/React.createElement("span", {
+      className: "absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-bold tracking-wide uppercase px-3 py-1 rounded-full",
+      style: {
+        background: '#fe2700',
+        color: '#fff'
+      }
+    }, "Most popular"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        height: '4px',
+        background: t.color
+      },
+      className: "rounded-full mb-6"
+    }), /*#__PURE__*/React.createElement("h3", {
+      className: "text-2xl font-bold text-white mb-1"
+    }, t.name), /*#__PURE__*/React.createElement("p", {
+      className: "text-gray-400 text-sm mb-4"
+    }, t.tagline), /*#__PURE__*/React.createElement("div", {
+      className: "mb-6"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "text-4xl font-bold text-white"
+    }, t.price), /*#__PURE__*/React.createElement("span", {
+      className: "text-gray-400"
+    }, "/month")), /*#__PURE__*/React.createElement("ul", {
+      className: "space-y-3 mb-8 flex-grow"
+    }, t.features.map((f, j) => /*#__PURE__*/React.createElement("li", {
+      key: j,
+      className: "flex items-start text-gray-300"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "text-amber-400 mr-3 shrink-0"
+    }, "\u2713"), /*#__PURE__*/React.createElement("span", null, f)))), SAGE_NUMBER ? /*#__PURE__*/React.createElement("a", {
+      href: `tel:${SAGE_NUMBER}`,
+      onClick: () => window.gtag && window.gtag('event', 'call_sage_click', {
+        event_category: 'demo',
+        event_label: `pricing_${t.name.toLowerCase()}`
+      }),
+      className: "block text-center text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg",
+      style: {
+        background: t.highlight ? '#fe2700' : '#334155'
+      }
+    }, "\uD83C\uDF99 Talk to Sage") : /*#__PURE__*/React.createElement("a", {
+      href: "#consultation",
+      className: "block text-center text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg",
+      style: {
+        background: t.highlight ? '#fe2700' : '#334155'
+      }
+    }, "Book a free call")))), /*#__PURE__*/React.createElement("div", {
+      className: "mt-10 text-center"
+    }, /*#__PURE__*/React.createElement("p", {
+      className: "text-gray-400 mb-3"
+    }, "One-offs also available: database reactivation campaign \xA3350\u2013\xA3500 \xB7 Google Business Profile optimisation \xA3149\u2013\xA3199 \xB7 conversion site rebuild \xA3500\u2013\xA3750."), /*#__PURE__*/React.createElement("p", {
+      className: "text-lg text-gray-300"
+    }, "Not sure where to start? ", /*#__PURE__*/React.createElement("a", {
+      href: "https://boost.summcore.com",
+      className: "text-amber-400 font-semibold hover:underline"
+    }, "Take the \xA329 Boost.")))));
+  };
   const Tools = () => /*#__PURE__*/React.createElement("section", {
     id: "tools",
     className: "py-16 bg-slate-900"
@@ -499,6 +611,21 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
   }, "What free tools does SummCore offer?"), /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-1 md:grid-cols-2 gap-8"
   }, /*#__PURE__*/React.createElement("div", {
+    className: "bg-gradient-to-br from-slate-800 to-slate-700 p-6 rounded-lg border hover:border-amber-500 transition-colors duration-300",
+    style: {
+      borderColor: 'rgba(254,39,0,0.5)'
+    }
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "text-xl font-semibold text-white mb-4"
+  }, "Missed-Call Cost Calculator"), /*#__PURE__*/React.createElement("p", {
+    className: "text-gray-300 mb-4"
+  }, "How much is your unanswered phone really costing you? Three numbers, ten seconds, and the answer in pounds."), /*#__PURE__*/React.createElement("a", {
+    href: "tools/missed-call-calculator/",
+    className: "inline-block text-white px-6 py-2 rounded-md font-semibold hover:opacity-90 transition-all duration-300 shadow-md",
+    style: {
+      background: '#fe2700'
+    }
+  }, "Calculate My Losses")), /*#__PURE__*/React.createElement("div", {
     className: "bg-gradient-to-br from-slate-800 to-slate-700 p-6 rounded-lg border border-slate-600 hover:border-amber-500 transition-colors duration-300"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "text-xl font-semibold text-white mb-4"
@@ -596,6 +723,9 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     href: "#services",
     className: "text-gray-400 footer-link"
   }, "Services")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
+    href: "#pricing",
+    className: "text-gray-400 footer-link"
+  }, "Pricing")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
     href: "#tools",
     className: "text-gray-400 footer-link"
   }, "Free Tools")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
@@ -885,7 +1015,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       className: "px-6 pb-4 text-gray-300"
     }, item.a))))));
   };
-  const App = () => /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(NavBar, null), /*#__PURE__*/React.createElement(Hero, null), /*#__PURE__*/React.createElement(DemoStrip, null), /*#__PURE__*/React.createElement(Pitch, null), /*#__PURE__*/React.createElement(Services, null), /*#__PURE__*/React.createElement(Tools, null), /*#__PURE__*/React.createElement(FAQ, null), /*#__PURE__*/React.createElement(Consultation, null), /*#__PURE__*/React.createElement(Footer, null));
+  const App = () => /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(NavBar, null), /*#__PURE__*/React.createElement(Hero, null), /*#__PURE__*/React.createElement(DemoStrip, null), /*#__PURE__*/React.createElement(Pitch, null), /*#__PURE__*/React.createElement(Services, null), /*#__PURE__*/React.createElement(Pricing, null), /*#__PURE__*/React.createElement(Tools, null), /*#__PURE__*/React.createElement(FAQ, null), /*#__PURE__*/React.createElement(Consultation, null), /*#__PURE__*/React.createElement(Footer, null));
 
   // Use React 18 createRoot API if available, otherwise fallback to legacy render
 
