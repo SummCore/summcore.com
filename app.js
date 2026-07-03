@@ -273,7 +273,16 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
   }, "Or ring Sage directly: ", /*#__PURE__*/React.createElement("a", {
     href: `tel:${SAGE_NUMBER}`,
     className: "text-amber-300 font-semibold hover:underline"
-  }, SAGE_NUMBER_DISPLAY || SAGE_NUMBER))));
+  }, SAGE_NUMBER_DISPLAY || SAGE_NUMBER)), /*#__PURE__*/React.createElement("p", {
+    className: "mt-3 text-sm text-gray-400"
+  }, "Wondering what missed calls cost you? ", /*#__PURE__*/React.createElement("a", {
+    href: "/tools/missed-call-calculator/",
+    onClick: () => window.gtag && window.gtag('event', 'calculator_click', {
+      event_category: 'tools',
+      event_label: 'hero_teaser'
+    }),
+    className: "text-amber-300 hover:underline"
+  }, "Try the free calculator."))));
 
   // Live demo strip — hidden until SAGE_NUMBER is set
   const DemoStrip = () => {
