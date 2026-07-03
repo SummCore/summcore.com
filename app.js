@@ -271,7 +271,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     className: "w-24 h-1 bg-amber-400 mx-auto rounded-full opacity-60"
   })), /*#__PURE__*/React.createElement("p", {
     className: "text-lg md:text-xl mb-8 max-w-3xl mx-auto"
-  }, "SummCore builds AI systems that answer, book, chase and follow up for local businesses \u2014 starting from \xA3199/month. Hear it live before you spend a penny."), /*#__PURE__*/React.createElement("div", {
+  }, "SummCore builds AI systems that answer, book, chase and follow up for local businesses, starting from \xA3199 a month. Hear it live before you spend a penny."), /*#__PURE__*/React.createElement("div", {
     className: "flex flex-col sm:flex-row gap-4 justify-center items-center"
   }, SAGE_NUMBER ? /*#__PURE__*/React.createElement("a", {
     href: `tel:${SAGE_NUMBER}`,
@@ -283,7 +283,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     style: {
       background: '#fe2700'
     }
-  }, "\uD83C\uDF99 Talk to Sage \u2014 hear it live") : /*#__PURE__*/React.createElement("a", {
+  }, "\uD83C\uDF99 Talk to Sage") : /*#__PURE__*/React.createElement("a", {
     href: "#consultation",
     className: "text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-1",
     style: {
@@ -347,7 +347,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       icon: "💬",
       color: "#f59e0b",
       title: "Quote Follow-Up",
-      desc: "You already did the hard part quoting. We chase the quotes you sent with friendly, automatic nudges, so the quiet ones turn into booked work."
+      desc: "You have already done the hard part and sent the quote. We chase it with friendly, automatic nudges, so the quiet ones turn into booked work."
     }, {
       icon: "💷",
       color: "#10b981",
@@ -357,7 +357,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       icon: "🎨",
       color: "#8b5cf6",
       title: "Web Design & App Development",
-      desc: "Need a site that actually sells, or an app built from scratch? We design, build and ship it. Clean, fast and properly yours."
+      desc: "Need a site that actually sells, or an app built from scratch? We design and build it properly, and you own it outright."
     }, {
       icon: "🚀",
       color: "#0ea5e9",
@@ -440,7 +440,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     className: "text-3xl md:text-4xl font-bold mb-6 text-amber-400"
   }, "Turn Ideas Into Measurable Growth, Starting Today"), /*#__PURE__*/React.createElement("div", {
     className: "max-w-4xl mx-auto space-y-6 text-lg md:text-xl leading-relaxed"
-  }, /*#__PURE__*/React.createElement("p", null, "I have spent years working inside businesses, finding exactly where growth stalls and why. Not theory. Real decisions, real results, real problems solved."), /*#__PURE__*/React.createElement("p", null, "SummCore is how I make that experience work directly for you. Start with the free tools. Take the Boost assessment when you want a real picture of where your business stands. Go further when you are ready."), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("p", null, "I have spent years working inside businesses, finding exactly where growth stalls and why. None of it is theory. It comes from decisions made with real money on the line."), /*#__PURE__*/React.createElement("p", null, "SummCore is how I make that experience work directly for you. Start with the free tools. Take the Boost assessment when you want a real picture of where your business stands. Go further when you are ready."), /*#__PURE__*/React.createElement("p", {
     className: "text-amber-200 font-semibold"
   }, "The gap between where you are and where you could be is usually smaller than it looks. It just needs someone who knows where to look."))), /*#__PURE__*/React.createElement("div", {
     className: "grid md:grid-cols-2 gap-12 mb-12"
@@ -515,7 +515,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       name: "Grow",
       price: "£349",
       color: "#fe2700",
-      tagline: "Answer, chase, win",
+      tagline: "Answers the phone and chases the money",
       features: ["Sage AI receptionist + missed-call text-back", "Automated Google review requests", "Quote follow-up automation"],
       highlight: true
     }, {
@@ -537,7 +537,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       className: "text-amber-300 text-center text-lg font-semibold mb-2"
     }, "One missed \xA3800 job pays for six months."), /*#__PURE__*/React.createElement("p", {
       className: "text-gray-400 text-center max-w-2xl mx-auto mb-10"
-    }, "Every plan includes setup (\xA3299\u2013\xA3499 one-off), UK support, and no long contract. Hear Sage live before you spend a penny."), /*#__PURE__*/React.createElement("div", {
+    }, "Every plan includes setup (\xA3299\u2013\xA3499 one-off) with no long contract. Call Sage first and judge it for yourself."), /*#__PURE__*/React.createElement("div", {
       className: "grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto items-stretch"
     }, tiers.map((t, i) => /*#__PURE__*/React.createElement("div", {
       key: i,
@@ -713,7 +713,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     className: "text-lg font-semibold mb-4"
   }, "SummCore"), /*#__PURE__*/React.createElement("p", {
     className: "text-gray-400"
-  }, "Empowering SMEs and startups with innovative solutions for growth.")), /*#__PURE__*/React.createElement("div", {
+  }, "We build AI systems and practical tools that help local businesses win more work.")), /*#__PURE__*/React.createElement("div", {
     className: "md:justify-self-center text-center md:text-left"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "text-lg font-semibold mb-4"
@@ -834,7 +834,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     title: "Free Business Health Check \u2014 SummCore Boost"
   }, "Get your free Business Health Check \u2192"), /*#__PURE__*/React.createElement("p", {
     className: "text-sm text-gray-400 mt-2"
-  }, "Score your business across 5 pillars in 5 minutes. Free, instant, AI-powered.")), /*#__PURE__*/React.createElement("div", {
+  }, "Score your business across five pillars in about five minutes.")), /*#__PURE__*/React.createElement("div", {
     className: "mt-4 text-center text-gray-400 text-sm"
   }, "Something custom? ", /*#__PURE__*/React.createElement("a", {
     href: "index.html#consultation",
@@ -920,7 +920,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
   }, "Start with the ", /*#__PURE__*/React.createElement("a", {
     href: "https://boost.summcore.com",
     className: "text-amber-400 hover:underline font-semibold"
-  }, "\xA329 Boost assessment"), ", or book a free 15-minute call to talk strategy, fix something specific, or move fast."), CAL_LINK ? /*#__PURE__*/React.createElement(CalEmbed, null) : /*#__PURE__*/React.createElement("form", {
+  }, "\xA329 Boost assessment"), ", or book a free 15-minute call about whatever is holding your business up."), CAL_LINK ? /*#__PURE__*/React.createElement(CalEmbed, null) : /*#__PURE__*/React.createElement("form", {
     action: "send.php",
     method: "POST",
     className: "max-w-md mx-auto space-y-3 text-left",
@@ -975,19 +975,19 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
   const FAQ = () => {
     const faqs = [{
       q: "What is SummCore?",
-      a: "SummCore is an innovation consulting firm that helps SMEs and startups grow through strategy frameworks, free business tools, and one-to-one expert consultation."
+      a: "SummCore builds and runs AI systems for local businesses. Our main service is Sage, an AI receptionist that answers your calls, books jobs and texts you the summary. We also offer free business tools and hands-on growth consulting."
     }, {
       q: "Are the business tools free to use?",
       a: "Most SummCore tools are completely free with no sign-up required, including the Strategy Generator, Financial Health Checker, Revenue Forecasting Tool, and Invoicing and Quotation App. The Business Health Check offers a free limited assessment via SummCore Boost, with full scored reports available on a paid plan."
     }, {
       q: "Who is SummCore for?",
-      a: "SummCore is designed for small and medium-sized enterprises (SMEs) and startups looking for practical growth strategies, business planning tools, and expert innovation consulting."
+      a: "SummCore is built for local service businesses like trades, salons and clinics, and for any small business that wants its phone answered and its follow-up handled. The free tools work for any business owner."
     }, {
       q: "How do I work with SummCore?",
       a: "Start with the free tools or take the Business Health Check on SummCore Boost. When you are ready to go further, use the contact form to get in touch and a SummCore consultant will follow up with you."
     }, {
       q: "What services does SummCore offer?",
-      a: "SummCore offers innovation consulting, growth strategy development, process improvement, product development guidance, and a suite of free business tools covering health checks, strategy generation, financial analysis, revenue forecasting, and invoicing."
+      a: "Our main service is the Sage AI receptionist with missed-call text-back, from £199 a month. On higher plans we add quote follow-up, Google review requests, a website chat widget and reactivation campaigns. We also build websites and apps, offer growth consulting, and all our online tools are free to use."
     }];
     const [open, setOpen] = React.useState(null);
     return /*#__PURE__*/React.createElement("section", {
