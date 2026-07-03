@@ -831,7 +831,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
   }, "Free assessment"), /*#__PURE__*/React.createElement("a", {
     href: "https://boost.summcore.com",
     className: "inline-block text-lg font-semibold text-white footer-link",
-    title: "Free Business Health Check \u2014 SummCore Boost"
+    title: "Free Business Health Check from SummCore Boost"
   }, "Get your free Business Health Check \u2192"), /*#__PURE__*/React.createElement("p", {
     className: "text-sm text-gray-400 mt-2"
   }, "Score your business across five pillars in about five minutes.")), /*#__PURE__*/React.createElement("div", {
