@@ -349,11 +349,6 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       color: "#0ea5e9",
       title: "Growth Strategy & Consulting",
       desc: "Years spent finding where growth stalls inside real businesses. We pinpoint what is holding you back and map the clearest way forward."
-    }, {
-      icon: "🔧",
-      color: "#ec4899",
-      title: "Whatever You Need Built",
-      desc: "Something else on your mind? Automations, integrations, a one-off tool. Tell us the problem and we will work out how to solve it."
     }];
     return /*#__PURE__*/React.createElement("section", {
       id: "services",
@@ -391,7 +386,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     }, "AI Receptionist & Missed-Call Recovery"), /*#__PURE__*/React.createElement("p", {
       className: "text-gray-300 text-lg"
     }, "Never lose another lead to a ringing phone. We set up instant text-back and an AI receptionist that answers, books the job and texts you the summary, day or night. Most local businesses miss nearly half their calls. We make sure yours get answered.")))), /*#__PURE__*/React.createElement("div", {
-      className: "grid grid-cols-1 md:grid-cols-3 gap-6"
+      className: "grid grid-cols-1 md:grid-cols-2 gap-6"
     }, services.map((s, i) => /*#__PURE__*/React.createElement("div", {
       key: i,
       className: "group bg-slate-700 rounded-2xl border border-slate-600 hover:border-amber-500 hover:-translate-y-1 transition-all duration-300 overflow-hidden shadow-md hover:shadow-xl"
@@ -710,6 +705,11 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
   }, "Get your free Business Health Check \u2192"), /*#__PURE__*/React.createElement("p", {
     className: "text-sm text-gray-400 mt-2"
   }, "Score your business across 5 pillars in 5 minutes. Free, instant, AI-powered.")), /*#__PURE__*/React.createElement("div", {
+    className: "mt-4 text-center text-gray-400 text-sm"
+  }, "Something custom? ", /*#__PURE__*/React.createElement("a", {
+    href: "index.html#consultation",
+    className: "text-amber-400 footer-link"
+  }, "Ask.")), /*#__PURE__*/React.createElement("div", {
     className: "mt-6 text-center text-gray-400"
   }, "\xA9 2026 SummCore. All rights reserved.")));
 
