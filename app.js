@@ -341,8 +341,8 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     }, {
       icon: "🎨",
       color: "#8b5cf6",
-      title: "Web Design & App Development",
-      desc: "Need a site that actually sells, or an app built from scratch? We design and build it properly, and you own it outright."
+      title: "Web Design",
+      desc: "Need a site that actually sells? We design and build it properly, and you own it outright."
     }, {
       icon: "🚀",
       color: "#0ea5e9",
@@ -972,7 +972,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       a: "Start with the free tools or take the Business Health Check on SummCore Boost. When you are ready to go further, use the contact form to get in touch and a SummCore consultant will follow up with you."
     }, {
       q: "What services does SummCore offer?",
-      a: "Our main service is the Sage AI receptionist with missed-call text-back, from £199 a month. On higher plans we add quote follow-up, Google review requests, a website chat widget and reactivation campaigns. We also build websites and apps, offer growth consulting, and all our online tools are free to use."
+      a: "Our main service is the Sage AI receptionist with missed-call text-back, from £199 a month. On higher plans we add quote follow-up, Google review requests, a website chat widget and reactivation campaigns. We also build websites, offer growth consulting, and all our online tools are free to use."
     }];
     const [open, setOpen] = React.useState(null);
     return /*#__PURE__*/React.createElement("section", {
