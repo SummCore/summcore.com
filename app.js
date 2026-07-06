@@ -22,11 +22,12 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
   const SAGE_DEMO_AUDIO = ''; // e.g. '/audio/sage-demo-call.mp3' — demo strip shows a player once set
   const CAL_LINK = ''; // e.g. 'summcore/15min' — Cal.com booking link (username/event)
 
-  // Stripe payment links (live) — monthly subscriptions; setup fee invoiced at onboarding
+  // Stripe payment links (live) — monthly subscription + one-off setup on first payment
+  // Setup fees: Rescue £299, Grow £399, Dominate £499
   const STRIPE_LINKS = {
-    Rescue: 'https://buy.stripe.com/aFaeVcag6d6uawhg4z9MY00',
-    Grow: 'https://buy.stripe.com/fZu4gycoe8QefQB19F9MY01',
-    Dominate: 'https://buy.stripe.com/bJe14mewm9UiawhbOj9MY02'
+    Rescue: 'https://buy.stripe.com/00wcN49c2aYm47T2dJ9MY03',
+    Grow: 'https://buy.stripe.com/14A8wO2NE7Ma1ZL2dJ9MY04',
+    Dominate: 'https://buy.stripe.com/9B600i73U5E27k5cSn9MY05'
   };
 
   // Desktop browsers pop an "Open Pick an application?" dialog for tel: links.
@@ -582,7 +583,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       className: "text-amber-300 text-center text-lg font-semibold mb-2"
     }, "One missed \xA3800 job pays for six months."), /*#__PURE__*/React.createElement("p", {
       className: "text-gray-400 text-center max-w-2xl mx-auto mb-10"
-    }, "Every plan includes setup (\xA3299\u2013\xA3499 one-off) with no long contract. Call Sage first and judge it for yourself."), /*#__PURE__*/React.createElement("div", {
+    }, "One-off setup (\xA3299 on Rescue, \xA3399 on Grow, \xA3499 on Dominate) is added to your first payment. No long contract. Call Sage first and judge it for yourself."), /*#__PURE__*/React.createElement("div", {
       className: "grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto items-stretch"
     }, tiers.map((t, i) => /*#__PURE__*/React.createElement("div", {
       key: i,
