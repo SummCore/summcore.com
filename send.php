@@ -61,8 +61,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email'] ?? '');
     $needs = htmlspecialchars(trim($_POST['needs'] ?? ''));
 
-    // Optional field
+    // Optional fields
     $phone = isset($_POST['phone']) ? htmlspecialchars(trim($_POST['phone'])) : 'Not provided';
+    $selectedPlan = htmlspecialchars(trim($_POST['selected_plan'] ?? ''));
+    $selectedPlan = str_replace(["\r", "\n", "\t"], '', $selectedPlan);
 
     // Email is optional for feedback submissions
     $isFeedbackEarly = in_array(trim($_POST['business_name'] ?? ''), [
@@ -119,6 +121,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $subject = "[SummCore] Customer Discovery - " . mb_substr($yourName, 0, 50);
     } else {
         $subject = "[SummCore] New Consultation Request - " . mb_substr($yourName, 0, 50);
+        if (!empty($selectedPlan)) {
+            $subject .= " (" . mb_substr($selectedPlan, 0, 30) . ")";
+        }
     }
 
     if ($isFeedback) {
@@ -134,7 +139,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $body .= "Website: " . ($website ? $website : 'Not provided') . "\n";
     $body .= "Contact Name: $yourName\n";
     $body .= "Phone: $phone\n";
-    $body .= "Email: $email\n\n";
+    $body .= "Email: $email\n";
+    if (!empty($selectedPlan)) {
+        $body .= "Selected Plan: $selectedPlan\n";
+    }
+    $body .= "\n";
     $body .= "PROJECT REQUIREMENTS:\n";
     $body .= "------------------------\n";
     $body .= "$needs\n\n";

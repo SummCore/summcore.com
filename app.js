@@ -19,6 +19,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
   // "Talk to Sage" tel: links stay hidden until SAGE_NUMBER is set.
   const SAGE_NUMBER = '+442922715325'; // Sage's Cardiff demo line (Vapi)
   const SAGE_NUMBER_DISPLAY = '029 2271 5325';
+  const SAGE_DEMO_AUDIO = ''; // e.g. '/audio/sage-demo-call.mp3' — demo strip shows a player once set
   const CAL_LINK = ''; // e.g. 'summcore/15min' — Cal.com booking link (username/event)
 
   // Desktop browsers pop an "Open Pick an application?" dialog for tel: links.
@@ -352,7 +353,20 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       className: "text-xl md:text-2xl font-semibold mb-2"
     }, "Don't take our word for it. Call Sage right now."), /*#__PURE__*/React.createElement("p", {
       className: "text-gray-400 mb-6"
-    }, "If you'd have known it was AI, tell us."), /*#__PURE__*/React.createElement("div", {
+    }, "If you'd have known it was AI, tell us."), SAGE_DEMO_AUDIO && /*#__PURE__*/React.createElement("div", {
+      className: "mb-6"
+    }, /*#__PURE__*/React.createElement("p", {
+      className: "text-gray-300 mb-2"
+    }, "Or listen to a real Sage call first:"), /*#__PURE__*/React.createElement("audio", {
+      controls: true,
+      preload: "none",
+      src: SAGE_DEMO_AUDIO,
+      className: "mx-auto w-full max-w-md",
+      onPlay: () => window.gtag && window.gtag('event', 'demo_audio_play', {
+        event_category: 'demo',
+        event_label: 'demo_strip'
+      })
+    })), /*#__PURE__*/React.createElement("div", {
       className: "flex flex-col sm:flex-row gap-4 justify-center items-center"
     }, /*#__PURE__*/React.createElement(SageCallButton, {
       label: `📞 ${SAGE_NUMBER_DISPLAY || SAGE_NUMBER}`,
@@ -598,22 +612,27 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       className: "flex items-start text-gray-300"
     }, /*#__PURE__*/React.createElement("span", {
       className: "text-amber-400 mr-3 shrink-0"
-    }, "\u2713"), /*#__PURE__*/React.createElement("span", null, f)))), SAGE_NUMBER ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(SageCallButton, {
-      label: "\uD83C\uDF99 Talk to Sage",
-      gaLabel: `pricing_${t.name.toLowerCase()}`,
-      className: "block text-center text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg",
-      style: {
-        background: t.highlight ? '#fe2700' : '#334155'
-      }
-    }), /*#__PURE__*/React.createElement("p", {
-      className: "text-center text-xs text-gray-400 mt-3"
-    }, IS_PHONE ? `Calls our live demo on ${SAGE_NUMBER_DISPLAY}` : `Our live demo: ${SAGE_NUMBER_DISPLAY} (click to copy)`)) : /*#__PURE__*/React.createElement("a", {
+    }, "\u2713"), /*#__PURE__*/React.createElement("span", null, f)))), /*#__PURE__*/React.createElement("a", {
       href: "#consultation",
+      onClick: () => {
+        const sel = document.getElementById('home_selected_plan');
+        if (sel) sel.value = `${t.name} (${t.price}/month)`;
+        window.gtag && window.gtag('event', 'select_plan', {
+          event_category: 'pricing',
+          event_label: t.name.toLowerCase()
+        });
+      },
       className: "block text-center text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg",
       style: {
         background: t.highlight ? '#fe2700' : '#334155'
       }
-    }, "Book a free call")))), /*#__PURE__*/React.createElement("div", {
+    }, "Choose ", t.name), SAGE_NUMBER && /*#__PURE__*/React.createElement("p", {
+      className: "text-center text-xs text-gray-400 mt-3"
+    }, "Want to hear Sage first? ", /*#__PURE__*/React.createElement(SageCallButton, {
+      label: SAGE_NUMBER_DISPLAY || SAGE_NUMBER,
+      gaLabel: `pricing_${t.name.toLowerCase()}_demo`,
+      className: "text-amber-300 hover:underline"
+    }))))), /*#__PURE__*/React.createElement("div", {
       className: "mt-10 text-center"
     }, /*#__PURE__*/React.createElement("p", {
       className: "text-gray-400 mb-3"
@@ -981,7 +1000,22 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     placeholder: "Email",
     required: true,
     className: "w-full p-3 rounded-md text-gray-800"
-  }), /*#__PURE__*/React.createElement("textarea", {
+  }), /*#__PURE__*/React.createElement("select", {
+    id: "home_selected_plan",
+    name: "selected_plan",
+    defaultValue: "",
+    className: "w-full p-3 rounded-md text-gray-800"
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "Which plan are you interested in? (optional)"), /*#__PURE__*/React.createElement("option", {
+    value: "Rescue (\xA3199/month)"
+  }, "Rescue (\xA3199/month)"), /*#__PURE__*/React.createElement("option", {
+    value: "Grow (\xA3349/month)"
+  }, "Grow (\xA3349/month)"), /*#__PURE__*/React.createElement("option", {
+    value: "Dominate (\xA3499/month)"
+  }, "Dominate (\xA3499/month)"), /*#__PURE__*/React.createElement("option", {
+    value: "Not sure yet"
+  }, "Not sure yet")), /*#__PURE__*/React.createElement("textarea", {
     id: "home_needs",
     name: "needs",
     rows: "5",
