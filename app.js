@@ -559,7 +559,7 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       className: "flex items-start text-gray-300"
     }, /*#__PURE__*/React.createElement("span", {
       className: "text-amber-400 mr-3 shrink-0"
-    }, "\u2713"), /*#__PURE__*/React.createElement("span", null, f)))), SAGE_NUMBER ? /*#__PURE__*/React.createElement("a", {
+    }, "\u2713"), /*#__PURE__*/React.createElement("span", null, f)))), SAGE_NUMBER ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("a", {
       href: `tel:${SAGE_NUMBER}`,
       onClick: () => window.gtag && window.gtag('event', 'call_sage_click', {
         event_category: 'demo',
@@ -569,7 +569,9 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       style: {
         background: t.highlight ? '#fe2700' : '#334155'
       }
-    }, "\uD83C\uDF99 Talk to Sage") : /*#__PURE__*/React.createElement("a", {
+    }, "\uD83C\uDF99 Talk to Sage"), /*#__PURE__*/React.createElement("p", {
+      className: "text-center text-xs text-gray-400 mt-3"
+    }, "Calls our live demo on ", SAGE_NUMBER_DISPLAY)) : /*#__PURE__*/React.createElement("a", {
       href: "#consultation",
       className: "block text-center text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg",
       style: {
