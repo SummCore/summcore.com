@@ -22,6 +22,13 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
   const SAGE_DEMO_AUDIO = ''; // e.g. '/audio/sage-demo-call.mp3' — demo strip shows a player once set
   const CAL_LINK = ''; // e.g. 'summcore/15min' — Cal.com booking link (username/event)
 
+  // Stripe payment links (live) — monthly subscriptions; setup fee invoiced at onboarding
+  const STRIPE_LINKS = {
+    Rescue: 'https://buy.stripe.com/aFaeVcag6d6uawhg4z9MY00',
+    Grow: 'https://buy.stripe.com/fZu4gycoe8QefQB19F9MY01',
+    Dominate: 'https://buy.stripe.com/bJe14mewm9UiawhbOj9MY02'
+  };
+
   // Desktop browsers pop an "Open Pick an application?" dialog for tel: links.
   // Only phones get real tel: links; desktop clicks copy the number instead.
   const IS_PHONE = /Android|iPhone|iPod/i.test(typeof navigator !== 'undefined' && navigator.userAgent || '');
@@ -613,15 +620,11 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     }, /*#__PURE__*/React.createElement("span", {
       className: "text-amber-400 mr-3 shrink-0"
     }, "\u2713"), /*#__PURE__*/React.createElement("span", null, f)))), /*#__PURE__*/React.createElement("a", {
-      href: "#consultation",
-      onClick: () => {
-        const sel = document.getElementById('home_selected_plan');
-        if (sel) sel.value = `${t.name} (${t.price}/month)`;
-        window.gtag && window.gtag('event', 'select_plan', {
-          event_category: 'pricing',
-          event_label: t.name.toLowerCase()
-        });
-      },
+      href: STRIPE_LINKS[t.name] || '#consultation',
+      onClick: () => window.gtag && window.gtag('event', 'select_plan', {
+        event_category: 'pricing',
+        event_label: t.name.toLowerCase()
+      }),
       className: "block text-center text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg",
       style: {
         background: t.highlight ? '#fe2700' : '#334155'
@@ -632,7 +635,16 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       label: SAGE_NUMBER_DISPLAY || SAGE_NUMBER,
       gaLabel: `pricing_${t.name.toLowerCase()}_demo`,
       className: "text-amber-300 hover:underline"
-    }))))), /*#__PURE__*/React.createElement("div", {
+    })), /*#__PURE__*/React.createElement("p", {
+      className: "text-center text-xs text-gray-400 mt-1"
+    }, "Prefer to talk first? ", /*#__PURE__*/React.createElement("a", {
+      href: "#consultation",
+      onClick: () => {
+        const sel = document.getElementById('home_selected_plan');
+        if (sel) sel.value = `${t.name} (${t.price}/month)`;
+      },
+      className: "text-amber-300 hover:underline"
+    }, "Get in touch"))))), /*#__PURE__*/React.createElement("div", {
       className: "mt-10 text-center"
     }, /*#__PURE__*/React.createElement("p", {
       className: "text-gray-400 mb-3"
