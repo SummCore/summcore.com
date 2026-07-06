@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.googletagmanager.com https://app.cal.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; connect-src 'self' https://api.emailjs.com https://www.google-analytics.com https://analytics.google.com https://app.cal.com https://cal.com; frame-src https://app.cal.com https://cal.com; object-src 'none'; base-uri 'self';">
@@ -22,25 +22,90 @@
   <meta property="og:title" content="AI Receptionist and Missed-Call Recovery for Local Businesses | SummCore">
   <meta property="og:description" content="Our AI receptionist answers every call, books the job and texts you the summary. Hear it live on 029 2271 5325.">
   <meta property="og:url" content="https://summcore.com/">
-  <meta property="og:image" content="https://summcore.com/Logo/SC23.png">
+  <meta property="og:image" content="https://summcore.com/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="AI Receptionist and Missed-Call Recovery for Local Businesses | SummCore">
   <meta name="twitter:description" content="Our AI receptionist answers every call, books the job and texts you the summary. Hear it live on 029 2271 5325.">
-  <meta name="twitter:image" content="https://summcore.com/Logo/SC23.png">
+  <meta name="twitter:image" content="https://summcore.com/og-image.png">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "SummCore",
-    "url": "https://summcore.com/",
-    "logo": "https://summcore.com/Logo/SC23.png",
-    "sameAs": [
-      "https://x.com/SummCoreIdeas",
-      "https://www.instagram.com/summcoreideas/",
-      "https://www.tiktok.com/@summcore",
-      "https://www.youtube.com/@SummCore"
-    ],
-    "description": "AI receptionist, missed-call recovery and practical business tools for local businesses"
+    "@graph": [
+      {
+        "@type": ["Organization", "ProfessionalService"],
+        "@id": "https://summcore.com/#organization",
+        "name": "SummCore",
+        "url": "https://summcore.com/",
+        "logo": "https://summcore.com/Logo/SC23.png",
+        "image": "https://summcore.com/og-image.png",
+        "telephone": "+442922715325",
+        "email": "info@summcore.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Cardiff",
+          "addressCountry": "GB"
+        },
+        "areaServed": "GB",
+        "sameAs": [
+          "https://x.com/SummCoreIdeas",
+          "https://www.instagram.com/summcoreideas/",
+          "https://www.tiktok.com/@summcore",
+          "https://www.youtube.com/@SummCore"
+        ],
+        "description": "AI receptionist, missed-call recovery and practical business tools for local businesses",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+442922715325",
+          "email": "info@summcore.com",
+          "contactType": "sales",
+          "areaServed": "GB",
+          "availableLanguage": "en-GB"
+        }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://summcore.com/#sage",
+        "name": "Sage AI Receptionist",
+        "serviceType": "AI receptionist and missed-call recovery",
+        "provider": { "@id": "https://summcore.com/#organization" },
+        "areaServed": "GB",
+        "description": "Sage answers your business calls, books jobs and texts you the summary. Missed-call text-back comes as standard, with quote follow-up, Google review requests, a website chat widget and reactivation campaigns on higher plans.",
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Sage plans",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "name": "Rescue",
+              "price": "199",
+              "priceCurrency": "GBP",
+              "description": "Sage AI receptionist with missed-call text-back, £199 a month"
+            },
+            {
+              "@type": "Offer",
+              "name": "Grow",
+              "price": "349",
+              "priceCurrency": "GBP",
+              "description": "Everything in Rescue plus quote follow-up and Google review requests, £349 a month"
+            },
+            {
+              "@type": "Offer",
+              "name": "Dominate",
+              "price": "499",
+              "priceCurrency": "GBP",
+              "description": "Everything in Grow plus website chat widget and reactivation campaigns, £499 a month"
+            }
+          ]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://summcore.com/#website",
+        "name": "SummCore",
+        "url": "https://summcore.com/",
+        "publisher": { "@id": "https://summcore.com/#organization" }
+      }
+    ]
   }
   </script>
   <script type="application/ld+json">
