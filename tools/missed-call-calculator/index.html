@@ -264,5 +264,21 @@
     }
   </script>
   <script src="/feedback-widget.js?v=15"></script>
+  <script>
+    // Desktop browsers pop an app-picker dialog for tel: links; copy the number instead
+    (function(){
+      if (/Android|iPhone|iPod/i.test(navigator.userAgent)) return;
+      document.querySelectorAll('a[href^="tel:"]').forEach(function(a){
+        a.addEventListener('click', function(e){
+          e.preventDefault();
+          var original = a.textContent;
+          try { navigator.clipboard.writeText('029 2271 5325').then(function(){
+            a.textContent = '✓ Number copied';
+            setTimeout(function(){ a.textContent = original; }, 2500);
+          }); } catch(err) {}
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

@@ -21,6 +21,50 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
   const SAGE_NUMBER_DISPLAY = '029 2271 5325';
   const CAL_LINK = ''; // e.g. 'summcore/15min' — Cal.com booking link (username/event)
 
+  // Desktop browsers pop an "Open Pick an application?" dialog for tel: links.
+  // Only phones get real tel: links; desktop clicks copy the number instead.
+  const IS_PHONE = /Android|iPhone|iPod/i.test(typeof navigator !== 'undefined' && navigator.userAgent || '');
+  const SageCallButton = ({
+    label,
+    gaLabel,
+    className,
+    style
+  }) => {
+    const [copied, setCopied] = React.useState(false);
+    const track = () => window.gtag && window.gtag('event', 'call_sage_click', {
+      event_category: 'demo',
+      event_label: gaLabel
+    });
+    if (IS_PHONE) {
+      return /*#__PURE__*/React.createElement("a", {
+        href: `tel:${SAGE_NUMBER}`,
+        onClick: track,
+        className: className,
+        style: style
+      }, label);
+    }
+    const copyNumber = e => {
+      e.preventDefault();
+      track();
+      const ok = () => {
+        setCopied('copied');
+        setTimeout(() => setCopied(false), 2500);
+      };
+      const showNumber = () => setCopied('shown');
+      try {
+        navigator.clipboard.writeText(SAGE_NUMBER_DISPLAY || SAGE_NUMBER).then(ok, showNumber);
+      } catch (err) {
+        showNumber();
+      }
+    };
+    const text = copied === 'copied' ? '✓ Number copied' : copied === 'shown' ? `Ring ${SAGE_NUMBER_DISPLAY || SAGE_NUMBER}` : label;
+    return /*#__PURE__*/React.createElement("a", {
+      href: `tel:${SAGE_NUMBER}`,
+      onClick: copyNumber,
+      className: className,
+      style: style
+    }, text);
+  };
   const NavBar = () => {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     return /*#__PURE__*/React.createElement("nav", {
@@ -249,17 +293,14 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     className: "text-lg md:text-xl mb-8 max-w-3xl mx-auto"
   }, "SummCore builds AI systems that answer, book, chase and follow up for local businesses, starting from \xA3199 a month. Hear it live before you spend a penny."), /*#__PURE__*/React.createElement("div", {
     className: "flex flex-col sm:flex-row gap-4 justify-center items-center"
-  }, SAGE_NUMBER ? /*#__PURE__*/React.createElement("a", {
-    href: `tel:${SAGE_NUMBER}`,
-    onClick: () => window.gtag && window.gtag('event', 'call_sage_click', {
-      event_category: 'demo',
-      event_label: 'hero'
-    }),
+  }, SAGE_NUMBER ? /*#__PURE__*/React.createElement(SageCallButton, {
+    label: "\uD83C\uDF99 Talk to Sage",
+    gaLabel: "hero",
     className: "text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-1",
     style: {
       background: '#fe2700'
     }
-  }, "\uD83C\uDF99 Talk to Sage") : /*#__PURE__*/React.createElement("a", {
+  }) : /*#__PURE__*/React.createElement("a", {
     href: "#consultation",
     className: "text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-1",
     style: {
@@ -270,10 +311,11 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     className: "px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-2 border-amber-400 text-amber-300 hover:bg-amber-400 hover:text-slate-900"
   }, "Start the \xA329 Boost")), SAGE_NUMBER && /*#__PURE__*/React.createElement("p", {
     className: "mt-4 text-gray-300"
-  }, "Or ring Sage directly: ", /*#__PURE__*/React.createElement("a", {
-    href: `tel:${SAGE_NUMBER}`,
+  }, IS_PHONE ? 'Or ring Sage directly: ' : 'Our live demo line: ', /*#__PURE__*/React.createElement(SageCallButton, {
+    label: SAGE_NUMBER_DISPLAY || SAGE_NUMBER,
+    gaLabel: "hero_inline",
     className: "text-amber-300 font-semibold hover:underline"
-  }, SAGE_NUMBER_DISPLAY || SAGE_NUMBER)), /*#__PURE__*/React.createElement("p", {
+  })), /*#__PURE__*/React.createElement("p", {
     className: "mt-3 text-sm text-gray-400"
   }, "Wondering what missed calls cost you? ", /*#__PURE__*/React.createElement("a", {
     href: "/tools/missed-call-calculator/",
@@ -312,17 +354,14 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       className: "text-gray-400 mb-6"
     }, "If you'd have known it was AI, tell us."), /*#__PURE__*/React.createElement("div", {
       className: "flex flex-col sm:flex-row gap-4 justify-center items-center"
-    }, /*#__PURE__*/React.createElement("a", {
-      href: `tel:${SAGE_NUMBER}`,
-      onClick: () => window.gtag && window.gtag('event', 'call_sage_click', {
-        event_category: 'demo',
-        event_label: 'demo_strip'
-      }),
+    }, /*#__PURE__*/React.createElement(SageCallButton, {
+      label: `📞 ${SAGE_NUMBER_DISPLAY || SAGE_NUMBER}`,
+      gaLabel: "demo_strip",
       className: "text-white px-8 py-4 rounded-full font-bold text-xl transition-all duration-300 hover:shadow-xl hover:-translate-y-1",
       style: {
         background: '#fe2700'
       }
-    }, "\uD83D\uDCDE ", SAGE_NUMBER_DISPLAY || SAGE_NUMBER), /*#__PURE__*/React.createElement("button", {
+    }), /*#__PURE__*/React.createElement("button", {
       onClick: copyNumber,
       className: "px-6 py-3 rounded-full font-semibold border border-gray-500 text-gray-300 hover:border-amber-400 hover:text-amber-300 transition-colors duration-300 bg-transparent cursor-pointer"
     }, copied ? 'Copied ✓' : 'Copy number'))));
@@ -559,19 +598,16 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       className: "flex items-start text-gray-300"
     }, /*#__PURE__*/React.createElement("span", {
       className: "text-amber-400 mr-3 shrink-0"
-    }, "\u2713"), /*#__PURE__*/React.createElement("span", null, f)))), SAGE_NUMBER ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("a", {
-      href: `tel:${SAGE_NUMBER}`,
-      onClick: () => window.gtag && window.gtag('event', 'call_sage_click', {
-        event_category: 'demo',
-        event_label: `pricing_${t.name.toLowerCase()}`
-      }),
+    }, "\u2713"), /*#__PURE__*/React.createElement("span", null, f)))), SAGE_NUMBER ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(SageCallButton, {
+      label: "\uD83C\uDF99 Talk to Sage",
+      gaLabel: `pricing_${t.name.toLowerCase()}`,
       className: "block text-center text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg",
       style: {
         background: t.highlight ? '#fe2700' : '#334155'
       }
-    }, "\uD83C\uDF99 Talk to Sage"), /*#__PURE__*/React.createElement("p", {
+    }), /*#__PURE__*/React.createElement("p", {
       className: "text-center text-xs text-gray-400 mt-3"
-    }, "Calls our live demo on ", SAGE_NUMBER_DISPLAY)) : /*#__PURE__*/React.createElement("a", {
+    }, IS_PHONE ? `Calls our live demo on ${SAGE_NUMBER_DISPLAY}` : `Our live demo: ${SAGE_NUMBER_DISPLAY} (click to copy)`)) : /*#__PURE__*/React.createElement("a", {
       href: "#consultation",
       className: "block text-center text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg",
       style: {
