@@ -21,8 +21,10 @@ node_modules/
 # Editor / tooling
 .claude/
 
-# Personal notes
+# Personal notes / internal docs — never publish
 Tonight To Do List.txt
+SUMMCORE-OPERATIONS-PLAYBOOK.md
+*PLAYBOOK*.md
 
 # OS files
 .DS_Store
