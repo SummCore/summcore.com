@@ -87,57 +87,16 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     }, /*#__PURE__*/React.createElement("img", {
       src: "Logo/SC23.png?v=2",
       alt: "SummCore company logo",
-      className: "h-20 filter drop-shadow-2xl hover:drop-shadow-3xl transition-all duration-300 transform hover:-translate-y-1",
+      className: "h-20 transition-all duration-300 transform hover:-translate-y-1",
       style: {
-        filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3)) drop-shadow(0 6px 6px rgba(0,0,0,0.2))',
-        transform: 'perspective(1000px) rotateX(5deg)'
+        filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.15))'
       },
       loading: "lazy"
     })), /*#__PURE__*/React.createElement("div", {
       className: "relative"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "text-4xl font-bold tracking-tight transform hover:-translate-y-1 transition-all duration-300 flex items-center"
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "text-gray-800",
-      style: {
-        WebkitTextStroke: '0px transparent',
-        textShadow: '0 2px 4px rgba(0,0,0,0.2)',
-        filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))',
-        fontWeight: 'bold',
-        fontSize: '2.25rem',
-        lineHeight: '1'
-      }
-    }, "S"), /*#__PURE__*/React.createElement("span", {
-      className: "text-gray-800",
-      style: {
-        WebkitTextStroke: '1px #000',
-        textShadow: '0 2px 4px rgba(0,0,0,0.2)',
-        filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))'
-      }
-    }, "umm"), /*#__PURE__*/React.createElement("span", {
-      className: "text-gray-800",
-      style: {
-        WebkitTextStroke: '0px transparent',
-        textShadow: '0 2px 4px rgba(0,0,0,0.2)',
-        filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))',
-        fontWeight: 'bold',
-        fontSize: '2.25rem',
-        lineHeight: '1'
-      }
-    }, "C"), /*#__PURE__*/React.createElement("span", {
-      className: "text-gray-800",
-      style: {
-        WebkitTextStroke: '1px #000',
-        textShadow: '0 2px 4px rgba(0,0,0,0.2)',
-        filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))'
-      }
-    }, "ore")), /*#__PURE__*/React.createElement("div", {
-      className: "absolute inset-0 text-4xl font-bold text-gray-300 -z-10 flex items-center",
-      style: {
-        transform: 'translate(2px, 2px)',
-        opacity: '0.6'
-      }
-    }, /*#__PURE__*/React.createElement("span", null, "S"), /*#__PURE__*/React.createElement("span", null, "umm"), /*#__PURE__*/React.createElement("span", null, "C"), /*#__PURE__*/React.createElement("span", null, "ore")))), /*#__PURE__*/React.createElement("div", {
+      className: "text-4xl font-bold tracking-tight text-gray-900 transform hover:-translate-y-1 transition-all duration-300"
+    }, "SummCore"))), /*#__PURE__*/React.createElement("div", {
       className: "hidden md:flex space-x-4 items-center"
     }, /*#__PURE__*/React.createElement("a", {
       href: "#services",
@@ -275,28 +234,13 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
   }, "Never lose another job to a missed call."), /*#__PURE__*/React.createElement("div", {
     className: "mb-6"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "text-2xl md:text-3xl font-light text-amber-200 mb-2 relative",
+    className: "text-2xl md:text-3xl font-light text-amber-100 mb-2 relative",
     style: {
-      textShadow: '0 2px 4px rgba(0,0,0,0.3)',
-      letterSpacing: '0.05em',
-      fontFamily: 'Georgia, "Times New Roman", serif'
+      textShadow: '0 2px 4px rgba(0,0,0,0.3)'
     }
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "text-amber-100",
-    style: {
-      fontStyle: 'italic'
-    }
-  }, "While you're out on a job, "), /*#__PURE__*/React.createElement("span", {
-    className: "bg-gradient-to-r from-amber-300 via-yellow-300 to-orange-400 bg-clip-text text-transparent font-semibold",
-    style: {
-      fontStyle: 'italic'
-    }
-  }, "Sage, our AI receptionist,"), /*#__PURE__*/React.createElement("span", {
-    className: "text-amber-100",
-    style: {
-      fontStyle: 'italic'
-    }
-  }, " answers the call and books it in.")), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("span", null, "While you're out on a job, "), /*#__PURE__*/React.createElement("span", {
+    className: "bg-gradient-to-r from-amber-300 via-yellow-300 to-orange-400 bg-clip-text text-transparent font-semibold"
+  }, "Sage, our AI receptionist,"), /*#__PURE__*/React.createElement("span", null, " answers the call and books it in.")), /*#__PURE__*/React.createElement("div", {
     className: "w-24 h-1 bg-amber-400 mx-auto rounded-full opacity-60"
   })), /*#__PURE__*/React.createElement("p", {
     className: "text-lg md:text-xl mb-8 max-w-3xl mx-auto"
@@ -555,21 +499,26 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       price: "£199",
       color: "#f59e0b",
       tagline: "Stop the leak",
-      features: ["Sage AI receptionist + missed-call text-back"],
+      fit: "Built for one-person trades",
+      features: ["Sage AI receptionist, answering around the clock", "Missed-call text-back within seconds", "Set up and tested by us before it goes live", "We watch the calls and keep Sage sharp", "A real person to ring when you need help"],
       highlight: false
     }, {
       name: "Grow",
       price: "£349",
       color: "#fe2700",
       tagline: "Answers the phone and chases the money",
-      features: ["Sage AI receptionist + missed-call text-back", "Automated Google review requests", "Quote follow-up automation"],
+      fit: "For trades with a small team",
+      intro: "Everything in Rescue, plus:",
+      features: ["Automated Google review requests", "Quote follow-up automation"],
       highlight: true
     }, {
       name: "Dominate",
       price: "£499",
       color: "#0ea5e9",
       tagline: "Run the whole front desk",
-      features: ["Sage AI receptionist + missed-call text-back", "Automated Google review requests", "Quote follow-up automation", "AI website chat widget", "Monthly performance report", "Reactivation campaign (1 per quarter)"],
+      fit: "For busy firms where the phone never stops",
+      intro: "Everything in Grow, plus:",
+      features: ["AI website chat widget", "Monthly performance report", "Reactivation campaign (1 per quarter)"],
       highlight: false
     }];
     return /*#__PURE__*/React.createElement("section", {
@@ -606,14 +555,18 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     }), /*#__PURE__*/React.createElement("h3", {
       className: "text-2xl font-bold text-white mb-1"
     }, t.name), /*#__PURE__*/React.createElement("p", {
-      className: "text-gray-400 text-sm mb-4"
-    }, t.tagline), /*#__PURE__*/React.createElement("div", {
+      className: "text-gray-400 text-sm mb-1"
+    }, t.tagline), /*#__PURE__*/React.createElement("p", {
+      className: "text-amber-300 text-sm font-semibold mb-4"
+    }, t.fit), /*#__PURE__*/React.createElement("div", {
       className: "mb-6"
     }, /*#__PURE__*/React.createElement("span", {
       className: "text-4xl font-bold text-white"
     }, t.price), /*#__PURE__*/React.createElement("span", {
       className: "text-gray-400"
-    }, "/month")), /*#__PURE__*/React.createElement("ul", {
+    }, "/month")), t.intro && /*#__PURE__*/React.createElement("p", {
+      className: "text-gray-300 font-semibold mb-3"
+    }, t.intro), /*#__PURE__*/React.createElement("ul", {
       className: "space-y-3 mb-8 flex-grow"
     }, t.features.map((f, j) => /*#__PURE__*/React.createElement("li", {
       key: j,
@@ -646,6 +599,16 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
       },
       className: "text-amber-300 hover:underline"
     }, "Get in touch"))))), /*#__PURE__*/React.createElement("div", {
+      className: "max-w-3xl mx-auto mt-12 rounded-2xl border border-slate-600 bg-slate-800/60 p-8"
+    }, /*#__PURE__*/React.createElement("h3", {
+      className: "text-xl font-bold text-white mb-3"
+    }, "Why not just use a \xA320 app?"), /*#__PURE__*/React.createElement("p", {
+      className: "text-gray-300 mb-3"
+    }, "There are self-serve apps that answer calls for \xA320 a month. With those, you set everything up yourself and you fix it yourself when something goes wrong. Most take a message rather than booking the job in."), /*#__PURE__*/React.createElement("p", {
+      className: "text-gray-300 mb-3"
+    }, "SummCore is a managed service. Sage is our receptionist, and we tune her to your trade and test her on your line before she goes live. After launch we keep an eye on the calls and put right anything that drifts. When you need a human, you ring us."), /*#__PURE__*/React.createElement("p", {
+      className: "text-gray-300"
+    }, "The setup fee pays for the build. The monthly fee keeps it running and looked after.")), /*#__PURE__*/React.createElement("div", {
       className: "mt-10 text-center"
     }, /*#__PURE__*/React.createElement("p", {
       className: "text-gray-400 mb-3"
@@ -1058,6 +1021,9 @@ if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
     }, {
       q: "What services does SummCore offer?",
       a: "Our main service is the Sage AI receptionist with missed-call text-back, from £199 a month. On higher plans we add quote follow-up, Google review requests, a website chat widget and reactivation campaigns. We also build websites, offer growth consulting, and all our online tools are free to use."
+    }, {
+      q: "Why does SummCore cost more than cheap AI receptionist apps?",
+      a: "Self-serve apps charge £20 a month because you do the work: you set them up, you fix them when they go wrong, and most only take a message. SummCore is a managed service. Sage is our receptionist. We tune her to your trade, test her before launch, monitor the calls afterwards and give you a real person to ring. Sage books the job in rather than leaving you a voicemail in text form."
     }];
     const [open, setOpen] = React.useState(null);
     return /*#__PURE__*/React.createElement("section", {
